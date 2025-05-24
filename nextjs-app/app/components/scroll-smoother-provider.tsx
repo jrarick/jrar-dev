@@ -9,18 +9,26 @@ import {ReactNode, useRef} from 'react'
 gsap.registerPlugin(useGSAP, ScrollTrigger, ScrollSmoother)
 
 export default function ScrollSmootherProvider({children}: {children: ReactNode}) {
-  const container = useRef<HTMLDivElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
 
   useGSAP(
     () => {
       ScrollSmoother.create({
+        wrapper: '#scroll-smoother-wrapper',
+        content: '#scroll-smoother-content',
         effects: true,
         normalizeScroll: true,
         ignoreMobileResize: true,
       })
     },
-    {scope: container},
+    {scope: containerRef},
   )
 
-  return <div ref={container}>{children}</div>
+  return (
+    <div ref={containerRef}>
+      <div id="scroll-smoother-wrapper">
+        <div id="scroll-smoother-content">{children}</div>
+      </div>
+    </div>
+  )
 }
