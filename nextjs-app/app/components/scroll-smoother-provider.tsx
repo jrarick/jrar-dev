@@ -5,6 +5,7 @@ import {useGSAP} from '@gsap/react'
 import {ScrollSmoother} from 'gsap/ScrollSmoother'
 import {ScrollTrigger} from 'gsap/ScrollTrigger'
 import {ReactNode, useRef} from 'react'
+import {SCROLL_SMOOTHER_WRAPPER_ID} from '../constants'
 
 gsap.registerPlugin(useGSAP, ScrollTrigger, ScrollSmoother)
 
@@ -14,7 +15,7 @@ export default function ScrollSmootherProvider({children}: {children: ReactNode}
   useGSAP(
     () => {
       ScrollSmoother.create({
-        wrapper: '#scroll-smoother-wrapper',
+        wrapper: `#${SCROLL_SMOOTHER_WRAPPER_ID}`,
         content: '#scroll-smoother-content',
         effects: true,
         normalizeScroll: true,
@@ -26,7 +27,7 @@ export default function ScrollSmootherProvider({children}: {children: ReactNode}
 
   return (
     <div ref={containerRef}>
-      <div id="scroll-smoother-wrapper">
+      <div id={SCROLL_SMOOTHER_WRAPPER_ID}>
         <div id="scroll-smoother-content">{children}</div>
       </div>
     </div>

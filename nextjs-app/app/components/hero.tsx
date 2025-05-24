@@ -5,6 +5,7 @@ import {useGSAP} from '@gsap/react'
 import {SplitText} from 'gsap/SplitText'
 import {ScrollTrigger} from 'gsap/ScrollTrigger'
 import {useRef} from 'react'
+import {SCROLL_SMOOTHER_WRAPPER_ID} from '../constants'
 
 gsap.registerPlugin(useGSAP, ScrollTrigger, SplitText)
 
@@ -27,9 +28,34 @@ export default function Hero() {
         stagger: 0.01,
       })
 
+      const titleTl = gsap.timeline({
+        repeat: -1,
+      })
+
+      titleTl.to('.hero-title', {
+        transformOrigin: 'center center',
+        ease: 'sine.inOut',
+        keyframes: [
+          {x: 1, duration: 0.025},
+          {x: -1, duration: 0.025},
+          {x: 0, duration: 0.025},
+        ],
+        repeat: 60,
+      })
+
+      titleTl.to('.hero-title', {
+        transformOrigin: 'center center',
+        ease: 'sine.inOut',
+        keyframes: [
+          {skewX: 50, duration: 0.0125},
+          {skewX: -50, duration: 0.0125},
+          {skewX: 0, duration: 0.0125},
+        ],
+      })
+
       const heroTl = gsap.timeline({
         scrollTrigger: {
-          trigger: '#scroll-smoother',
+          trigger: `#${SCROLL_SMOOTHER_WRAPPER_ID}`,
           start: 'top top',
           end: 'top+=20% top',
           scrub: 1.2,
@@ -58,7 +84,7 @@ export default function Hero() {
   return (
     <div ref={heroRef}>
       <section className="hero-container h-dvh w-full flex justify-center py-48">
-        <h1 className="hero-title text-center max-w-5xl text-7xl/22 font-bold">{`Hey my name's Josh. I build stuff with Next.js and React.`}</h1>
+        <h1 className="hero-title text-center max-w-5xl text-7xl/28 font-bold blur-[1px]">{`Hey, my name's Josh. I build first-class user experiences.`}</h1>
       </section>
     </div>
   )
