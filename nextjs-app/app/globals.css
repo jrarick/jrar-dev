@@ -16,6 +16,7 @@
   --color-default: var(--default);
   --color-muted: var(--muted);
   --color-accent: var(--accent);
+  --color-accent-muted: #261301;
 }
 
 /*

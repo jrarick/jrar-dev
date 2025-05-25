@@ -15,6 +15,7 @@ export default function Hero() {
   useGSAP(
     () => {
       const splitTitle = new SplitText('.hero-title', {type: 'lines, words, chars'})
+
       gsap.from(splitTitle.chars, {
         duration: 0.5,
         opacity: 0,
@@ -36,9 +37,9 @@ export default function Hero() {
         transformOrigin: 'center center',
         ease: 'sine.inOut',
         keyframes: [
-          {x: 1, duration: 0.025},
-          {x: -1, duration: 0.025},
-          {x: 0, duration: 0.025},
+          {x: 0.5, duration: 0.0125},
+          {x: -0.5, duration: 0.0125},
+          {x: 0, duration: 0.0125},
         ],
         repeat: 60,
       })

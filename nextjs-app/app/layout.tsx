@@ -14,6 +14,7 @@ import {settingsQuery} from '@/sanity/lib/queries'
 import {resolveOpenGraphImage} from '@/sanity/lib/utils'
 import {handleError} from './client-utils'
 import ScrollSmootherProvider from './components/scroll-smoother-provider'
+import FloatingToast from './components/floating-toast'
 
 /**
  * Generate metadata for the page.
@@ -61,7 +62,7 @@ export default async function RootLayout({children}: {children: React.ReactNode}
 
   return (
     <html lang="en" className={`${kodeMono.variable} font-mono antialiased bg-fill text-default`}>
-      <body>
+      <body className="relative">
         <ScrollSmootherProvider>
           {/* The <Toaster> component is responsible for rendering toast notifications used in /app/client-utils.ts and /app/components/DraftModeToast.tsx */}
           <Toaster />
@@ -76,6 +77,7 @@ export default async function RootLayout({children}: {children: React.ReactNode}
           <SanityLive onError={handleError} />
           <main>{children}</main>
         </ScrollSmootherProvider>
+        <FloatingToast />
         <SpeedInsights />
       </body>
     </html>
