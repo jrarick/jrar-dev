@@ -1,6 +1,6 @@
-import {Suspense} from 'react'
+import { Suspense } from 'react'
 
-import {AllPosts} from '@/app/components/Posts'
+import { AllPosts } from '@/app/components/Posts'
 import Hero from './components/hero'
 import Intro from './components/intro'
 import Technologies from './components/technologies'
