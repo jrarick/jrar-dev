@@ -44,6 +44,14 @@ export default function FloatingToast() {
         },
         0.5,
       )
+
+      tl.to('aside', {
+        duration: 0.3,
+        autoAlpha: 0,
+        ease: 'power3.inOut',
+        y: 50,
+        delay: 3, // Keep the toast visible for 5 seconds before fading out
+      })
     },
     { scope: containerRef },
   )

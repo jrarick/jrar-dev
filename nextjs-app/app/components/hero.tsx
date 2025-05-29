@@ -69,10 +69,10 @@ export default function Hero() {
           {
             rotationX: 90,
             y: -30,
-            scale: 0.7, // Scale down as it rotates away
+            scale: 0.7,
             opacity: 0,
-            filter: 'blur(6px)', // Add blur effect
-            ease: 'power3.inOut', // Better easing
+            filter: 'blur(6px)',
+            ease: 'power3.inOut',
             transformOrigin: 'center top',
           },
           index * 0.08,
@@ -84,10 +84,10 @@ export default function Hero() {
 
   return (
     <div ref={heroContainerRef}>
-      <section className="w-full flex justify-center py-40 md:py-64">
+      <section className="w-full flex justify-center py-64">
         <h1
           id="hero-title"
-          className="text-center max-w-5xl text-3xl/12 sm:text-4xl/14 md:text-5xl/20 lg:text-7xl/28 font-bold blur-[1px] px-8"
+          className="text-center max-w-5xl text-4xl/14 md:text-5xl/20 lg:text-7xl/28 font-bold blur-[1px] px-8"
         >{`Hey, my name's Josh. I build first-class user experiences.`}</h1>
       </section>
     </div>

@@ -43,8 +43,8 @@ export default function Technologies() {
         duration: 0.3,
         scrollTrigger: {
           trigger: technologiesContainerRef.current,
-          start: 'top bottom-=10%',
-          end: 'bottom top+=10%',
+          start: 'top bottom-=20%',
+          end: 'bottom top+=20%',
           toggleActions: 'play reverse play reverse',
         },
       })

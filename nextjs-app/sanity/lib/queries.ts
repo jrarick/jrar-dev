@@ -1,6 +1,14 @@
-import { defineQuery } from "next-sanity";
+import { defineQuery } from 'next-sanity'
 
-export const settingsQuery = defineQuery(`*[_type == "settings"][0]`);
+export const settingsQuery = defineQuery(`*[_type == "settings"][0]`)
+
+const projectPreviewFields = /* groq */ `
+  _id,
+  title,
+  "slug": slug.current,
+  description,
+  coverImage,
+`
 
 const postFields = /* groq */ `
   _id,
@@ -11,21 +19,21 @@ const postFields = /* groq */ `
   coverImage,
   "date": coalesce(date, _updatedAt),
   "author": author->{firstName, lastName, picture},
-`;
+`
 
 const linkReference = /* groq */ `
   _type == "link" => {
     "page": page->slug.current,
     "post": post->slug.current
   }
-`;
+`
 
 const linkFields = /* groq */ `
   link {
       ...,
       ${linkReference}
       }
-`;
+`
 
 export const getPageQuery = defineQuery(`
   *[_type == 'page' && slug.current == $slug][0]{
@@ -51,7 +59,7 @@ export const getPageQuery = defineQuery(`
       },
     },
   }
-`);
+`)
 
 export const sitemapData = defineQuery(`
   *[_type == "page" || _type == "post" && defined(slug.current)] | order(_type asc) {
@@ -59,19 +67,19 @@ export const sitemapData = defineQuery(`
     _type,
     _updatedAt,
   }
-`);
+`)
 
 export const allPostsQuery = defineQuery(`
   *[_type == "post" && defined(slug.current)] | order(date desc, _updatedAt desc) {
     ${postFields}
   }
-`);
+`)
 
 export const morePostsQuery = defineQuery(`
   *[_type == "post" && _id != $skip && defined(slug.current)] | order(date desc, _updatedAt desc) [0...$limit] {
     ${postFields}
   }
-`);
+`)
 
 export const postQuery = defineQuery(`
   *[_type == "post" && slug.current == $slug] [0] {
@@ -84,14 +92,20 @@ export const postQuery = defineQuery(`
   },
     ${postFields}
   }
-`);
+`)
 
 export const postPagesSlugs = defineQuery(`
   *[_type == "post" && defined(slug.current)]
   {"slug": slug.current}
-`);
+`)
 
 export const pagesSlugs = defineQuery(`
   *[_type == "page" && defined(slug.current)]
   {"slug": slug.current}
-`);
+`)
+
+export const projectsPreviewQuery = defineQuery(`
+  *[_type == "project" && defined(slug.current)] {
+    ${projectPreviewFields}
+  }
+`)
