@@ -8,20 +8,16 @@
  *
  */
 
-import {
-  PortableText,
-  type PortableTextComponents,
-  type PortableTextBlock,
-} from "next-sanity";
+import { PortableText, type PortableTextComponents, type PortableTextBlock } from 'next-sanity'
 
-import ResolvedLink from "@/app/components/ResolvedLink";
+import ResolvedLink from '@/app/components/ResolvedLink'
 
 export default function CustomPortableText({
   className,
   value,
 }: {
-  className?: string;
-  value: PortableTextBlock[];
+  className?: string
+  value: PortableTextBlock[]
 }) {
   const components: PortableTextComponents = {
     block: {
@@ -31,7 +27,7 @@ export default function CustomPortableText({
           {children}
           <a
             href={`#${value?._key}`}
-            className="absolute left-0 top-0 bottom-0 -ml-6 flex items-center opacity-0 group-hover:opacity-100 transition-opacity"
+            className="absolute left-0 top-0 bottom-3 -ml-6 flex items-end opacity-0 group-hover:opacity-100 transition-opacity"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -57,7 +53,7 @@ export default function CustomPortableText({
             {children}
             <a
               href={`#${value?._key}`}
-              className="absolute left-0 top-0 bottom-0 -ml-6 flex items-center opacity-0 group-hover:opacity-100 transition-opacity"
+              className="absolute left-0 top-0 bottom-3 -ml-6 flex items-end opacity-0 group-hover:opacity-100 transition-opacity"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -75,23 +71,19 @@ export default function CustomPortableText({
               </svg>
             </a>
           </h2>
-        );
+        )
       },
     },
     marks: {
       link: ({ children, value: link }) => {
-        return <ResolvedLink link={link}>{children}</ResolvedLink>;
+        return <ResolvedLink link={link}>{children}</ResolvedLink>
       },
     },
-  };
+  }
 
   return (
-    <div
-      className={["prose prose-a:text-red-500", className]
-        .filter(Boolean)
-        .join(" ")}
-    >
+    <div className={['prose prose-a:text-accent', className].filter(Boolean).join(' ')}>
       <PortableText components={components} value={value} />
     </div>
-  );
+  )
 }

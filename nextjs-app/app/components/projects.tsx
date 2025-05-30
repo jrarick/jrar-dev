@@ -22,7 +22,6 @@ export default function Projects({ projects }: { projects: ProjectsPreviewQueryR
           end: 'bottom-=50% top+=50%',
           scrub: 0.8,
           toggleActions: 'play reverse play reverse',
-          markers: true,
         },
         autoAlpha: 0,
         filter: 'blur(4px)',
@@ -48,13 +47,13 @@ export default function Projects({ projects }: { projects: ProjectsPreviewQueryR
   )
 
   return (
-    <div className="py-96">
+    <div className="pt-96">
       <div ref={projectsContainerRef} className="max-w-7xl mx-auto pt-12">
-        <h2 className="text-center font-bold text-4xl mb-12">{`What I've worked on`}</h2>
+        <h2 className="text-center font-bold text-4xl mb-12">{`Projects I've worked on`}</h2>
         <div className="grid grid-cols-4 w-[400%]">
           {projects.map((project, i) => (
             <article key={project._id} id={`project-${i + 1}`} className="px-36 py-8">
-              <div className="relative">
+              <div className="relative flex flex-col space-y-3">
                 <CoverImage image={project.coverImage} />
                 <Link href={`/projects/${project.slug}`} className="text-2xl font-bold">
                   <span className="absolute inset-0" />

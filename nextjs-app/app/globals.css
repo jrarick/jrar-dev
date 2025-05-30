@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@plugin "@tailwindcss/typography";
 
 :root {
   --fill: oklch(13.79% 0.025 71.38);

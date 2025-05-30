@@ -109,3 +109,21 @@ export const projectsPreviewQuery = defineQuery(`
     ${projectPreviewFields}
   }
 `)
+
+export const getProjectQuery = defineQuery(`
+  *[_type == "project" && slug.current == $slug][0] {
+    _id,
+    title,
+    "slug": slug.current,
+    description,
+    content[]{
+      ...,
+      markDefs[]{
+        ...,
+        ${linkReference}
+      }
+    },
+    linkToProject,
+    coverImage,
+  }  
+`)

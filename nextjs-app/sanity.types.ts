@@ -813,6 +813,49 @@ export type ProjectsPreviewQueryResult = Array<{
     _type: 'image'
   } | null
 }>
+// Variable: getProjectQuery
+// Query: *[_type == "project" && slug.current == $slug][0] {    _id,    title,    "slug": slug.current,    description,    content[]{      ...,      markDefs[]{        ...,          _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      }    },    linkToProject,    coverImage,  }
+export type GetProjectQueryResult = {
+  _id: string
+  title: string | null
+  slug: string | null
+  description: string | null
+  content: Array<{
+    children?: Array<{
+      marks?: Array<string>
+      text?: string
+      _type: 'span'
+      _key: string
+    }>
+    style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'normal'
+    listItem?: 'bullet' | 'number'
+    markDefs: Array<{
+      linkType?: 'href' | 'page' | 'post'
+      href?: string
+      page: string | null
+      post: string | null
+      openInNewTab?: boolean
+      _type: 'link'
+      _key: string
+    }> | null
+    level?: number
+    _type: 'block'
+    _key: string
+  }> | null
+  linkToProject: string | null
+  coverImage: {
+    asset?: {
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+    }
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt?: string
+    _type: 'image'
+  } | null
+} | null
 
 // Query TypeMap
 import '@sanity/client'
@@ -827,5 +870,6 @@ declare module '@sanity/client' {
     '\n  *[_type == "post" && defined(slug.current)]\n  {"slug": slug.current}\n': PostPagesSlugsResult
     '\n  *[_type == "page" && defined(slug.current)]\n  {"slug": slug.current}\n': PagesSlugsResult
     '\n  *[_type == "project" && defined(slug.current)] {\n    \n  _id,\n  title,\n  "slug": slug.current,\n  description,\n  coverImage,\n\n  }\n': ProjectsPreviewQueryResult
+    '\n  *[_type == "project" && slug.current == $slug][0] {\n    _id,\n    title,\n    "slug": slug.current,\n    description,\n    content[]{\n      ...,\n      markDefs[]{\n        ...,\n        \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n      }\n    },\n    linkToProject,\n    coverImage,\n  }  \n': GetProjectQueryResult
   }
 }

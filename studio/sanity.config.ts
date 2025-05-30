@@ -3,19 +3,19 @@
  * Learn more: https://www.sanity.io/docs/configuration
  */
 
-import {defineConfig} from 'sanity'
-import {structureTool} from 'sanity/structure'
-import {visionTool} from '@sanity/vision'
-import {schemaTypes} from './src/schemaTypes'
-import {structure} from './src/structure'
-import {unsplashImageAsset} from 'sanity-plugin-asset-source-unsplash'
+import { defineConfig } from 'sanity'
+import { structureTool } from 'sanity/structure'
+import { visionTool } from '@sanity/vision'
+import { schemaTypes } from './src/schemaTypes'
+import { structure } from './src/structure'
+import { unsplashImageAsset } from 'sanity-plugin-asset-source-unsplash'
 import {
   presentationTool,
   defineDocuments,
   defineLocations,
   type DocumentLocation,
 } from 'sanity/presentation'
-import {assist} from '@sanity/assist'
+import { assist } from '@sanity/assist'
 
 // Environment variables for project configuration
 const projectId = process.env.SANITY_STUDIO_PROJECT_ID || 'your-projectID'
@@ -35,7 +35,7 @@ const homeLocation = {
 function resolveHref(documentType?: string, slug?: string): string | undefined {
   switch (documentType) {
     case 'post':
-      return slug ? `/posts/${slug}` : undefined
+      return slug ? `/blog/${slug}` : undefined
     case 'page':
       return slug ? `/${slug}` : undefined
     default:
@@ -69,7 +69,7 @@ export default defineConfig({
             filter: `_type == "page" && slug.current == $slug || _id == $slug`,
           },
           {
-            route: '/posts/:slug',
+            route: '/blog/:slug',
             filter: `_type == "post" && slug.current == $slug || _id == $slug`,
           },
         ]),
