@@ -29,7 +29,7 @@ const Post = ({ post }: { post: PostType }) => {
 }
 
 const Posts = ({ children, heading }: { children: React.ReactNode; heading?: string }) => (
-  <div className="w-full flex flex-col items-center mx-auto">
+  <div className="w-full flex flex-col items-center mx-auto px-4">
     {heading && (
       <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">{heading}</h2>
     )}

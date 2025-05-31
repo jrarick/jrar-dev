@@ -63,7 +63,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
   return (
     <html lang="en" className={`${kodeMono.variable} font-mono antialiased bg-fill text-default`}>
-      <body className="relative">
+      <body className="relative w-dvw overflow-x-hidden">
         <ScrollSmootherProvider>
           {/* The <Toaster> component is responsible for rendering toast notifications used in /app/client-utils.ts and /app/components/DraftModeToast.tsx */}
           <Toaster />

@@ -84,7 +84,7 @@ export default function Hero() {
 
   return (
     <div ref={heroContainerRef}>
-      <section className="w-full flex justify-center py-64">
+      <section className="w-full flex justify-center py-48 sm:py-64">
         <h1
           id="hero-title"
           className="text-center max-w-5xl text-4xl/14 md:text-5xl/20 lg:text-7xl/28 font-bold blur-[1px] px-8"

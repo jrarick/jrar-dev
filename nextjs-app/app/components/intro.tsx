@@ -13,7 +13,7 @@ export default function Intro() {
   const paragraphsText = [
     "After 6+ years in the industry, I've done a lot:",
     'Designing and developing website templates',
-    'Diagnosing and fixing browser/network performance issues',
+    'Diagnosing and fixing performance issues',
     'Building beautiful data visualizations',
     'Obsessing over maintainable front end architecture',
     'Automating workflows to accelerate development',
@@ -25,23 +25,22 @@ export default function Intro() {
     () => {
       const paragraphs = gsap.utils.toArray<HTMLParagraphElement>('[id^=intro-p-]')
 
-      const paragraphsTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: IntroContainerRef.current,
-          start: 'top bottom-=10%',
-          end: 'bottom top+=80%',
-          scrub: 1,
-          toggleActions: 'play reverse play reverse',
-        },
-      })
-
       paragraphs.forEach((p, i) => {
-        paragraphsTl.to(p, {
+        const paragraphTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: `#intro-p-${i + 1}`,
+            start: 'top bottom-=20%',
+            end: 'bottom top+=10%',
+            toggleActions: 'play reverse play reverse',
+          },
+        })
+
+        paragraphTl.to(p, {
           scrambleText: {
             text: paragraphsText[i],
             chars: 'lowerCase',
           },
-          duration: 1.3,
+          duration: 0.6,
         })
       })
     },
@@ -49,16 +48,16 @@ export default function Intro() {
   )
 
   return (
-    <div className="pb-96 pt-16">
+    <div className="pb-[32rem] pt-16">
       <div
-        className="font-medium px-3 sm:px-12 space-y-16 flex flex-col items-center"
+        className="font-medium px-3 sm:px-12 space-y-24 flex flex-col items-center"
         ref={IntroContainerRef}
       >
         {paragraphsText.map((text, i) => (
           <p
             key={text}
             id={`intro-p-${i + 1}`}
-            className="text-base text-center h-4 sm:text-xl sm:h-5 md:text-2xl/6 md:h-6"
+            className="text-sm font-semibold text-center h-3 sm:text-lg/4.5 sm:h-4.5 md:text-2xl/6 md:h-6"
           />
         ))}
       </div>

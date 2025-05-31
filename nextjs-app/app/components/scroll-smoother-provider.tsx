@@ -18,6 +18,7 @@ export default function ScrollSmootherProvider({ children }: { children: ReactNo
         wrapper: `#${SCROLL_SMOOTHER_WRAPPER_ID}`,
         content: '#scroll-smoother-content',
         ignoreMobileResize: true,
+        normalizeScroll: true,
       })
     },
     { scope: containerRef },
