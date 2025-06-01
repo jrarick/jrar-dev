@@ -76,7 +76,7 @@ export default function Technologies() {
 
   return (
     <div ref={technologiesContainerRef}>
-      <div className="space-y-12 md:space-y-16 -rotate-10">
+      <div className="space-y-12 md:space-y-16 -rotate-5">
         <h2 className="text-3xl sm:text-4xl md:text-6xl text-center font-mono font-bold">
           The Tools I Use
         </h2>

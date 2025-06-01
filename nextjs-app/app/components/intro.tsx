@@ -57,7 +57,7 @@ export default function Intro() {
           <p
             key={text}
             id={`intro-p-${i + 1}`}
-            className="text-sm font-semibold text-center h-3 sm:text-lg/4.5 sm:h-4.5 md:text-2xl/6 md:h-6"
+            className="text-sm font-semibold text-center h-3 sm:text-lg/4.5 sm:h-4.5 md:text-2xl/6 md:h-6 lg:text-3xl/7.5 lg:h-7.5"
           />
         ))}
       </div>

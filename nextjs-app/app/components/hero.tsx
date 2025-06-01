@@ -15,15 +15,25 @@ export default function Hero() {
     () => {
       const splitTitle = new SplitText('#hero-title', { type: 'lines, words, chars' })
 
-      gsap.from(splitTitle.chars, {
-        duration: 0.5,
-        opacity: 0,
+      gsap.set(splitTitle.chars, {
+        transformOrigin: 'center top',
+        autoAlpha: 0,
         y: 50,
         rotateX: 90,
         skewY: 5,
-        transformOrigin: 'center top',
         scale: 0.7,
         filter: 'blur(6px)',
+      })
+
+      gsap.to(splitTitle.chars, {
+        duration: 0.5,
+        autoAlpha: 1,
+        y: 0,
+        rotateX: 0,
+        skewY: 0,
+        transformOrigin: 'center top',
+        scale: 1,
+        filter: 'blur(0px)',
         ease: 'power3.inOut',
         stagger: 0.01,
       })
@@ -68,8 +78,8 @@ export default function Hero() {
           {
             rotationX: 90,
             y: -30,
-            scale: 0.7,
-            opacity: 0,
+            scaleX: 2.5,
+            autoAlpha: 0,
             filter: 'blur(6px)',
             ease: 'power3.inOut',
             transformOrigin: 'center top',
