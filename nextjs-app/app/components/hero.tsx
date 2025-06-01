@@ -5,7 +5,6 @@ import { useGSAP } from '@gsap/react'
 import { SplitText } from 'gsap/SplitText'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useRef } from 'react'
-import { SCROLL_SMOOTHER_WRAPPER_ID } from '../constants'
 
 gsap.registerPlugin(useGSAP, ScrollTrigger, SplitText)
 
@@ -56,7 +55,7 @@ export default function Hero() {
 
       const heroTl = gsap.timeline({
         scrollTrigger: {
-          trigger: `#${SCROLL_SMOOTHER_WRAPPER_ID}`,
+          trigger: heroContainerRef.current,
           start: 'top top',
           end: 'top+=20% top',
           scrub: 1.2,

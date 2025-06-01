@@ -5,28 +5,29 @@ import { useGSAP } from '@gsap/react'
 import { ScrollSmoother } from 'gsap/ScrollSmoother'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ReactNode, useRef } from 'react'
-import { SCROLL_SMOOTHER_WRAPPER_ID } from '../constants'
+import { usePathname } from 'next/navigation'
 
 gsap.registerPlugin(useGSAP, ScrollTrigger, ScrollSmoother)
 
 export default function ScrollSmootherProvider({ children }: { children: ReactNode }) {
   const containerRef = useRef<HTMLDivElement>(null)
+  const pathname = usePathname()
 
   useGSAP(
     () => {
       ScrollSmoother.create({
-        wrapper: `#${SCROLL_SMOOTHER_WRAPPER_ID}`,
+        wrapper: '#scroll-smoother-wrapper',
         content: '#scroll-smoother-content',
         ignoreMobileResize: true,
         normalizeScroll: true,
       })
     },
-    { scope: containerRef },
+    { dependencies: [pathname], scope: containerRef, revertOnUpdate: true },
   )
 
   return (
     <div ref={containerRef}>
-      <div id={SCROLL_SMOOTHER_WRAPPER_ID}>
+      <div id="scroll-smoother-wrapper">
         <div id="scroll-smoother-content">{children}</div>
       </div>
     </div>
