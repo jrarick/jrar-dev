@@ -16,6 +16,7 @@ import { handleError } from './client-utils'
 import ScrollSmootherProvider from './components/scroll-smoother-provider'
 import FloatingToast from './components/floating-toast'
 import Link from 'next/link'
+import { Analytics } from '@vercel/analytics/next'
 
 /**
  * Generate metadata for the page.
@@ -80,6 +81,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <main>{children}</main>
           <Footer />
         </ScrollSmootherProvider>
+        <Analytics />
         <FloatingToast />
         <SpeedInsights />
       </body>
