@@ -51,9 +51,11 @@ export default async function Page(props: { params: Promise<{ slug: string }> })
           href={linkToProject ?? '#'}
           target="_blank"
           rel="noopener noreferrer"
-          className="block mb-12 min-h-full"
+          className="block mb-12 min-h-full relative"
         >
           <CoverImage image={coverImage} />
+          <span className="absolute inset-0 bg-gradient-to-br from-50% to-fill" />
+          <span className="absolute bottom-4 right-4 font-bold">Click me</span>
         </a>
         <h1 className="text-3xl font-bold mb-4">{title}</h1>
         {content?.length && (
