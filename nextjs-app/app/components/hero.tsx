@@ -17,7 +17,7 @@ export default function Hero() {
 
       gsap.set(splitTitle.chars, {
         transformOrigin: 'center top',
-        autoAlpha: 0,
+        opacity: 0,
         y: 50,
         rotateX: 90,
         skewY: 5,
@@ -27,7 +27,7 @@ export default function Hero() {
 
       gsap.to(splitTitle.chars, {
         duration: 0.5,
-        autoAlpha: 1,
+        opacity: 1,
         y: 0,
         rotateX: 0,
         skewY: 0,
@@ -79,7 +79,7 @@ export default function Hero() {
             rotationX: 90,
             y: -30,
             scaleX: 2.5,
-            autoAlpha: 0,
+            opacity: 0,
             filter: 'blur(6px)',
             ease: 'power3.inOut',
             transformOrigin: 'center top',

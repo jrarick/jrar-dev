@@ -52,7 +52,11 @@ export default function Projects({ projects }: { projects: ProjectsPreviewQueryR
         <h2 className="text-center font-bold text-4xl mb-12">{`Projects I've worked on`}</h2>
         <div className="grid grid-cols-4 w-[400%]">
           {projects.map((project, i) => (
-            <article key={project._id} id={`project-${i + 1}`} className="px-20 sm:px-[20dvw] py-8">
+            <article
+              key={project._id}
+              id={`project-${i + 1}`}
+              className="px-20 sm:px-[min(20dvw,250px)] py-8"
+            >
               <div className="relative flex flex-col space-y-3">
                 <CoverImage image={project.coverImage} />
                 <Link href={`/projects/${project.slug}`} className="text-2xl font-bold">
