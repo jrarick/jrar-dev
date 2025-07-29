@@ -19,7 +19,7 @@ export default async function Page() {
       <Hero />
       <Intro />
       <Technologies />
-      <Projects projects={projects.data.slice(0, 4)} />
+      <Projects projects={projects.data} />
       <aside className="py-28 sm:py-48">
         <Suspense>{await AllPosts()}</Suspense>
       </aside>

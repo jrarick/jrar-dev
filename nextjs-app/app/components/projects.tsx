@@ -50,7 +50,13 @@ export default function Projects({ projects }: { projects: ProjectsPreviewQueryR
     <div className="pt-96">
       <div ref={projectsContainerRef} className="max-w-7xl mx-auto pt-12">
         <h2 className="text-center font-bold text-4xl mb-12">{`Projects I've worked on`}</h2>
-        <div className="grid grid-cols-4 w-[400%]">
+        <div
+          className="grid"
+          style={{
+            gridTemplateColumns: `repeat(${projects.length}, minmax(0, 1fr))`,
+            width: `${projects.length * 100}%`,
+          }}
+        >
           {projects.map((project, i) => (
             <article
               key={project._id}
