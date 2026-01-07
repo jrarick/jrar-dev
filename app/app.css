@@ -2,6 +2,10 @@
 @plugin "tailwindcss-react-aria-components";
 @plugin "tailwindcss-animate";
 
+@layer base;
+@layer components;
+@layer utilities;
+
 @theme {
   --font-mono: "Fragment Mono", ui-monospace, system-ui, monospace;
 
@@ -17,11 +21,8 @@
   --color-ruby-accent: oklch(75.397% 0.30751 28.767);
 }
 
-html,
-body {
-  @apply bg-white dark:bg-gray-950;
-
-  @media (prefers-color-scheme: dark) {
-    color-scheme: dark;
+@layer base {
+  *::selection {
+    @apply bg-matrix-accent text-black;
   }
 }

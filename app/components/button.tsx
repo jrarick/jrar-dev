@@ -17,31 +17,24 @@ let button = tv({
   variants: {
     variant: {
       primary:
-        "bg-matrix-accent hover:bg-matrix-vivid text-black shadow-[0_0px_20px_var(--color-matrix-base)]",
+        "bg-matrix-accent hover:bg-matrix-vivid text-black shadow-[0_0px_20px_var(--color-matrix-base)] selection:bg-black selection:text-matrix-accent",
       secondary:
-        "border-matrix-base bg-matrix-muted text-white hover:bg-transparent shadow-[0_0px_20px_var(--color-matrix-base)]",
+        "border-matrix-base bg-matrix-muted text-white hover:bg-transparent shadow-[0_0px_20px_var(--color-matrix-base)] selection:bg-matrix-accent selection:text-black",
       destructive:
-        "bg-ruby-accent hover:bg-ruby-vivid  text-black shadow-[0_0px_20px_var(--color-ruby-base)]",
+        "bg-ruby-accent hover:bg-ruby-vivid text-black shadow-[0_0px_20px_var(--color-ruby-base)] focus:outline-ruby-vivid selection:bg-black selection:text-ruby-accent",
       quiet:
-        "border-0 bg-transparent hover:bg-matrix-muted text-white hover:shadow-[0_0px_20px_var(--color-matrix-muted)]",
+        "border-0 bg-transparent hover:bg-matrix-muted text-white hover:shadow-[0_0px_20px_var(--color-matrix-muted)] selection:bg-matrix-accent selection:text-black",
     },
     isDisabled: {
-      true: "border-transparent dark:border-transparent bg-neutral-100 dark:bg-neutral-800 text-neutral-300 dark:text-neutral-600 forced-colors:text-[GrayText]",
+      true: "opacity-30 cursor-not-allowed forced-colors:text-[GrayText]",
     },
     isPending: {
-      true: "text-transparent",
+      true: "text-transparent selection:text-transparent selection:bg-transparent",
     },
   },
   defaultVariants: {
     variant: "primary",
   },
-  compoundVariants: [
-    {
-      variant: "quiet",
-      isDisabled: true,
-      class: "bg-transparent dark:bg-transparent",
-    },
-  ],
 })
 
 export function Button(props: ButtonProps) {
@@ -65,8 +58,8 @@ export function Button(props: ButtonProps) {
                 viewBox="0 0 24 24"
                 stroke={
                   props.variant === "secondary" || props.variant === "quiet"
-                    ? "light-dark(black, white)"
-                    : "white"
+                    ? "white"
+                    : "black"
                 }
               >
                 <circle
