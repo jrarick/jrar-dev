@@ -21,12 +21,12 @@ import { composeTailwindRenderProps, focusRing } from "~/lib/utils"
 
 const styles = tv({
   extend: focusRing,
-  base: "flex items-center text-start gap-4 w-full font-sans border border-black/10 dark:border-white/10 cursor-default rounded-lg pl-3 pr-2 h-9 min-w-[180px] transition bg-neutral-50 dark:bg-neutral-700 [-webkit-tap-highlight-color:transparent]",
+  base: "flex items-center text-start gap-4 w-full font-mono border border-matrix-muted cursor-default pl-3 pr-2 h-9 min-w-[180px] transition bg-app-background [-webkit-tap-highlight-color:transparent]",
   variants: {
     isDisabled: {
       false:
-        "text-neutral-800 dark:text-neutral-300 hover:bg-neutral-100 pressed:bg-neutral-200 dark:hover:bg-neutral-600 dark:pressed:bg-neutral-500 group-invalid:outline group-invalid:outline-red-600 forced-colors:group-invalid:outline-[Mark]",
-      true: "border-transparent dark:border-transparent text-neutral-200 dark:text-neutral-600 forced-colors:text-[GrayText] bg-neutral-100 dark:bg-neutral-800",
+        "text-app-foreground hover:bg-matrix-muted/20 pressed:bg-matrix-muted/30 group-invalid:outline group-invalid:outline-ruby-vivid forced-colors:group-invalid:outline-[Mark]",
+      true: "border-transparent text-app-muted forced-colors:text-[GrayText] bg-app-muted/10",
     },
   },
 })
@@ -53,7 +53,7 @@ export function Select<T extends object>({
       {...props}
       className={composeTailwindRenderProps(
         props.className,
-        "group flex flex-col gap-1 relative font-sans"
+        "group flex flex-col gap-1 relative font-mono"
       )}
     >
       {label && <Label>{label}</Label>}
@@ -65,7 +65,7 @@ export function Select<T extends object>({
         </SelectValue>
         <ChevronDown
           aria-hidden
-          className="w-4 h-4 text-neutral-600 dark:text-neutral-400 forced-colors:text-[ButtonText] group-disabled:text-neutral-200 dark:group-disabled:text-neutral-600 forced-colors:group-disabled:text-[GrayText]"
+          className="w-4 h-4 text-app-muted forced-colors:text-[ButtonText] group-disabled:text-app-muted_50 forced-colors:group-disabled:text-[GrayText]"
         />
       </Button>
       {description && <Description>{description}</Description>}

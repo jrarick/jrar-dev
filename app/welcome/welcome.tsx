@@ -1,97 +1,88 @@
 import { Button } from "~/components/button"
-import logoDark from "./logo-dark.svg"
-import logoLight from "./logo-light.svg"
+import { TextField } from "~/components/text-field"
+import { Select, SelectItem } from "~/components/select"
+import { Link } from "~/components/link"
 
 export function Welcome({ message }: { message: string }) {
   return (
-    <main className="flex items-center justify-center pt-16 pb-4">
-      <div className="flex-1 flex flex-col items-center gap-16 min-h-0">
-        <header className="flex flex-col items-center gap-9">
-          <div className="w-[500px] max-w-[100vw] p-4">
-            <img
-              src={logoLight}
-              alt="React Router"
-              className="block w-full dark:hidden"
-            />
-            <img
-              src={logoDark}
-              alt="React Router"
-              className="hidden w-full dark:block"
-            />
-          </div>
+    <main className="flex items-center justify-center min-h-screen bg-app-background py-16">
+      <div className="flex-1 flex flex-col items-center gap-16 min-h-0 container mx-auto px-4">
+        <header className="flex flex-col items-center gap-4">
+          <h1 className="text-4xl font-mono font-bold text-matrix-vivid uppercase tracking-widest animate-pulse">
+            Terminal_UI
+          </h1>
+          <p className="font-mono text-app-muted text-sm">
+            v1.0.0 // SYSTEM_READY
+          </p>
         </header>
-        <div className="flex gap-2">
-          <Button variant="primary">Primary</Button>
-          <Button variant="secondary">Secondary</Button>
-          <Button variant="destructive">Destructive</Button>
-          <Button variant="quiet">Quiet</Button>
-        </div>
-        <div className="max-w-[300px] w-full space-y-6 px-4">
-          <nav className="rounded-3xl border border-gray-200 p-6 dark:border-gray-700 space-y-4">
-            <p className="leading-6 text-gray-700 dark:text-gray-200 text-center">
-              What&apos;s next?
-            </p>
-            <ul>
-              {resources.map(({ href, text, icon }) => (
-                <li key={href}>
-                  <a
-                    className="group flex items-center gap-3 self-stretch p-3 leading-normal text-blue-700 hover:underline dark:text-blue-500"
-                    href={href}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    {icon}
-                    {text}
-                  </a>
-                </li>
-              ))}
-              <li className="self-stretch p-3 leading-normal">{message}</li>
-            </ul>
-          </nav>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-8 max-w-5xl w-full">
-          {themes.map((theme) => (
-            <div
-              key={theme.name}
-              className={`flex flex-col gap-4 p-6 rounded-3xl border-2 shadow-lg transition-transform hover:scale-[1.02] ${theme.card}`}
-            >
-              <div className="flex items-center justify-between">
-                <h3
-                  className={`text-2xl font-black capitalize tracking-tight ${theme.title}`}
-                >
-                  {theme.name}
-                </h3>
-                <span
-                  className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider ${theme.badge}`}
-                >
-                  Palette
-                </span>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 w-full max-w-6xl">
+          {/* Buttons Section */}
+          <section className="space-y-6">
+            <h2 className="text-xl font-mono text-app-foreground border-b border-matrix-muted pb-2 uppercase">
+              01_Buttons //
+            </h2>
+            <div className="flex flex-col gap-4">
+              <div className="flex flex-wrap gap-4 items-center">
+                <Button variant="primary">Primary Action</Button>
+                <Button variant="secondary">Secondary</Button>
+                <Button variant="destructive">Destructive</Button>
+                <Button variant="quiet">Quiet</Button>
               </div>
-
-              <div className={`h-px w-full my-1 opacity-20 ${theme.divider}`} />
-
-              <p
-                className={`text-sm font-medium leading-relaxed ${theme.text}`}
-              >
-                This card demonstrates the <strong>{theme.name}</strong> color
-                palette hierarchy. The background uses the muted tone, while
-                borders use the base tone.
-              </p>
-
-              <div className="flex items-center gap-3 mt-auto pt-2">
-                <button
-                  className={`flex-1 px-4 py-2.5 rounded-xl text-sm font-bold shadow-sm transition-opacity hover:opacity-90 active:opacity-100 cursor-pointer ${theme.buttonPrimary}`}
-                >
-                  Primary
-                </button>
-                <button
-                  className={`flex-1 px-4 py-2.5 rounded-xl text-sm font-bold border-2 transition-opacity hover:bg-black/10 cursor-pointer ${theme.buttonSecondary}`}
-                >
-                  Secondary
-                </button>
+              <div className="flex flex-wrap gap-4 items-center">
+                <Button variant="primary" isDisabled>
+                  Disabled
+                </Button>
+                <Button variant="primary" isPending>
+                  Pending
+                </Button>
               </div>
             </div>
-          ))}
+          </section>
+
+          {/* Inputs Section */}
+          <section className="space-y-6">
+            <h2 className="text-xl font-mono text-app-foreground border-b border-matrix-muted pb-2 uppercase">
+              02_Inputs //
+            </h2>
+            <div className="space-y-4">
+              <TextField
+                label="System Code"
+                placeholder="ENTER_CODE"
+                description="Secure entry required."
+              />
+              <TextField
+                label="Error State"
+                defaultValue="INVALID_INPUT"
+                isInvalid
+                errorMessage="Critical Failure"
+              />
+              <TextField label="Disabled" defaultValue="LOCKED" isDisabled />
+            </div>
+          </section>
+
+          {/* Select & Links Section */}
+          <section className="space-y-6">
+            <h2 className="text-xl font-mono text-app-foreground border-b border-matrix-muted pb-2 uppercase">
+              03_Selection & Nav //
+            </h2>
+            <div className="space-y-8">
+              <Select label="Access Level">
+                <SelectItem id="guest">Guest Access</SelectItem>
+                <SelectItem id="user">User Level 1</SelectItem>
+                <SelectItem id="admin">Admin Root</SelectItem>
+              </Select>
+
+              <div className="flex flex-col gap-2">
+                <Link href="#" variant="primary">
+                  Navigate to Root
+                </Link>
+                <Link href="#" variant="secondary">
+                  View System Logs
+                </Link>
+              </div>
+            </div>
+          </section>
         </div>
       </div>
     </main>

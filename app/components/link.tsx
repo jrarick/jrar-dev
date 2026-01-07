@@ -12,13 +12,13 @@ interface LinkProps extends AriaLinkProps {
 
 const styles = tv({
   extend: focusRing,
-  base: "underline disabled:no-underline disabled:cursor-default forced-colors:disabled:text-[GrayText] transition rounded-xs [-webkit-tap-highlight-color:transparent]",
+  base: "underline disabled:no-underline disabled:cursor-default forced-colors:disabled:text-[GrayText] transition [-webkit-tap-highlight-color:transparent]",
   variants: {
     variant: {
       primary:
-        "text-blue-600 dark:text-blue-500 underline decoration-blue-600/60 hover:decoration-blue-600 dark:decoration-blue-500/60 dark:hover:decoration-blue-500",
+        "text-matrix-base hover:text-matrix-vivid underline decoration-matrix-base/60 hover:decoration-matrix-vivid",
       secondary:
-        "text-neutral-700 dark:text-neutral-300 underline decoration-neutral-700/50 hover:decoration-neutral-700 dark:decoration-neutral-300/70 dark:hover:decoration-neutral-300",
+        "text-app-muted hover:text-app-foreground underline decoration-app-muted/50 hover:decoration-app-foreground",
     },
   },
   defaultVariants: {

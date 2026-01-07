@@ -1,5 +1,3 @@
-"use client"
-import React from "react"
 import {
   TextField as AriaTextField,
   type TextFieldProps as AriaTextFieldProps,
@@ -17,12 +15,13 @@ import { composeTailwindRenderProps, focusRing } from "~/lib/utils"
 
 const inputStyles = tv({
   extend: focusRing,
-  base: "border rounded-lg min-h-9 font-sans text-sm py-0 px-3 box-border transition",
+  base: "border min-h-9 font-mono text-sm py-0 px-3 box-border transition",
   variants: {
     isFocused: fieldBorderStyles.variants.isFocusWithin,
     isInvalid: fieldBorderStyles.variants.isInvalid,
     isDisabled: fieldBorderStyles.variants.isDisabled,
   },
+  compoundVariants: fieldBorderStyles.compoundVariants,
 })
 
 export interface TextFieldProps extends AriaTextFieldProps {
@@ -43,7 +42,7 @@ export function TextField({
       {...props}
       className={composeTailwindRenderProps(
         props.className,
-        "flex flex-col gap-1 font-sans"
+        "flex flex-col gap-1 font-mono"
       )}
     >
       {label && <Label>{label}</Label>}

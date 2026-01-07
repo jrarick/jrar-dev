@@ -11,8 +11,8 @@
 
   /* App Colors */
   --color-app-background: oklch(0% 0 0);
-  --color-app-foreground: oklch(100% 0.00011 271.152 / 0.948);
-  --color-app-muted: oklch(20% 0.00011 271.152 / 0.948);
+  --color-app-foreground: oklch(96.416% 0.00011 271.152);
+  --color-app-muted: oklch(30.519% 0.00003 271.152);
 
   /* Matrix - neon terminal green */
   --color-matrix-muted: oklch(0.275 0.08853 143.345);

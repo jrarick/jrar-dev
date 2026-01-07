@@ -17,13 +17,13 @@ let button = tv({
   variants: {
     variant: {
       primary:
-        "bg-matrix-accent hover:bg-matrix-vivid text-black shadow-[0_0px_20px_var(--color-matrix-base)] selection:bg-black selection:text-matrix-accent",
+        "bg-matrix-accent hover:bg-matrix-vivid text-app-background shadow-[0_0px_10px_var(--color-matrix-base)] selection:bg-app-background selection:text-matrix-accent",
       secondary:
-        "border-matrix-base bg-matrix-muted text-white hover:bg-transparent shadow-[0_0px_20px_var(--color-matrix-base)] selection:bg-matrix-accent selection:text-black",
+        "border-matrix-base bg-matrix-muted text-app-foreground hover:bg-transparent shadow-[0_0px_10px_var(--color-matrix-muted)] selection:bg-matrix-accent selection:text-app-background",
       destructive:
-        "bg-ruby-accent hover:bg-ruby-vivid text-black shadow-[0_0px_20px_var(--color-ruby-base)] focus:outline-ruby-vivid selection:bg-black selection:text-ruby-accent",
+        "bg-ruby-accent hover:bg-ruby-vivid text-app-background shadow-[0_0px_10px_var(--color-ruby-base)] focus:outline-ruby-vivid selection:bg-app-background selection:text-ruby-accent",
       quiet:
-        "border-0 bg-transparent hover:bg-matrix-muted text-white hover:shadow-[0_0px_20px_var(--color-matrix-muted)] selection:bg-matrix-accent selection:text-black",
+        "border-0 bg-transparent hover:bg-matrix-muted text-app-foreground hover:shadow-[0_0px_10px_var(--color-matrix-muted)] selection:bg-matrix-accent selection:text-app-background",
     },
     isDisabled: {
       true: "opacity-30 cursor-not-allowed forced-colors:text-[GrayText]",
@@ -54,12 +54,12 @@ export function Button(props: ButtonProps) {
               className="flex absolute inset-0 justify-center items-center"
             >
               <svg
-                className="w-4 h-4 text-white animate-spin"
+                className="w-4 h-4 text-app-foreground animate-spin"
                 viewBox="0 0 24 24"
                 stroke={
                   props.variant === "secondary" || props.variant === "quiet"
-                    ? "white"
-                    : "black"
+                    ? "var(--color-app-foreground)"
+                    : "var(--color-app-background)"
                 }
               >
                 <circle

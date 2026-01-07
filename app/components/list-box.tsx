@@ -26,7 +26,7 @@ export function ListBox<T extends object>({
       {...props}
       className={composeTailwindRenderProps(
         props.className,
-        "outline-0 p-1 w-[200px] bg-white dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-700 rounded-lg font-sans"
+        "outline-0 p-1 w-[200px] bg-app-background border border-matrix-muted rounded-none font-mono"
       )}
     >
       {children}
@@ -36,15 +36,15 @@ export function ListBox<T extends object>({
 
 export const itemStyles = tv({
   extend: focusRing,
-  base: "group relative flex items-center gap-8 cursor-default select-none py-1.5 px-2.5 rounded-md will-change-transform text-sm forced-color-adjust-none",
+  base: "group relative flex items-center gap-8 cursor-default select-none py-1.5 px-2.5 rounded-none will-change-transform text-sm forced-color-adjust-none",
   variants: {
     isSelected: {
       false:
-        "text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 pressed:bg-neutral-100 dark:hover:bg-neutral-800 dark:pressed:bg-neutral-800 -outline-offset-2",
-      true: "bg-blue-600 text-white forced-colors:bg-[Highlight] forced-colors:text-[HighlightText] [&:has(+[data-selected])]:rounded-b-none [&+[data-selected]]:rounded-t-none -outline-offset-4 outline-white dark:outline-white forced-colors:outline-[HighlightText]",
+        "text-app-foreground hover:bg-matrix-muted hover:text-matrix-vivid pressed:bg-matrix-muted -outline-offset-2",
+      true: "bg-matrix-base text-app-background forced-colors:bg-[Highlight] forced-colors:text-[HighlightText] [&:has(+[data-selected])]:rounded-b-none [&+[data-selected]]:rounded-t-none -outline-offset-4 outline-matrix-accent forced-colors:outline-[HighlightText]",
     },
     isDisabled: {
-      true: "text-neutral-300 dark:text-neutral-600 forced-colors:text-[GrayText]",
+      true: "text-app-muted forced-colors:text-[GrayText]",
     },
   },
 })
@@ -58,7 +58,7 @@ export function ListBoxItem(props: ListBoxItemProps) {
       {composeRenderProps(props.children, (children) => (
         <>
           {children}
-          <div className="absolute left-4 right-4 bottom-0 h-px bg-white/20 forced-colors:bg-[HighlightText] hidden [.group[data-selected]:has(+[data-selected])_&]:block" />
+          <div className="absolute left-4 right-4 bottom-0 h-px bg-app-foreground/10 forced-colors:bg-[HighlightText] hidden [.group[data-selected]:has(+[data-selected])_&]:block" />
         </>
       ))}
     </AriaListBoxItem>
@@ -66,24 +66,24 @@ export function ListBoxItem(props: ListBoxItemProps) {
 }
 
 export const dropdownItemStyles = tv({
-  base: "group flex items-center gap-4 cursor-default select-none py-2 pl-3 pr-3 selected:pr-1 rounded-lg outline-0 text-sm forced-color-adjust-none no-underline [[href]]:cursor-pointer [-webkit-tap-highlight-color:transparent]",
+  base: "group flex items-center gap-4 cursor-default select-none py-2 pl-3 pr-3 selected:pr-1 rounded-none outline-0 text-sm forced-color-adjust-none no-underline [[href]]:cursor-pointer [-webkit-tap-highlight-color:transparent]",
   variants: {
     isDisabled: {
-      false: "text-neutral-900 dark:text-neutral-100",
-      true: "text-neutral-300 dark:text-neutral-600 forced-colors:text-[GrayText]",
+      false: "text-app-foreground",
+      true: "text-app-muted forced-colors:text-[GrayText]",
     },
     isPressed: {
-      true: "bg-neutral-100 dark:bg-neutral-800",
+      true: "bg-matrix-muted",
     },
     isFocused: {
-      true: "bg-blue-600 dark:bg-blue-600 text-white forced-colors:bg-[Highlight] forced-colors:text-[HighlightText]",
+      true: "bg-matrix-base text-app-background forced-colors:bg-[Highlight] forced-colors:text-[HighlightText]",
     },
   },
   compoundVariants: [
     {
       isFocused: false,
       isOpen: true,
-      className: "bg-neutral-100 dark:bg-neutral-700/60",
+      className: "bg-matrix-muted/60",
     },
   ],
 })
@@ -122,7 +122,7 @@ export function DropdownSection<T extends object>(
 ) {
   return (
     <ListBoxSection className="first:-mt-[5px] after:content-[''] after:block after:h-[5px] last:after:hidden">
-      <Header className="text-sm font-semibold text-neutral-500 dark:text-neutral-300 px-4 py-1 truncate sticky -top-[5px] -mt-px -mx-1 z-10 bg-neutral-100/60 dark:bg-neutral-700/60 backdrop-blur-md supports-[-moz-appearance:none]:bg-neutral-100 border-y border-y-neutral-200 dark:border-y-neutral-700 [&+*]:mt-1">
+      <Header className="text-sm font-semibold text-app-muted px-4 py-1 truncate sticky -top-[5px] -mt-px -mx-1 z-10 bg-app-background/90 backdrop-blur-md supports-[-moz-appearance:none]:bg-app-background border-y border-y-matrix-muted [&+*]:mt-1">
         {props.title}
       </Header>
       <Collection items={props.items}>{props.children}</Collection>
