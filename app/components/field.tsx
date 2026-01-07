@@ -54,10 +54,10 @@ export const fieldBorderStyles = tv({
   variants: {
     isFocusWithin: {
       false: "border-matrix-base forced-colors:border-[ButtonBorder]",
-      true: "border-matrix-accent forced-colors:border-[Highlight] bg-linear-to-b from-transparent via-matrix-muted/25 to-matrix-muted/75",
+      true: "border-matrix-accent forced-colors:border-[Highlight] bg-linear-to-b from-transparent via-matrix-background/25 to-matrix-background/75",
     },
     isInvalid: {
-      true: "border-ruby-base forced-colors:border-[Mark] outline-ruby-vivid selection:bg-ruby-vivid selection:text-app-background",
+      true: "border-ruby-base forced-colors:border-[Mark] outline-ruby-vivid selection:bg-ruby-vivid selection:text-app-muted",
     },
     isDisabled: {
       true: "border-app-muted opacity-50 forced-colors:border-[GrayText]",
@@ -67,7 +67,8 @@ export const fieldBorderStyles = tv({
     {
       isFocused: true,
       isInvalid: true,
-      className: "border-ruby-accent via-ruby-muted/25 to-ruby-muted/75",
+      className:
+        "border-ruby-accent via-ruby-background/25 to-ruby-background/75",
     },
   ],
 })

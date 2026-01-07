@@ -19,7 +19,7 @@ export function Welcome({ message }: { message: string }) {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 w-full max-w-6xl">
           {/* Buttons Section */}
           <section className="space-y-6">
-            <h2 className="text-xl font-mono text-app-foreground border-b border-matrix-muted pb-2 uppercase">
+            <h2 className="text-xl font-mono text-app-foreground border-b border-matrix-background pb-2 uppercase">
               01_Buttons //
             </h2>
             <div className="flex flex-col gap-4">
@@ -42,7 +42,7 @@ export function Welcome({ message }: { message: string }) {
 
           {/* Inputs Section */}
           <section className="space-y-6">
-            <h2 className="text-xl font-mono text-app-foreground border-b border-matrix-muted pb-2 uppercase">
+            <h2 className="text-xl font-mono text-app-foreground border-b border-matrix-background pb-2 uppercase">
               02_Inputs //
             </h2>
             <div className="space-y-4">
@@ -63,11 +63,17 @@ export function Welcome({ message }: { message: string }) {
 
           {/* Select & Links Section */}
           <section className="space-y-6">
-            <h2 className="text-xl font-mono text-app-foreground border-b border-matrix-muted pb-2 uppercase">
+            <h2 className="text-xl font-mono text-app-foreground border-b border-matrix-background pb-2 uppercase">
               03_Selection & Nav //
             </h2>
             <div className="space-y-8">
               <Select label="Access Level">
+                <SelectItem id="guest">Guest Access</SelectItem>
+                <SelectItem id="user">User Level 1</SelectItem>
+                <SelectItem id="admin">Admin Root</SelectItem>
+              </Select>
+
+              <Select label="Access Level" isInvalid>
                 <SelectItem id="guest">Guest Access</SelectItem>
                 <SelectItem id="user">User Level 1</SelectItem>
                 <SelectItem id="admin">Admin Root</SelectItem>
@@ -134,12 +140,12 @@ const resources = [
 const themes = [
   {
     name: "matrix",
-    card: "bg-matrix-muted border-matrix-base",
+    card: "bg-matrix-background border-matrix-base",
     title: "text-matrix-vivid",
-    badge: "bg-matrix-accent text-matrix-muted",
+    badge: "bg-matrix-accent text-matrix-background",
     divider: "bg-matrix-vivid",
     text: "text-matrix-accent",
-    buttonPrimary: "bg-matrix-vivid text-matrix-muted",
+    buttonPrimary: "bg-matrix-vivid text-matrix-background",
     buttonSecondary: "border-matrix-vivid text-matrix-vivid",
   },
 ]

@@ -26,7 +26,7 @@ export function ListBox<T extends object>({
       {...props}
       className={composeTailwindRenderProps(
         props.className,
-        "outline-0 p-1 w-[200px] bg-app-background border border-matrix-muted rounded-none font-mono"
+        "outline-0 p-1 w-[200px] bg-app-background border border-matrix-background rounded-none font-mono"
       )}
     >
       {children}
@@ -40,7 +40,7 @@ export const itemStyles = tv({
   variants: {
     isSelected: {
       false:
-        "text-app-foreground hover:bg-matrix-muted hover:text-matrix-vivid pressed:bg-matrix-muted -outline-offset-2",
+        "text-app-foreground hover:bg-matrix-background hover:text-matrix-vivid pressed:bg-matrix-background -outline-offset-2",
       true: "bg-matrix-base text-app-background forced-colors:bg-[Highlight] forced-colors:text-[HighlightText] [&:has(+[data-selected])]:rounded-b-none [&+[data-selected]]:rounded-t-none -outline-offset-4 outline-matrix-accent forced-colors:outline-[HighlightText]",
     },
     isDisabled: {
@@ -73,17 +73,17 @@ export const dropdownItemStyles = tv({
       true: "text-app-muted forced-colors:text-[GrayText]",
     },
     isPressed: {
-      true: "bg-matrix-muted",
+      true: "bg-matrix-background",
     },
     isFocused: {
-      true: "bg-matrix-base text-app-background forced-colors:bg-[Highlight] forced-colors:text-[HighlightText]",
+      true: "bg-matrix-accent text-app-background forced-colors:bg-[Highlight] forced-colors:text-[HighlightText]",
     },
   },
   compoundVariants: [
     {
       isFocused: false,
       isOpen: true,
-      className: "bg-matrix-muted/60",
+      className: "bg-matrix-background/60",
     },
   ],
 })
@@ -122,7 +122,7 @@ export function DropdownSection<T extends object>(
 ) {
   return (
     <ListBoxSection className="first:-mt-[5px] after:content-[''] after:block after:h-[5px] last:after:hidden">
-      <Header className="text-sm font-semibold text-app-muted px-4 py-1 truncate sticky -top-[5px] -mt-px -mx-1 z-10 bg-app-background/90 backdrop-blur-md supports-[-moz-appearance:none]:bg-app-background border-y border-y-matrix-muted [&+*]:mt-1">
+      <Header className="text-sm font-semibold text-app-muted px-4 py-1 truncate sticky -top-[5px] -mt-px -mx-1 z-10 bg-app-muted/90 backdrop-blur-md supports-[-moz-appearance:none]:bg-app-muted border-y border-y-matrix-background [&+*]:mt-1">
         {props.title}
       </Header>
       <Collection items={props.items}>{props.children}</Collection>

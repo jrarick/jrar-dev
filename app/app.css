@@ -12,16 +12,16 @@
   /* App Colors */
   --color-app-background: oklch(0% 0 0);
   --color-app-foreground: oklch(96.416% 0.00011 271.152);
-  --color-app-muted: oklch(30.519% 0.00003 271.152);
+  --color-app-muted: oklch(43.861% 0.00005 271.152);
 
   /* Matrix - neon terminal green */
-  --color-matrix-muted: oklch(0.275 0.08853 143.345);
+  --color-matrix-background: oklch(0.275 0.08853 143.345);
   --color-matrix-base: oklch(0.65 0.2 145);
   --color-matrix-vivid: oklch(0.8 0.28 145);
   --color-matrix-accent: oklch(0.88 0.32 145);
 
   /* Ruby - neon terminal red */
-  --color-ruby-muted: oklch(29.003% 0.11768 28.971);
+  --color-ruby-background: oklch(29.003% 0.11768 28.971);
   --color-ruby-base: oklch(45.397% 0.18247 28.767);
   --color-ruby-vivid: oklch(57.767% 0.23334 28.873);
   --color-ruby-accent: oklch(75.397% 0.30751 28.767);
