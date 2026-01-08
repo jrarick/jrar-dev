@@ -10,6 +10,14 @@ import {
 import type { Route } from "./+types/root"
 import "./app.css"
 
+declare global {
+  namespace Cloudflare {
+    interface Env {
+      jrar_dev_db: D1Database
+    }
+  }
+}
+
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
   {

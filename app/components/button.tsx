@@ -21,7 +21,7 @@ let button = tv({
       secondary:
         "border-matrix-base bg-app-background text-app-foreground hover:bg-matrix-background/50 shadow-[0_0px_10px_var(--color-matrix-background)] selection:bg-matrix-accent selection:text-app-background",
       destructive:
-        "bg-ruby-accent hover:bg-ruby-vivid text-app-background shadow-[0_0px_10px_var(--color-ruby-base)] focus:outline-ruby-vivid selection:bg-app-background selection:text-ruby-accent",
+        "bg-ruby-accent hover:bg-ruby-vivid text-app-background shadow-[0_0px_10px_var(--color-ruby-base)] outline-ruby-vivid selection:bg-app-background selection:text-ruby-accent",
       quiet:
         "border-0 bg-transparent hover:bg-matrix-background text-app-foreground hover:shadow-[0_0px_10px_var(--color-matrix-background)] selection:bg-matrix-accent selection:text-app-background",
     },
