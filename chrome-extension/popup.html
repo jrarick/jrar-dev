@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Courier New", monospace;
+        background: #000;
+        color: #00ff00;
+        width: 320px;
+        padding: 16px;
+        margin: 0;
+      }
+
+      h1 {
+        font-size: 14px;
+        margin: 0 0 16px 0;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        border-bottom: 1px solid #00ff00;
+        padding-bottom: 8px;
+      }
+
+      .field {
+        margin-bottom: 12px;
+      }
+
+      label {
+        display: block;
+        font-size: 11px;
+        margin-bottom: 4px;
+        text-transform: uppercase;
+        color: #00aa00;
+      }
+
+      input {
+        width: 100%;
+        background: #001a00;
+        border: 1px solid #00ff00;
+        color: #00ff00;
+        padding: 8px;
+        font-family: inherit;
+        font-size: 12px;
+      }
+
+      input:focus {
+        outline: none;
+        border-color: #00ffaa;
+        box-shadow: 0 0 5px #00ff0050;
+      }
+
+      input::placeholder {
+        color: #006600;
+      }
+
+      button {
+        width: 100%;
+        background: #00ff00;
+        color: #000;
+        border: none;
+        padding: 10px;
+        font-family: inherit;
+        font-weight: bold;
+        cursor: pointer;
+        text-transform: uppercase;
+        margin-top: 8px;
+        font-size: 12px;
+        letter-spacing: 1px;
+      }
+
+      button:hover {
+        background: #00cc00;
+      }
+
+      button:disabled {
+        background: #004400;
+        color: #006600;
+        cursor: not-allowed;
+      }
+
+      button.secondary {
+        background: transparent;
+        color: #00ff00;
+        border: 1px solid #00ff00;
+      }
+
+      button.secondary:hover {
+        background: #00ff0020;
+      }
+
+      button.secondary:disabled {
+        border-color: #004400;
+        color: #004400;
+      }
+
+      .status {
+        margin-top: 12px;
+        padding: 8px;
+        font-size: 11px;
+        border: 1px solid #00ff00;
+        display: none;
+      }
+
+      .status.error {
+        border-color: #ff0000;
+        color: #ff0000;
+      }
+
+      .status.success {
+        border-color: #00ff00;
+      }
+
+      .status.visible {
+        display: block;
+      }
+
+      .info {
+        font-size: 10px;
+        color: #006600;
+        margin-top: 16px;
+        padding-top: 12px;
+        border-top: 1px solid #003300;
+      }
+
+      .info a {
+        color: #00aa00;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>// JRAR Bookmark Sync</h1>
+
+    <div class="field">
+      <label>API Base URL</label>
+      <input
+        type="text"
+        id="apiBase"
+        placeholder="https://jrar.dev/api/bookmarks"
+      />
+    </div>
+
+    <div class="field">
+      <label>API Key</label>
+      <input type="password" id="apiKey" placeholder="Enter API key..." />
+    </div>
+
+    <button id="saveSettings">Save Settings</button>
+    <button id="testConnection" class="secondary">Test Connection</button>
+    <button id="syncAll" class="secondary">Sync All Bookmarks</button>
+
+    <div id="status" class="status"></div>
+
+    <div class="info">
+      Real-time sync is active when API key is configured. Changes to your
+      bookmarks will automatically sync to your site.
+    </div>
+
+    <script src="popup.js"></script>
+  </body>
+</html>

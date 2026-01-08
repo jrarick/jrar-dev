@@ -57,7 +57,7 @@ export const fieldBorderStyles = tv({
       true: "border-matrix-accent forced-colors:border-[Highlight] bg-linear-to-b from-transparent via-matrix-background/25 to-matrix-background/75",
     },
     isInvalid: {
-      true: "border-ruby-base forced-colors:border-[Mark] outline-ruby-vivid selection:bg-ruby-vivid selection:text-app-muted",
+      true: "border-ruby-base forced-colors:border-[Mark] outline-ruby-vivid selection:bg-ruby-vivid selection:text-app-background",
     },
     isDisabled: {
       true: "border-app-muted opacity-50 forced-colors:border-[GrayText]",

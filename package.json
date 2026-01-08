@@ -14,6 +14,7 @@
 		"publish": true
 	},
 	"dependencies": {
+		"effect": "^3.19.14",
 		"isbot": "5.1.32",
 		"lucide-react": "^0.562.0",
 		"motion": "^12.24.7",
@@ -29,6 +30,7 @@
 	"devDependencies": {
 		"@cloudflare/vite-plugin": "1.15.3",
 		"@cloudflare/workers-types": "^4.20260103.0",
+		"@effect/language-service": "^0.64.1",
 		"@react-router/dev": "7.9.6",
 		"@tailwindcss/vite": "4.1.17",
 		"@types/node": "24.10.1",
