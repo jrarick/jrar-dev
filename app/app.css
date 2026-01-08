@@ -1,6 +1,10 @@
 @import "tailwindcss" source(".");
 @plugin "tailwindcss-react-aria-components";
 @plugin "tailwindcss-animate";
+@plugin "@tailwindcss/typography";
+
+/* Highlight.js theme */
+@import "highlight.js/styles/github-dark.css";
 
 @layer base;
 @layer components;
