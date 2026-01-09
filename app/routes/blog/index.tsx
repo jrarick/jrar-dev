@@ -1,59 +1,84 @@
-import { Link, useLoaderData } from "react-router";
+import { Link, useLoaderData } from "react-router"
 
 // Define interface for frontmatter
 interface Frontmatter {
-  title: string;
-  date?: string;
-  description?: string;
-  [key: string]: any;
+  title: string
+  date?: string
+  description?: string
+  [key: string]: any
 }
 
 // Define interface for MDX module
 interface MdxModule {
-  frontmatter: Frontmatter;
-  default: React.ComponentType;
+  frontmatter: Frontmatter
+  default: React.ComponentType
 }
 
 export async function loader() {
   // Use import.meta.glob to load all MDX files in the posts directory
-  const modules = import.meta.glob<MdxModule>('./posts/*.mdx', { eager: true });
+  const modules = import.meta.glob<MdxModule>("./posts/*.mdx", { eager: true })
 
   // Map over the modules to extract slug and frontmatter
   const posts = Object.entries(modules).map(([filepath, module]) => {
     // Extract slug from filepath (e.g., "./posts/first-post.mdx" -> "first-post")
-    const slug = filepath.replace(/^\.\/posts\/(.*)\.mdx$/, '$1');
+    const slug = filepath.replace(/^\.\/posts\/(.*)\.mdx$/, "$1")
     return {
       slug,
       frontmatter: module.frontmatter,
-    };
-  });
+    }
+  })
 
-  return { posts };
+  return { posts }
 }
 
 export default function BlogIndex() {
-  const { posts } = useLoaderData<typeof loader>();
+  const { posts } = useLoaderData<typeof loader>()
 
   return (
-    <div className="p-8 font-sans">
-      <h1 className="text-3xl font-bold mb-6">Blog Posts</h1>
-      <ul className="space-y-4">
-        {posts.map((post) => (
-          <li key={post.slug} className="border p-4 rounded hover:bg-gray-50">
-            <Link to={`/blog/${post.slug}`} className="block">
-              <h2 className="text-xl font-semibold text-blue-600">
-                {post.frontmatter.title || post.slug}
-              </h2>
-              {post.frontmatter.date && (
-                <p className="text-sm text-gray-500">{post.frontmatter.date}</p>
-              )}
-              {post.frontmatter.description && (
-                <p className="mt-2 text-gray-700">{post.frontmatter.description}</p>
-              )}
-            </Link>
-          </li>
-        ))}
-      </ul>
+    <div className="min-h-screen bg-app-background p-8 font-mono">
+      <div className="max-w-4xl mx-auto">
+        <header className="mb-12 border-b border-primary-background pb-4">
+          <h1 className="text-3xl font-bold text-primary-vivid uppercase tracking-widest">
+            ~/blog // INDEX
+          </h1>
+          <p className="text-app-muted mt-2 text-sm">
+            {posts.length} entries found...
+          </p>
+        </header>
+
+        <ul className="flex flex-col gap-px bg-primary-background/20 border border-primary-background/20">
+          {posts.map((post) => (
+            <li
+              key={post.slug}
+              className="group relative bg-app-background hover:bg-primary-background/5 transition-colors"
+            >
+              <Link to={`/blog/${post.slug}`} className="block p-6">
+                <div className="flex flex-col md:flex-row md:items-baseline gap-2 md:gap-8">
+                  <span className="text-xs text-app-muted shrink-0 w-32 font-bold opacity-60">
+                    {post.frontmatter.date
+                      ? new Date(post.frontmatter.date)
+                          .toISOString()
+                          .split("T")[0]
+                      : "UNKNOWN_DATE"}
+                  </span>
+                  <div>
+                    <h2 className="text-xl font-bold text-primary-base group-hover:text-primary-vivid transition-colors mb-2">
+                      {post.frontmatter.title || post.slug}
+                    </h2>
+                    {post.frontmatter.description && (
+                      <p className="text-sm text-app-muted/80 max-w-2xl leading-relaxed">
+                        {post.frontmatter.description}
+                      </p>
+                    )}
+                  </div>
+                </div>
+                {/* Hover indicator */}
+                <div className="absolute left-0 top-0 bottom-0 w-1 bg-primary-vivid scale-y-0 group-hover:scale-y-100 transition-transform origin-top" />
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
-  );
+  )
 }

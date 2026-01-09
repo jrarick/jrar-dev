@@ -2,6 +2,8 @@ import { Button } from "~/components/button"
 import { TextField } from "~/components/text-field"
 import { Select, SelectItem } from "~/components/select"
 import { Link } from "~/components/link"
+import { Checkbox } from "~/components/checkbox"
+import { RadioGroup, Radio } from "~/components/radio-group"
 
 export function Welcome({ message }: { message: string }) {
   return (
@@ -98,6 +100,54 @@ export function Welcome({ message }: { message: string }) {
                 <Link href="#" variant="secondary">
                   View System Logs
                 </Link>
+              </div>
+            </div>
+          </section>
+
+          {/* Toggles Section */}
+          <section className="space-y-6">
+            <h2 className="text-xl font-mono text-app-foreground border-b border-primary-background pb-2 uppercase">
+              04_Toggles //
+            </h2>
+            <div className="flex flex-col gap-8">
+              <div className="space-y-4">
+                <h3 className="font-mono text-app-muted text-sm uppercase">
+                  Checkbox
+                </h3>
+                <div className="flex flex-col gap-2">
+                  <Checkbox>Accept Terms</Checkbox>
+                  <Checkbox isSelected>Auto-save</Checkbox>
+                  <Checkbox isDisabled>Restricted Option</Checkbox>
+                  <Checkbox isInvalid>Invalid Selection</Checkbox>
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <h3 className="font-mono text-app-muted text-sm uppercase">
+                  Radio Group
+                </h3>
+                <RadioGroup
+                  label="Notification Preference"
+                  defaultValue="email"
+                >
+                  <Radio value="email">Email</Radio>
+                  <Radio value="sms">SMS</Radio>
+                  <Radio value="none">None</Radio>
+                </RadioGroup>
+
+                <RadioGroup label="Disabled Group" isDisabled>
+                  <Radio value="on">On</Radio>
+                  <Radio value="off">Off</Radio>
+                </RadioGroup>
+
+                <RadioGroup
+                  label="Invalid Selection"
+                  isInvalid
+                  errorMessage="Selection required"
+                >
+                  <Radio value="a">Option A</Radio>
+                  <Radio value="b">Option B</Radio>
+                </RadioGroup>
               </div>
             </div>
           </section>

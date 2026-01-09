@@ -76,7 +76,7 @@ const getBookmarks = Effect.tryPromise({
 
 ### Styling
 
-- Neon terminal theme with matrix green (`--color-matrix-*`) and ruby red (`--color-ruby-*`)
+- Neon terminal theme with matrix green (`--color-primary-*`) and ruby red (`--color-ruby-*`)
 - Use `tv()` from tailwind-variants for component styles
 - `focusRing` utility from `app/lib/utils.tsx` for accessibility
 

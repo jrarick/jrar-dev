@@ -1,13 +1,46 @@
 ---
-title: Another Post
-date: 2023-10-05
-description: Here is another interesting post.
+title: System Architecture v2.0
+date: 2026-01-09
+description: An overview of the new terminal-based interface and system architecture protocols.
 ---
 
-# Second Post
+# System Architecture v2.0
 
-This is another post. I can use React components here if I want.
+The new interface operates on a strictly **monospaced** visual grid. All organic curves have been purged from the system in favor of `rounded-none` efficiency.
 
-<div style={{ padding: '10px', backgroundColor: 'tomato' }}>
-  This is a div inside MDX.
-</div>
+## Core Protocols
+
+1.  **Visual Clarity**: High contrast text against deep backgrounds.
+2.  **Efficiency**: No wasted padding or decorative fluff.
+3.  **Responsiveness**: Adapts to any viewport stream.
+
+> "Design is not just what it looks like and feels like. Design is how it works."
+> — _Steve Jobs_ (Archived Data)
+
+## Code Implementation
+
+Here is a snippet of the styles used to generate the **Checkbox** component:
+
+```tsx
+const boxStyles = tv({
+  extend: focusRing,
+  base: "w-4.5 h-4.5 box-border shrink-0 rounded-none flex items-center justify-center border transition bg-app-background",
+  variants: {
+    isSelected: {
+      false: "border-primary-base group-pressed:border-primary-vivid",
+      true: "bg-primary-base border-primary-base group-pressed:border-primary-vivid group-pressed:bg-primary-vivid forced-colors:[--color:Highlight]!",
+    },
+    isInvalid: {
+      true: "border-ruby-base group-pressed:border-ruby-vivid",
+    },
+  },
+})
+```
+
+## System Status
+
+- [x] Styles Loaded
+- [x] MDX Parsing Active
+- [ ] Production Deployment
+
+Proceed with caution.
