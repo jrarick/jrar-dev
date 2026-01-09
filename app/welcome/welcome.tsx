@@ -4,6 +4,7 @@ import { Select, SelectItem } from "~/components/select"
 import { Link } from "~/components/link"
 import { Checkbox } from "~/components/checkbox"
 import { RadioGroup, Radio } from "~/components/radio-group"
+import { Breadcrumb, Breadcrumbs } from "~/components/breadcrumbs"
 
 export function Welcome({ message }: { message: string }) {
   return (
@@ -148,6 +149,25 @@ export function Welcome({ message }: { message: string }) {
                   <Radio value="a">Option A</Radio>
                   <Radio value="b">Option B</Radio>
                 </RadioGroup>
+              </div>
+            </div>
+          </section>
+
+          {/* Breadcrumbs Section */}
+          <section className="space-y-6">
+            <h2 className="text-xl font-mono text-app-accent border-b border-primary-muted pb-2 uppercase">
+              05_Breadcrumbs //
+            </h2>
+            <div className="flex flex-col gap-8">
+              <div className="space-y-4">
+                <div className="flex flex-col gap-2">
+                  <Breadcrumbs>
+                    <Breadcrumb href="#">Home</Breadcrumb>
+                    <Breadcrumb href="#">Level 1</Breadcrumb>
+                    <Breadcrumb href="#">Level 2</Breadcrumb>
+                    <Breadcrumb href="#">Level 3</Breadcrumb>
+                  </Breadcrumbs>
+                </div>
               </div>
             </div>
           </section>
