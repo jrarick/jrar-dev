@@ -1,4 +1,5 @@
 import { useMemo } from "react"
+import { useIsSSR } from "react-aria"
 import { tv } from "tailwind-variants"
 
 const PATTERNS = ["wave", "snake", "rain", "blink", "parallax"] as const
@@ -122,12 +123,16 @@ export function GridLoader({
   className,
   inverted = false,
 }: GridLoaderProps) {
+  const isSSR = useIsSSR()
+
   const resolvedPattern = useMemo<ActualPattern>(() => {
     if (pattern === "random") {
+      // Use a strict pattern during SSR/hydration to avoid mismatch
+      if (isSSR) return "wave"
       return PATTERNS[Math.floor(Math.random() * PATTERNS.length)]
     }
     return pattern
-  }, [pattern])
+  }, [pattern, isSSR])
 
   const config = PATTERN_CONFIG[resolvedPattern]
 
