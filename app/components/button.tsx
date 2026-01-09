@@ -20,11 +20,11 @@ let button = tv({
       primary:
         "bg-primary-accent hover:bg-primary-vivid text-app-background shadow-[0_0px_10px_var(--color-primary-base)] selection:bg-app-background selection:text-primary-accent",
       secondary:
-        "border-primary-base bg-app-background text-app-foreground hover:bg-primary-background/50 shadow-[0_0px_10px_var(--color-primary-background)] selection:bg-primary-accent selection:text-app-background",
+        "border-primary-base bg-app-background text-app-accent hover:bg-primary-background/50 shadow-[0_0px_10px_var(--color-primary-background)] selection:bg-primary-accent selection:text-app-background",
       destructive:
         "bg-ruby-accent hover:bg-ruby-vivid text-app-background shadow-[0_0px_10px_var(--color-ruby-base)] outline-ruby-vivid selection:bg-app-background selection:text-ruby-accent",
       quiet:
-        "border-0 bg-transparent hover:bg-primary-background text-app-foreground hover:shadow-[0_0px_10px_var(--color-primary-background)] selection:bg-primary-accent selection:text-app-background",
+        "border-0 bg-transparent hover:bg-primary-background text-app-accent hover:shadow-[0_0px_10px_var(--color-primary-background)] selection:bg-primary-accent selection:text-app-background",
     },
     isDisabled: {
       true: "opacity-30 cursor-not-allowed forced-colors:text-[GrayText]",

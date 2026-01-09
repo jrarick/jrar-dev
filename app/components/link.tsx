@@ -18,7 +18,7 @@ const styles = tv({
       primary:
         "text-primary-base hover:text-primary-vivid underline decoration-primary-base/60 hover:decoration-primary-vivid",
       secondary:
-        "text-app-muted hover:text-app-foreground underline decoration-app-muted/50 hover:decoration-app-foreground",
+        "text-app-vivid hover:text-app-accent underline decoration-app-vivid/50 hover:decoration-app-accent",
     },
   },
   defaultVariants: {

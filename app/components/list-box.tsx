@@ -40,7 +40,7 @@ export const itemStyles = tv({
   variants: {
     isSelected: {
       false:
-        "text-app-foreground hover:bg-primary-background hover:text-primary-vivid pressed:bg-primary-background -outline-offset-2",
+        "text-app-accent hover:bg-primary-background hover:text-primary-vivid pressed:bg-primary-background -outline-offset-2",
       true: "bg-primary-base text-app-background forced-colors:bg-[Highlight] forced-colors:text-[HighlightText] [&:has(+[data-selected])]:rounded-b-none [&+[data-selected]]:rounded-t-none -outline-offset-4 outline-primary-accent forced-colors:outline-[HighlightText]",
     },
     isDisabled: {
@@ -58,7 +58,7 @@ export function ListBoxItem(props: ListBoxItemProps) {
       {composeRenderProps(props.children, (children) => (
         <>
           {children}
-          <div className="absolute left-4 right-4 bottom-0 h-px bg-app-foreground/10 forced-colors:bg-[HighlightText] hidden [.group[data-selected]:has(+[data-selected])_&]:block" />
+          <div className="absolute left-4 right-4 bottom-0 h-px bg-app-accent/10 forced-colors:bg-[HighlightText] hidden [.group[data-selected]:has(+[data-selected])_&]:block" />
         </>
       ))}
     </AriaListBoxItem>
@@ -69,7 +69,7 @@ export const dropdownItemStyles = tv({
   base: "group flex items-center gap-4 cursor-default select-none py-2 pl-3 pr-3 selected:pr-1 rounded-none outline-0 text-sm forced-color-adjust-none no-underline [[href]]:cursor-pointer [-webkit-tap-highlight-color:transparent]",
   variants: {
     isDisabled: {
-      false: "text-app-foreground",
+      false: "text-app-accent",
       true: "text-app-muted forced-colors:text-[GrayText]",
     },
     isPressed: {

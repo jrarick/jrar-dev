@@ -78,15 +78,13 @@ function TreeItem({ item, level }: TreeItemProps) {
             href={item.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex-1 truncate text-app-foreground hover:text-primary-vivid hover:underline"
+            className="flex-1 truncate text-app-accent hover:text-primary-vivid hover:underline"
             onClick={(e) => e.stopPropagation()}
           >
             {item.title || item.url}
           </a>
         ) : (
-          <span className="flex-1 truncate text-app-foreground">
-            {item.title}
-          </span>
+          <span className="flex-1 truncate text-app-accent">{item.title}</span>
         )}
 
         {/* External link icon for bookmarks */}

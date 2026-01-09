@@ -38,7 +38,7 @@ export default function BlogPost({ loaderData }: Route.ComponentProps) {
   }, [filepath])
 
   return (
-    <div className="min-h-screen bg-app-background text-app-foreground font-mono p-8">
+    <div className="min-h-screen bg-app-background text-app-accent font-mono p-8">
       <div className="max-w-4xl mx-auto">
         <nav className="mb-12">
           <Link
@@ -57,7 +57,7 @@ export default function BlogPost({ loaderData }: Route.ComponentProps) {
           prose prose-invert max-w-none
           prose-headings:text-primary-vivid prose-headings:font-bold prose-headings:uppercase prose-headings:tracking-wide
           prose-h1:text-4xl prose-h1:border-b prose-h1:border-primary-background prose-h1:pb-4
-          prose-p:text-app-foreground/90 prose-p:leading-relaxed
+          prose-p:text-app-accent/90 prose-p:leading-relaxed
           prose-a:text-primary-base prose-a:no-underline hover:prose-a:text-primary-vivid hover:prose-a:underline
           prose-strong:text-primary-vivid
           prose-code:text-magenta prose-code:bg-app-muted/10 prose-code:px-1 prose-code:rounded-none prose-code:before:content-none prose-code:after:content-none

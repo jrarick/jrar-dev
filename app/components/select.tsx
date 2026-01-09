@@ -27,7 +27,7 @@ const styles = tv({
     isInvalid: fieldBorderStyles.variants.isInvalid,
     isDisabled: {
       false:
-        "text-app-foreground hover:bg-primary-background/20 pressed:bg-primary-background/30",
+        "text-app-accent hover:bg-primary-background/20 pressed:bg-primary-background/30",
       true: "border-transparent text-app-muted forced-colors:text-[GrayText] bg-app-muted/10",
     },
   },
@@ -85,7 +85,7 @@ export function Select<T extends object>({
             </SelectValue>
             <ChevronDown
               aria-hidden
-              className="w-4 h-4 text-app-muted forced-colors:text-[ButtonText] group-disabled:text-app-muted forced-colors:group-disabled:text-[GrayText]"
+              className="w-4 h-4 text-app-vivid forced-colors:text-[ButtonText] group-disabled:text-app-muted forced-colors:group-disabled:text-[GrayText]"
             />
           </Button>
           {description && <Description>{description}</Description>}

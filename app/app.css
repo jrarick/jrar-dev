@@ -14,9 +14,10 @@
   --font-mono: "Fragment Mono", ui-monospace, system-ui, monospace;
 
   /* App Colors */
-  --color-app-background: oklch(0% 0 0);
-  --color-app-foreground: oklch(96.416% 0.00011 271.152);
-  --color-app-muted: oklch(43.861% 0.00005 271.152);
+  --color-app-background: oklch(0 0 0);
+  --color-app-muted: oklch(0.44 0 0);
+  --color-app-vivid: oklch(0.65 0 0);
+  --color-app-accent: oklch(0.96 0 0);
 
   --matrix: 145;
   --bumblebee: 107;

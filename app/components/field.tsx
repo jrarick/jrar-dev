@@ -22,7 +22,7 @@ export function Label(props: LabelProps) {
     <RACLabel
       {...props}
       className={twMerge(
-        "font-mono text-sm text-app-foreground font-medium cursor-default w-fit",
+        "font-mono text-sm text-app-accent font-medium cursor-default w-fit group-invalid:selection:bg-ruby-vivid group-invalid:selection:text-app-background",
         props.className
       )}
     />
@@ -34,7 +34,7 @@ export function Description(props: TextProps) {
     <Text
       {...props}
       slot="description"
-      className={twMerge("text-sm text-app-muted", props.className)}
+      className={twMerge("text-sm text-app-vivid", props.className)}
     />
   )
 }
@@ -45,7 +45,7 @@ export function FieldError(props: FieldErrorProps) {
       {...props}
       className={composeTailwindRenderProps(
         props.className,
-        "text-sm text-ruby-vivid forced-colors:text-[Mark]"
+        "text-sm text-ruby-accent forced-colors:text-[Mark] selection:bg-ruby-vivid selection:text-app-background"
       )}
     />
   )
@@ -98,7 +98,7 @@ export function Input(props: InputProps) {
       {...props}
       className={composeTailwindRenderProps(
         props.className,
-        "px-3 py-0 min-h-9 flex-1 min-w-0 border-0 outline-0 bg-app-background font-mono text-sm text-app-foreground placeholder:text-app-muted disabled:text-app-muted [-webkit-tap-highlight-color:transparent]"
+        "px-3 py-0 min-h-9 flex-1 min-w-0 border-0 outline-0 bg-app-background font-mono text-sm text-app-accent placeholder:text-app-muted disabled:text-app-muted [-webkit-tap-highlight-color:transparent]"
       )}
     />
   )
@@ -110,7 +110,7 @@ export function TextArea(props: TextAreaProps) {
       {...props}
       className={composeTailwindRenderProps(
         props.className,
-        "px-3 py-0 flex-1 min-w-0 min-h-24 border-0 outline-0 bg-app-background font-mono text-sm text-app-foreground placeholder:text-app-muted disabled:text-app-muted [-webkit-tap-highlight-color:transparent]"
+        "px-3 py-0 flex-1 min-w-0 min-h-24 border-0 outline-0 bg-app-background font-mono text-sm text-app-accent placeholder:text-app-muted disabled:text-app-muted [-webkit-tap-highlight-color:transparent]"
       )}
     />
   )

@@ -11,7 +11,7 @@ const checkboxStyles = tv({
   base: "flex gap-2 items-center group font-mono text-sm transition relative [-webkit-tap-highlight-color:transparent]",
   variants: {
     isDisabled: {
-      false: "text-app-foreground",
+      false: "text-app-accent",
       true: "text-app-muted cursor-not-allowed",
     },
   },
