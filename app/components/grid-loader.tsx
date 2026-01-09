@@ -30,7 +30,7 @@ const cellStyles = tv({
   variants: {
     inverted: {
       false: "bg-app-background",
-      true: "bg-matrix-accent",
+      true: "bg-primary-accent",
     },
   },
   defaultVariants: {

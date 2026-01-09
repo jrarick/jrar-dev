@@ -35,6 +35,9 @@ importers:
       react-router:
         specifier: 7.9.6
         version: 7.9.6(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      remix-themes:
+        specifier: ^2.0.4
+        version: 2.0.4(react-router@7.9.6(react-dom@19.2.3(react@19.2.3))(react@19.2.3))
       tailwind-merge:
         specifier: ^3.4.0
         version: 3.4.0
@@ -2608,6 +2611,11 @@ packages:
 
   remark-rehype@11.1.2:
     resolution: {integrity: sha512-Dh7l57ianaEoIpzbp0PC9UKAdCSVklD8E5Rpw7ETfbTl3FqcOOgq5q2LVDhgGCkaBv7p24JXikPdvhhmHvKMsw==}
+
+  remix-themes@2.0.4:
+    resolution: {integrity: sha512-S1vIx86xdsMv+ceaWGWtlVZBMhU4tmZeBOBzOiZnhbHnGBbd5YeyIlZ5EL3BSEhZq35oEcINeTrMrVju9GPYEA==}
+    peerDependencies:
+      react-router: '>=7.0.0'
 
   retry@0.12.0:
     resolution: {integrity: sha512-9LkiTwjUh6rT555DtE9rTX+BKByPfrMzEAtnlEtdEwr3Nkffwiihqe2bWADg+OQRjt9gl6ICdmB/ZFDCGAtSow==}
@@ -6140,6 +6148,10 @@ snapshots:
       mdast-util-to-hast: 13.2.1
       unified: 11.0.5
       vfile: 6.0.3
+
+  remix-themes@2.0.4(react-router@7.9.6(react-dom@19.2.3(react@19.2.3))(react@19.2.3)):
+    dependencies:
+      react-router: 7.9.6(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
 
   retry@0.12.0: {}
 

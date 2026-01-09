@@ -3,7 +3,7 @@ import {
   index,
   route,
   prefix,
-} from "@react-router/dev/routes";
+} from "@react-router/dev/routes"
 
 export default [
   index("routes/home.tsx"),
@@ -16,4 +16,4 @@ export default [
       index("routes/api/bookmarks/index.ts"),
     ]),
   ]),
-] satisfies RouteConfig;
+] satisfies RouteConfig

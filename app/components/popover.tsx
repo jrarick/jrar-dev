@@ -13,7 +13,7 @@ export interface PopoverProps extends Omit<AriaPopoverProps, "children"> {
 }
 
 const styles = tv({
-  base: "font-mono bg-app-background forced-colors:bg-[Canvas] shadow-[0_0_20px_var(--color-matrix-background)] bg-clip-padding border border-matrix-background text-app-foreground outline-0",
+  base: "font-mono bg-app-background forced-colors:bg-[Canvas] shadow-[0_0_20px_var(--color-primary-background)] bg-clip-padding border border-primary-background text-app-foreground outline-0",
   variants: {
     isEntering: {
       true: "animate-in fade-in placement-bottom:slide-in-from-top-1 placement-top:slide-in-from-bottom-1 placement-left:slide-in-from-right-1 placement-right:slide-in-from-left-1 ease-out duration-200",
@@ -45,7 +45,7 @@ export function Popover({
             width={12}
             height={12}
             viewBox="0 0 12 12"
-            className="block fill-app-background forced-colors:fill-[Canvas] stroke-1 stroke-matrix-background forced-colors:stroke-[ButtonBorder] group-placement-bottom:rotate-180 group-placement-left:-rotate-90 group-placement-right:rotate-90"
+            className="block fill-app-background forced-colors:fill-[Canvas] stroke-1 stroke-primary-background forced-colors:stroke-[ButtonBorder] group-placement-bottom:rotate-180 group-placement-left:-rotate-90 group-placement-right:rotate-90"
           >
             <path d="M0 0 L6 6 L12 0" />
           </svg>

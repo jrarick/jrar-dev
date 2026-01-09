@@ -16,7 +16,7 @@ const styles = tv({
   variants: {
     variant: {
       primary:
-        "text-matrix-base hover:text-matrix-vivid underline decoration-matrix-base/60 hover:decoration-matrix-vivid",
+        "text-primary-base hover:text-primary-vivid underline decoration-primary-base/60 hover:decoration-primary-vivid",
       secondary:
         "text-app-muted hover:text-app-foreground underline decoration-app-muted/50 hover:decoration-app-foreground",
     },

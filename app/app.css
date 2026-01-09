@@ -18,22 +18,29 @@
   --color-app-foreground: oklch(96.416% 0.00011 271.152);
   --color-app-muted: oklch(43.861% 0.00005 271.152);
 
-  /* Matrix - neon terminal green */
-  --color-matrix-background: oklch(0.275 0.08853 143.345);
-  --color-matrix-base: oklch(0.65 0.2 145);
-  --color-matrix-vivid: oklch(0.8 0.28 145);
-  --color-matrix-accent: oklch(0.88 0.32 145);
+  --matrix: 145;
+  --bumblebee: 107;
+  --cyan: 226;
+  --magenta: 328;
 
-  /* Ruby - neon terminal red */
-  --color-ruby-background: oklch(29.003% 0.11768 28.971);
-  --color-ruby-base: oklch(45.397% 0.18247 28.767);
-  --color-ruby-vivid: oklch(57.767% 0.23334 28.873);
-  --color-ruby-accent: oklch(75.397% 0.30751 28.767);
+  --hue: var(--matrix);
+
+  /* Primary colors - default to matrix green (hue 145) */
+  --color-primary-background: oklch(0.275 0.08 var(--hue));
+  --color-primary-base: oklch(0.65 0.2 var(--hue));
+  --color-primary-vivid: oklch(0.8 0.28 var(--hue));
+  --color-primary-accent: oklch(0.88 0.32 var(--hue));
+
+  /* Ruby - neon terminal red (for destructive/error states) */
+  --color-ruby-background: oklch(0.275 0.08 29);
+  --color-ruby-base: oklch(0.45 0.18 29);
+  --color-ruby-vivid: oklch(0.58 0.23 29);
+  --color-ruby-accent: oklch(0.75 0.3 29);
 }
 
 @layer base {
   *::selection {
-    @apply bg-matrix-accent text-black;
+    @apply bg-primary-accent text-black;
   }
 
   /* Grid Loader Animations */

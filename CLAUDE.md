@@ -9,7 +9,7 @@ Personal website/portfolio built with React Router 7 on Cloudflare Workers.
 - **Framework**: React Router 7 (framework mode for routing)
 - **Runtime**: Cloudflare Workers
 - **Database**: Cloudflare D1 (binding: `jrar_dev_db`)
-- **Styling**: TailwindCSS 4 with custom neon terminal theme
+- **Styling**: TailwindCSS 4 with custom neon terminal theme (there is no js tailwind config file in version 4)
 - **UI Components**: React Aria Components
 - **Backend Logic**: Effect framework for typed errors, services, and async operations
 
@@ -33,15 +33,13 @@ workers/
 Routes are defined in `app/routes.ts` using the declarative API:
 
 ```typescript
-import { index, route, prefix } from "@react-router/dev/routes";
+import { index, route, prefix } from "@react-router/dev/routes"
 
 export default [
   index("routes/home.tsx"),
   route("bookmarks", "routes/bookmarks.tsx"),
-  ...prefix("api", [
-    route("bookmarks", "routes/api/bookmarks/index.ts"),
-  ]),
-] satisfies RouteConfig;
+  ...prefix("api", [route("bookmarks", "routes/api/bookmarks/index.ts")]),
+] satisfies RouteConfig
 ```
 
 ### Effect Framework
@@ -56,18 +54,18 @@ Use Effect for all backend/service layer code:
 Example pattern:
 
 ```typescript
-import { Effect, Data } from "effect";
+import { Effect, Data } from "effect"
 
 // Define typed errors
 class DatabaseError extends Data.TaggedError("DatabaseError")<{
-  cause: unknown;
+  cause: unknown
 }> {}
 
 // Database operation with Effect
 const getBookmarks = Effect.tryPromise({
   try: () => db.prepare("SELECT * FROM bookmarks").all(),
   catch: (cause) => new DatabaseError({ cause }),
-});
+})
 ```
 
 ### D1 Database

@@ -106,7 +106,7 @@ export default function BookmarksPage({ loaderData }: Route.ComponentProps) {
     <main className="min-h-screen bg-app-background py-16">
       <div className="container mx-auto px-4 max-w-4xl">
         <header className="mb-12">
-          <h1 className="text-3xl font-mono font-bold text-matrix-vivid uppercase tracking-widest">
+          <h1 className="text-3xl font-mono font-bold text-primary-vivid uppercase tracking-widest">
             Bookmarks_
           </h1>
           <p className="font-mono text-app-muted text-sm mt-2">
@@ -115,11 +115,11 @@ export default function BookmarksPage({ loaderData }: Route.ComponentProps) {
         </header>
 
         {tree.length > 0 ? (
-          <section className="border border-matrix-background">
+          <section className="border border-primary-background">
             <BookmarkTree items={tree} />
           </section>
         ) : (
-          <section className="border border-matrix-background p-8 text-center">
+          <section className="border border-primary-background p-8 text-center">
             <p className="font-mono text-app-muted">
               No bookmarks synced yet. Use the Chrome extension to sync your
               bookmarks.

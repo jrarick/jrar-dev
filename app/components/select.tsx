@@ -27,7 +27,7 @@ const styles = tv({
     isInvalid: fieldBorderStyles.variants.isInvalid,
     isDisabled: {
       false:
-        "text-app-foreground hover:bg-matrix-background/20 pressed:bg-matrix-background/30",
+        "text-app-foreground hover:bg-primary-background/20 pressed:bg-primary-background/30",
       true: "border-transparent text-app-muted forced-colors:text-[GrayText] bg-app-muted/10",
     },
   },
