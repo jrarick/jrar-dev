@@ -1,5 +1,6 @@
 import {
   TextField as AriaTextField,
+  TextArea,
   type TextFieldProps as AriaTextFieldProps,
   type ValidationResult,
 } from "react-aria-components"
@@ -24,6 +25,17 @@ const inputStyles = tv({
   compoundVariants: fieldBorderStyles.compoundVariants,
 })
 
+const textareaStyles = tv({
+  extend: focusRing,
+  base: "border min-h-16 font-mono text-sm py-1.5 px-3 box-border transition",
+  variants: {
+    isFocused: fieldBorderStyles.variants.isFocusWithin,
+    isInvalid: fieldBorderStyles.variants.isInvalid,
+    isDisabled: fieldBorderStyles.variants.isDisabled,
+  },
+  compoundVariants: fieldBorderStyles.compoundVariants,
+})
+
 export interface TextFieldProps extends AriaTextFieldProps {
   label?: string
   description?: string
@@ -35,8 +47,9 @@ export function TextField({
   label,
   description,
   errorMessage,
+  kind = "input",
   ...props
-}: TextFieldProps) {
+}: TextFieldProps & { kind?: "input" | "textarea" }) {
   return (
     <AriaTextField
       {...props}
@@ -46,7 +59,11 @@ export function TextField({
       )}
     >
       {label && <Label>{label}</Label>}
-      <Input className={inputStyles} />
+      {kind === "input" ? (
+        <Input className={inputStyles} />
+      ) : (
+        <TextArea className={textareaStyles} />
+      )}
       {description && <Description>{description}</Description>}
       <FieldError>{errorMessage}</FieldError>
     </AriaTextField>

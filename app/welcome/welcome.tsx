@@ -33,7 +33,7 @@ export function Welcome({ message }: { message: string }) {
                 <Button variant="primary" isDisabled>
                   Disabled
                 </Button>
-                <Button variant="primary" isPending>
+                <Button variant="destructive" isPending>
                   Pending
                 </Button>
               </div>
@@ -58,6 +58,18 @@ export function Welcome({ message }: { message: string }) {
                 errorMessage="Critical Failure"
               />
               <TextField label="Disabled" defaultValue="LOCKED" isDisabled />
+              <TextField
+                label="Text Area"
+                defaultValue="This is a text area."
+                kind="textarea"
+              />
+              <TextField
+                label="Text Area"
+                defaultValue="This is an invalid text area."
+                kind="textarea"
+                isInvalid
+                errorMessage="Critical Failure"
+              />
             </div>
           </section>
 

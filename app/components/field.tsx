@@ -6,10 +6,12 @@ import {
   type LabelProps,
   FieldError as RACFieldError,
   Input as RACInput,
+  TextArea as RACTextArea,
   Label as RACLabel,
   Text,
   type TextProps,
   composeRenderProps,
+  type TextAreaProps,
 } from "react-aria-components"
 import { twMerge } from "tailwind-merge"
 import { tv } from "tailwind-variants"
@@ -54,10 +56,10 @@ export const fieldBorderStyles = tv({
   variants: {
     isFocusWithin: {
       false: "border-matrix-base forced-colors:border-[ButtonBorder]",
-      true: "border-matrix-accent forced-colors:border-[Highlight] bg-linear-to-b from-transparent via-matrix-background/25 to-matrix-background/75",
+      true: "border-matrix-accent forced-colors:border-[Highlight] bg-linear-to-b from-transparent via-matrix-background/50 to-matrix-background caret-matrix-accent",
     },
     isInvalid: {
-      true: "border-ruby-base forced-colors:border-[Mark] outline-ruby-vivid selection:bg-ruby-vivid selection:text-app-background",
+      true: "border-ruby-base forced-colors:border-[Mark] outline-ruby-vivid selection:bg-ruby-vivid selection:text-app-background caret-ruby-vivid",
     },
     isDisabled: {
       true: "border-app-muted opacity-50 forced-colors:border-[GrayText]",
@@ -67,8 +69,7 @@ export const fieldBorderStyles = tv({
     {
       isFocused: true,
       isInvalid: true,
-      className:
-        "border-ruby-accent via-ruby-background/25 to-ruby-background/75",
+      className: "border-ruby-accent via-ruby-background/50 to-ruby-background",
     },
   ],
 })
@@ -98,6 +99,18 @@ export function Input(props: InputProps) {
       className={composeTailwindRenderProps(
         props.className,
         "px-3 py-0 min-h-9 flex-1 min-w-0 border-0 outline-0 bg-app-background font-mono text-sm text-app-foreground placeholder:text-app-muted disabled:text-app-muted [-webkit-tap-highlight-color:transparent]"
+      )}
+    />
+  )
+}
+
+export function TextArea(props: TextAreaProps) {
+  return (
+    <RACTextArea
+      {...props}
+      className={composeTailwindRenderProps(
+        props.className,
+        "px-3 py-0 flex-1 min-w-0 min-h-24 border-0 outline-0 bg-app-background font-mono text-sm text-app-foreground placeholder:text-app-muted disabled:text-app-muted [-webkit-tap-highlight-color:transparent]"
       )}
     />
   )

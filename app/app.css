@@ -35,4 +35,52 @@
   *::selection {
     @apply bg-matrix-accent text-black;
   }
+
+  /* Grid Loader Animations */
+  @keyframes grid-pulse {
+    0%,
+    100% {
+      opacity: 0.15;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes grid-snake {
+    0%,
+    12% {
+      opacity: 1;
+    }
+    12.01%,
+    100% {
+      opacity: 0.15;
+    }
+  }
+
+  @keyframes grid-rain {
+    0%,
+    20% {
+      opacity: 0.15;
+    }
+    20%,
+    40% {
+      opacity: 1;
+    }
+    40%,
+    100% {
+      opacity: 0.15;
+    }
+  }
+
+  @keyframes grid-blink {
+    0%,
+    49% {
+      opacity: 0.15;
+    }
+    50%,
+    100% {
+      opacity: 1;
+    }
+  }
 }

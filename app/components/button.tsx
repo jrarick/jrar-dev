@@ -5,6 +5,7 @@ import {
 } from "react-aria-components"
 import { tv } from "tailwind-variants"
 import { focusRing } from "~/lib/utils"
+import { GridLoader } from "./grid-loader"
 
 export interface ButtonProps extends RACButtonProps {
   /** @default 'primary' */
@@ -49,39 +50,13 @@ export function Button(props: ButtonProps) {
         <>
           {children}
           {isPending && (
-            <span
-              aria-hidden
-              className="flex absolute inset-0 justify-center items-center"
-            >
-              <svg
-                className="w-4 h-4 text-app-foreground animate-spin"
-                viewBox="0 0 24 24"
-                stroke={
+            <span className="flex absolute inset-0 justify-center items-center">
+              <GridLoader
+                pattern="random"
+                inverted={
                   props.variant === "secondary" || props.variant === "quiet"
-                    ? "var(--color-app-foreground)"
-                    : "var(--color-app-background)"
                 }
-              >
-                <circle
-                  cx="12"
-                  cy="12"
-                  r="10"
-                  strokeWidth="4"
-                  fill="none"
-                  className="opacity-25"
-                />
-                <circle
-                  cx="12"
-                  cy="12"
-                  r="10"
-                  strokeWidth="4"
-                  strokeLinecap="round"
-                  fill="none"
-                  pathLength="100"
-                  strokeDasharray="60 140"
-                  strokeDashoffset="0"
-                />
-              </svg>
+              />
             </span>
           )}
         </>
