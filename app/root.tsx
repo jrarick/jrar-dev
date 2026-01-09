@@ -9,7 +9,12 @@ import {
   useNavigate,
   type NavigateOptions,
 } from "react-router"
-import { Sidebar } from "./components/sidebar"
+import { Sidebar, SidebarContent } from "./components/sidebar"
+import { Sheet } from "./components/sheet"
+import { RouteBreadcrumbs } from "./components/route-breadcrumbs"
+import { Button } from "./components/button"
+import { DialogTrigger, Dialog } from "react-aria-components"
+import { Menu } from "lucide-react"
 
 import type { Route } from "./+types/root"
 import "./app.css"
@@ -69,9 +74,27 @@ export default function App() {
   return (
     <div className="flex min-h-screen">
       <Sidebar />
-      <main className="flex-1 min-w-0">
-        <Outlet />
-      </main>
+      <div className="flex-1 flex flex-col min-w-0">
+        <header className="flex items-center gap-4 p-4 border-b border-primary-muted bg-app-background/80 backdrop-blur sticky top-0 z-10">
+          <DialogTrigger>
+            <Button variant="quiet" className="md:hidden">
+              <Menu />
+              <span className="sr-only">Menu</span>
+            </Button>
+            <Sheet side="left" isDismissable>
+              <Dialog className="h-full outline-none">
+                {({ close }) => (
+                  <SidebarContent onLinkClick={close} onClose={close} />
+                )}
+              </Dialog>
+            </Sheet>
+          </DialogTrigger>
+          <RouteBreadcrumbs />
+        </header>
+        <main className="flex-1 min-w-0">
+          <Outlet />
+        </main>
+      </div>
     </div>
   )
 }

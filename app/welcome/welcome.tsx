@@ -36,7 +36,7 @@ export function Welcome({ message }: { message: string }) {
                 <Button variant="primary" isDisabled>
                   Disabled
                 </Button>
-                <Button variant="destructive" isPending>
+                <Button variant="quiet" isPending>
                   Pending
                 </Button>
               </div>
