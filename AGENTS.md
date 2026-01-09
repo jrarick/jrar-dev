@@ -72,3 +72,4 @@ We use OKLCH semantic variables. Do not use raw hex codes or standard Tailwind c
 - **Hydration**: If using random values or date-dependent rendering that mismatches server/client, use a `ClientOnly` wrapper to prevent hydration errors.
 - **Effect**: Prefer using the `Effect` library wherever possible for complex logic, error handling, and async management where appropriate.
 - **Terminal Components**: When creating new UI components, ensure they look like terminal interfaces (borders, monospaced text, high contrast active states).
+- **Links**: ALWAYS use the `Link` component from `react-aria-components` for both internal and external links. Do NOT use `Link` or `NavLink` from `react-router` directly in UI components. The `Router` provider is already configured to handle client-side routing for `react-aria-components`. Active states should be determined using `useLocation`.

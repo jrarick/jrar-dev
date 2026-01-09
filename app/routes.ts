@@ -10,6 +10,8 @@ export default [
   route("bookmarks", "routes/bookmarks.tsx"),
   route("blog", "routes/blog/index.tsx"),
   route("blog/:slug", "routes/blog/post.tsx"),
+  route("projects", "routes/projects.tsx"),
+  route("tools", "routes/tools.tsx"),
   ...prefix("api", [
     ...prefix("bookmarks", [
       route("sync", "routes/api/bookmarks/sync.ts"),

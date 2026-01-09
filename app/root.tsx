@@ -5,16 +5,28 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useHref,
+  useNavigate,
+  type NavigateOptions,
 } from "react-router"
+import { Sidebar } from "./components/sidebar"
 
 import type { Route } from "./+types/root"
 import "./app.css"
+import { RouterProvider } from "react-aria-components"
 
 declare global {
   namespace Cloudflare {
     interface Env {
       jrar_dev_db: D1Database
     }
+  }
+}
+
+// Configure the type of the `routerOptions` prop on all React Aria components.
+declare module "react-aria-components" {
+  interface RouterConfig {
+    routerOptions: NavigateOptions
   }
 }
 
@@ -32,6 +44,8 @@ export const links: Route.LinksFunction = () => [
 ]
 
 export function Layout({ children }: { children: React.ReactNode }) {
+  const navigate = useNavigate()
+
   return (
     <html lang="en">
       <head>
@@ -41,7 +55,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body className="font-mono bg-app-background text-app-accent">
-        {children}
+        <RouterProvider navigate={navigate} useHref={useHref}>
+          {children}
+        </RouterProvider>
         <ScrollRestoration />
         <Scripts />
       </body>
@@ -50,7 +66,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  return <Outlet />
+  return (
+    <div className="flex min-h-screen">
+      <Sidebar />
+      <main className="flex-1 min-w-0">
+        <Outlet />
+      </main>
+    </div>
+  )
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
