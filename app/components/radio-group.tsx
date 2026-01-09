@@ -42,11 +42,11 @@ const styles = tv({
   base: "w-4.5 h-4.5 box-border rounded-none border bg-app-background transition-all",
   variants: {
     isSelected: {
-      false: "border-primary-base group-pressed:border-primary-vivid",
-      true: "border-[6px] border-primary-accent forced-colors:border-[Highlight]! group-pressed:border-primary-vivid shadow-[0_0px_10px_var(--color-primary-base)]",
+      false: "border-primary-muted group-pressed:border-primary-vivid",
+      true: "border-[6px] border-primary-accent forced-colors:border-[Highlight]! group-pressed:border-primary-vivid shadow-[0_0px_10px_var(--color-primary-muted)]",
     },
     isInvalid: {
-      true: "border-ruby-base group-pressed:border-ruby-vivid outline-ruby-vivid forced-colors:border-[Mark]!",
+      true: "border-ruby-muted group-pressed:border-ruby-vivid outline-ruby-vivid forced-colors:border-[Mark]!",
     },
     isDisabled: {
       true: "border-app-muted opacity-50 forced-colors:border-[GrayText]!",
@@ -57,7 +57,7 @@ const styles = tv({
       isSelected: true,
       isInvalid: true,
       class:
-        "border-ruby-accent group-pressed:border-ruby-vivid shadow-[0_0px_10px_var(--color-ruby-base)]",
+        "border-ruby-accent group-pressed:border-ruby-vivid shadow-[0_0px_10px_var(--color-ruby-muted)]",
     },
   ],
 })

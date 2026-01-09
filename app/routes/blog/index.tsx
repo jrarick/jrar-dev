@@ -62,7 +62,7 @@ export default function BlogIndex() {
                       : "UNKNOWN_DATE"}
                   </span>
                   <div>
-                    <h2 className="text-xl font-bold text-primary-base group-hover:text-primary-vivid transition-colors mb-2">
+                    <h2 className="text-xl font-bold text-primary-muted group-hover:text-primary-vivid transition-colors mb-2">
                       {post.frontmatter.title || post.slug}
                     </h2>
                     {post.frontmatter.description && (

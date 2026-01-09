@@ -55,11 +55,11 @@ export const fieldBorderStyles = tv({
   base: "transition",
   variants: {
     isFocusWithin: {
-      false: "border-primary-base forced-colors:border-[ButtonBorder]",
+      false: "border-primary-muted forced-colors:border-[ButtonBorder]",
       true: "border-primary-accent forced-colors:border-[Highlight] bg-linear-to-b from-transparent via-primary-background/50 to-primary-background caret-primary-accent",
     },
     isInvalid: {
-      true: "border-ruby-base forced-colors:border-[Mark] outline-ruby-vivid selection:bg-ruby-vivid selection:text-app-background caret-ruby-vivid",
+      true: "border-ruby-muted forced-colors:border-[Mark] outline-ruby-vivid selection:bg-ruby-vivid selection:text-app-background caret-ruby-vivid",
     },
     isDisabled: {
       true: "border-app-muted opacity-50 forced-colors:border-[GrayText]",

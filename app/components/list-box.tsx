@@ -41,7 +41,7 @@ export const itemStyles = tv({
     isSelected: {
       false:
         "text-app-accent hover:bg-primary-background hover:text-primary-vivid pressed:bg-primary-background -outline-offset-2",
-      true: "bg-primary-base text-app-background forced-colors:bg-[Highlight] forced-colors:text-[HighlightText] [&:has(+[data-selected])]:rounded-b-none [&+[data-selected]]:rounded-t-none -outline-offset-4 outline-primary-accent forced-colors:outline-[HighlightText]",
+      true: "bg-primary-muted text-app-background forced-colors:bg-[Highlight] forced-colors:text-[HighlightText] [&:has(+[data-selected])]:rounded-b-none [&+[data-selected]]:rounded-t-none -outline-offset-4 outline-primary-accent forced-colors:outline-[HighlightText]",
     },
     isDisabled: {
       true: "text-app-muted forced-colors:text-[GrayText]",

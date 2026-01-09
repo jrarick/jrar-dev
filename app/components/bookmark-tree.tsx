@@ -58,7 +58,7 @@ function TreeItem({ item, level }: TreeItemProps) {
 
         {/* Icon */}
         {item.type === "folder" ? (
-          <Folder className="w-4 h-4 text-primary-base shrink-0" />
+          <Folder className="w-4 h-4 text-primary-muted shrink-0" />
         ) : item.favicon_url ? (
           <img
             src={item.favicon_url}

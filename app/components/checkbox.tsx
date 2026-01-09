@@ -22,11 +22,11 @@ const boxStyles = tv({
   base: "w-4.5 h-4.5 box-border shrink-0 rounded-none flex items-center justify-center border transition bg-app-background",
   variants: {
     isSelected: {
-      false: "border-primary-base group-pressed:border-primary-vivid",
-      true: "bg-primary-accent border-primary-base group-pressed:border-primary-vivid shadow-[0_0px_10px_var(--color-primary-base)] group-pressed:bg-primary-vivid forced-colors:[--color:Highlight]!",
+      false: "border-primary-muted group-pressed:border-primary-vivid",
+      true: "bg-primary-accent border-primary-muted group-pressed:border-primary-vivid shadow-[0_0px_10px_var(--color-primary-muted)] group-pressed:bg-primary-vivid forced-colors:[--color:Highlight]!",
     },
     isInvalid: {
-      true: "border-ruby-base group-pressed:border-ruby-vivid outline-ruby-vivid",
+      true: "border-ruby-muted group-pressed:border-ruby-vivid outline-ruby-vivid",
     },
     isDisabled: {
       true: "border-app-muted opacity-50",
@@ -37,7 +37,7 @@ const boxStyles = tv({
       isSelected: true,
       isInvalid: true,
       class:
-        "bg-ruby-accent border-ruby-base group-pressed:bg-ruby-vivid group-pressed:border-ruby-vivid shadow-[0_0px_10px_var(--color-ruby-base)]",
+        "bg-ruby-accent border-ruby-muted group-pressed:bg-ruby-vivid group-pressed:border-ruby-vivid shadow-[0_0px_10px_var(--color-ruby-muted)]",
     },
   ],
 })

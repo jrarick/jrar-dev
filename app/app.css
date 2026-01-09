@@ -28,13 +28,13 @@
 
   /* Primary colors - default to matrix green (hue 145) */
   --color-primary-background: oklch(0.275 0.08 var(--hue));
-  --color-primary-base: oklch(0.65 0.2 var(--hue));
+  --color-primary-muted: oklch(0.65 0.2 var(--hue));
   --color-primary-vivid: oklch(0.8 0.28 var(--hue));
   --color-primary-accent: oklch(0.88 0.32 var(--hue));
 
   /* Ruby - neon terminal red (for destructive/error states) */
   --color-ruby-background: oklch(0.275 0.08 29);
-  --color-ruby-base: oklch(0.45 0.18 29);
+  --color-ruby-muted: oklch(0.45 0.18 29);
   --color-ruby-vivid: oklch(0.58 0.23 29);
   --color-ruby-accent: oklch(0.75 0.3 29);
 }

@@ -27,11 +27,11 @@ const boxStyles = tv({
   base: "w-4.5 h-4.5 box-border shrink-0 rounded-none flex items-center justify-center border transition bg-app-background",
   variants: {
     isSelected: {
-      false: "border-primary-base group-pressed:border-primary-vivid",
-      true: "bg-primary-base border-primary-base group-pressed:border-primary-vivid group-pressed:bg-primary-vivid forced-colors:[--color:Highlight]!",
+      false: "border-primary-muted group-pressed:border-primary-vivid",
+      true: "bg-primary-muted border-primary-muted group-pressed:border-primary-vivid group-pressed:bg-primary-vivid forced-colors:[--color:Highlight]!",
     },
     isInvalid: {
-      true: "border-ruby-base group-pressed:border-ruby-vivid",
+      true: "border-ruby-muted group-pressed:border-ruby-vivid",
     },
   },
 })
