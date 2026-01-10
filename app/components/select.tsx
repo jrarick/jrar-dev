@@ -26,8 +26,7 @@ const styles = tv({
     isFocusVisible: fieldBorderStyles.variants.isFocusWithin,
     isInvalid: fieldBorderStyles.variants.isInvalid,
     isDisabled: {
-      false:
-        "text-app-accent hover:bg-primary-background/20 pressed:bg-primary-background/30",
+      false: "text-app-accent",
       true: "border-transparent text-app-muted forced-colors:text-[GrayText] bg-app-muted/10",
     },
   },

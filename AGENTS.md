@@ -1,6 +1,6 @@
 # Project Context & Agent Guide
 
-This file contains essential context for AI agents (Jules, etc.) working on the `jrar-dev` project.
+This file contains essential context for AI agents (Jules, Claude, etc.) working on the `jrar-dev` project.
 
 ## 1. Project Identity
 

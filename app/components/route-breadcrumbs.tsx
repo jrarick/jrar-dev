@@ -2,10 +2,10 @@ import { useLocation } from "react-router"
 import { Breadcrumbs, Breadcrumb } from "./breadcrumbs"
 
 const routeMap: Record<string, string> = {
-  blog: "Blog",
-  bookmarks: "Bookmarks",
-  projects: "Projects",
-  tools: "Tools",
+  blog: "blog",
+  bookmarks: "bookmarks",
+  projects: "projects",
+  tools: "tools",
 }
 
 export function RouteBreadcrumbs() {
@@ -13,7 +13,7 @@ export function RouteBreadcrumbs() {
   const pathnames = location.pathname.split("/").filter((x) => x)
 
   const items = [
-    { id: "/", label: "Index", href: "/" },
+    { id: "/", label: "index", href: "/" },
     ...pathnames.map((value, index) => {
       const href = `/${pathnames.slice(0, index + 1).join("/")}`
       const label = routeMap[value] || value

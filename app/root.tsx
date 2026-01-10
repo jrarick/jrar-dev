@@ -19,6 +19,8 @@ import { Menu } from "lucide-react"
 import type { Route } from "./+types/root"
 import "./app.css"
 import { RouterProvider } from "react-aria-components"
+import Noise from "./components/noise"
+import { usePrefersReducedMotion } from "./hooks/use-prefers-reduced-motion"
 
 declare global {
   namespace Cloudflare {
@@ -50,9 +52,10 @@ export const links: Route.LinksFunction = () => [
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const navigate = useNavigate()
+  const prefersReducedMotion = usePrefersReducedMotion({ ssr: true })
 
   return (
-    <html lang="en">
+    <html lang="en" className="pointer-events-none">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -60,9 +63,25 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body className="font-mono bg-app-background text-app-accent">
-        <RouterProvider navigate={navigate} useHref={useHref}>
-          {children}
-        </RouterProvider>
+        {!prefersReducedMotion && (
+          <div
+            className="w-dvw h-dvh fixed overflow-hidden z-20 inset-0"
+            aria-hidden="true"
+          >
+            <Noise
+              patternSize={250}
+              patternScaleX={1}
+              patternScaleY={1}
+              patternRefreshInterval={10}
+              patternAlpha={15}
+            />
+          </div>
+        )}
+        <div className="pointer-events-auto">
+          <RouterProvider navigate={navigate} useHref={useHref}>
+            {children}
+          </RouterProvider>
+        </div>
         <ScrollRestoration />
         <Scripts />
       </body>
