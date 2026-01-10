@@ -19,11 +19,11 @@ const overlayStyles = tv({
 })
 
 const sheetStyles = tv({
-  base: "fixed z-50 gap-4 bg-app-background p-6 shadow-lg transition ease-in-out border-r border-primary-muted h-full",
+  base: "fixed z-50 bg-app-background py-6 shadow-lg transition ease-in-out border-r border-primary-muted h-full",
   variants: {
     side: {
-      left: "inset-y-0 left-0 w-3/4 sm:max-w-sm border-r",
-      right: "inset-y-0 right-0 w-3/4 sm:max-w-sm border-l",
+      left: "inset-y-0 left-0 w-64 border-r",
+      right: "inset-y-0 right-0 w-64 border-l",
       top: "inset-x-0 top-0 border-b",
       bottom: "inset-x-0 bottom-0 border-t",
     },

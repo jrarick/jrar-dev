@@ -5,6 +5,7 @@ import { Link } from "~/components/link"
 import { Checkbox } from "~/components/checkbox"
 import { RadioGroup, Radio } from "~/components/radio-group"
 import { Breadcrumb, Breadcrumbs } from "~/components/breadcrumbs"
+import { TagGroup, Tag } from "~/components/tag-group"
 
 export function Welcome({ message }: { message: string }) {
   return (
@@ -168,6 +169,38 @@ export function Welcome({ message }: { message: string }) {
                     <Breadcrumb href="#">Level 3</Breadcrumb>
                   </Breadcrumbs>
                 </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Tags Section */}
+          <section className="space-y-6">
+            <h2 className="text-xl font-mono text-app-accent border-b border-primary-muted pb-2 uppercase">
+              06_Tags //
+            </h2>
+            <div className="flex flex-col gap-8">
+              <div className="space-y-4">
+                <TagGroup label="System Status">
+                  <Tag>Online</Tag>
+                  <Tag>Secure</Tag>
+                  <Tag>v1.0.0</Tag>
+                </TagGroup>
+
+                <TagGroup
+                  label="Active Modules"
+                  selectionMode="multiple"
+                  defaultSelectedKeys={["firewall", "ai"]}
+                >
+                  <Tag id="firewall">Firewall</Tag>
+                  <Tag id="ai">AI Core</Tag>
+                  <Tag id="network">Network</Tag>
+                </TagGroup>
+
+                <TagGroup label="Removable Items" onRemove={() => {}}>
+                  <Tag>Cache_01</Tag>
+                  <Tag>Cache_02</Tag>
+                  <Tag>Cache_03</Tag>
+                </TagGroup>
               </div>
             </div>
           </section>
