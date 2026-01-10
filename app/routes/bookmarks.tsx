@@ -1,132 +1,141 @@
-import { Effect, Layer } from "effect";
-import type { Route } from "./+types/bookmarks";
-import { BookmarkTree } from "~/components/bookmark-tree";
-import { D1, makeD1Layer } from "~/lib/services/db";
-import { Bookmarks, BookmarksLive } from "~/lib/services/bookmarks";
-import type { Folder, Bookmark, TreeNode } from "~/lib/bookmark-types";
+import { useState, useMemo } from "react"
+import { Effect, Layer } from "effect"
+import type { Route } from "./+types/bookmarks"
+import { makeD1Layer } from "~/lib/services/db"
+import { Bookmarks, BookmarksLive } from "~/lib/services/bookmarks"
+import { TagGroup, Tag } from "~/components/tag-group"
+import { SearchField } from "~/components/search-field"
+import { BookmarkList } from "~/components/bookmark-list"
+import type { Selection } from "react-aria-components"
 
 export function meta() {
   return [
     { title: "Bookmarks // JRAR" },
-    { name: "description", content: "Chrome bookmarks synced from my browser" },
-  ];
-}
-
-/**
- * Build tree structure from flat folders and bookmarks
- */
-function buildTree(folders: Folder[], bookmarks: Bookmark[]): TreeNode[] {
-  // Create lookup maps
-  const folderMap = new Map<string, TreeNode>();
-  const rootNodes: TreeNode[] = [];
-
-  // Initialize all folders as tree nodes
-  for (const folder of folders) {
-    folderMap.set(folder.id, {
-      id: folder.id,
-      title: folder.title,
-      type: "folder",
-      date_added: folder.date_added,
-      children: [],
-    });
-  }
-
-  // Build folder hierarchy
-  for (const folder of folders) {
-    const node = folderMap.get(folder.id)!;
-    if (folder.parent_id && folderMap.has(folder.parent_id)) {
-      folderMap.get(folder.parent_id)!.children.push(node);
-    } else {
-      rootNodes.push(node);
-    }
-  }
-
-  // Add bookmarks to their folders
-  for (const bookmark of bookmarks) {
-    const bookmarkNode: TreeNode = {
-      id: bookmark.id,
-      title: bookmark.title,
-      type: "bookmark",
-      url: bookmark.url,
-      favicon_url: bookmark.favicon_url ?? undefined,
-      date_added: bookmark.date_added,
-      children: [],
-    };
-
-    if (bookmark.folder_id && folderMap.has(bookmark.folder_id)) {
-      folderMap.get(bookmark.folder_id)!.children.push(bookmarkNode);
-    } else {
-      rootNodes.push(bookmarkNode);
-    }
-  }
-
-  return rootNodes;
+    { name: "description", content: "Bookmarks I find interesting" },
+  ]
 }
 
 export async function loader({ context }: Route.LoaderArgs) {
-  const db = context.cloudflare.env.jrar_dev_db;
+  try {
+    const db = context.cloudflare.env.jrar_dev_db
 
-  const program = Effect.gen(function* () {
-    const bookmarks = yield* Bookmarks;
-    return yield* bookmarks.getAll();
-  });
+    if (!db) {
+      console.error("[Bookmarks] D1 database binding is undefined!")
+      return { categories: [], bookmarks: [] }
+    }
 
-  // Build the layer stack
-  const D1Live = makeD1Layer(db);
-  const MainLayer = Layer.merge(
-    D1Live,
-    BookmarksLive.pipe(Layer.provide(D1Live))
-  );
+    const program = Effect.gen(function* () {
+      const bookmarks = yield* Bookmarks
+      return yield* bookmarks.getBookmarksBar()
+    })
 
-  const result = await program.pipe(
-    Effect.provide(MainLayer),
-    Effect.match({
-      onFailure: () => ({ folders: [], bookmarks: [] }),
-      onSuccess: (data) => data,
-    }),
-    Effect.runPromise
-  );
+    const D1Live = makeD1Layer(db)
+    const MainLayer = Layer.merge(
+      D1Live,
+      BookmarksLive.pipe(Layer.provide(D1Live))
+    )
 
-  // Build tree structure
-  const tree = buildTree(result.folders, result.bookmarks);
+    const result = await program.pipe(
+      Effect.provide(MainLayer),
+      Effect.tapError((error) =>
+        Effect.sync(() => console.error("[Bookmarks] Effect error:", error))
+      ),
+      Effect.match({
+        onFailure: () => ({ categories: [], bookmarks: [] }),
+        onSuccess: (data) => data,
+      }),
+      Effect.runPromise
+    )
 
-  return {
-    tree,
-    stats: {
-      folders: result.folders.length,
-      bookmarks: result.bookmarks.length,
-    },
-  };
+    return result
+  } catch (error) {
+    console.error("[Bookmarks] Loader exception:", error)
+    return { categories: [], bookmarks: [] }
+  }
 }
 
 export default function BookmarksPage({ loaderData }: Route.ComponentProps) {
-  const { tree, stats } = loaderData;
+  const { categories, bookmarks } = loaderData
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
+  const [searchQuery, setSearchQuery] = useState("")
+
+  const filteredBookmarks = useMemo(() => {
+    return bookmarks
+      .filter((b) => !selectedCategory || b.folder_id === selectedCategory)
+      .filter(
+        (b) =>
+          !searchQuery ||
+          b.title.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+  }, [bookmarks, selectedCategory, searchQuery])
+
+  const handleSelectionChange = (selection: Selection) => {
+    if (selection === "all") {
+      setSelectedCategory(null)
+    } else {
+      const selected = Array.from(selection)[0] as string | undefined
+      setSelectedCategory(selected ?? null)
+    }
+  }
+
+  const handleSearchChange = (value: string) => {
+    setSearchQuery(value)
+    if (value) {
+      setSelectedCategory(null)
+    }
+  }
 
   return (
     <main className="min-h-screen bg-app-background py-16">
       <div className="container mx-auto px-4 max-w-4xl">
-        <header className="mb-12">
+        <header className="mb-8">
           <h1 className="text-3xl font-mono font-bold text-primary-vivid uppercase tracking-widest">
             Bookmarks_
           </h1>
           <p className="font-mono text-app-muted text-sm mt-2">
-            {stats.folders} folders // {stats.bookmarks} bookmarks
+            {bookmarks.length} bookmarks
           </p>
         </header>
 
-        {tree.length > 0 ? (
-          <section className="border border-primary-background">
-            <BookmarkTree items={tree} />
-          </section>
-        ) : (
-          <section className="border border-primary-background p-8 text-center">
-            <p className="font-mono text-app-muted">
-              No bookmarks synced yet. Use the Chrome extension to sync your
-              bookmarks.
-            </p>
-          </section>
-        )}
+        <div className="space-y-6">
+          <SearchField
+            aria-label="Search bookmarks"
+            placeholder="SEARCH_BOOKMARKS"
+            value={searchQuery}
+            onChange={handleSearchChange}
+          />
+
+          {categories.length > 0 && (
+            <TagGroup
+              aria-label="Filter by category"
+              selectionMode="single"
+              selectedKeys={selectedCategory ? [selectedCategory] : []}
+              onSelectionChange={handleSelectionChange}
+            >
+              {categories.map((category) => (
+                <Tag key={category.id} id={category.id}>
+                  {category.title}
+                </Tag>
+              ))}
+            </TagGroup>
+          )}
+
+          {filteredBookmarks.length > 0 ? (
+            <BookmarkList
+              bookmarks={filteredBookmarks}
+              highlightText={searchQuery}
+            />
+          ) : (
+            <section className="border border-primary-background p-8 text-center">
+              <p className="font-mono text-app-muted">
+                {bookmarks.length === 0
+                  ? "No bookmarks available. Something went wrong."
+                  : "No bookmarks match your search."}
+              </p>
+            </section>
+          )}
+        </div>
       </div>
     </main>
-  );
+  )
 }

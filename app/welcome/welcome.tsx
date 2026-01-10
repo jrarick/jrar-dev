@@ -6,6 +6,7 @@ import { Checkbox } from "~/components/checkbox"
 import { RadioGroup, Radio } from "~/components/radio-group"
 import { Breadcrumb, Breadcrumbs } from "~/components/breadcrumbs"
 import { TagGroup, Tag } from "~/components/tag-group"
+import { SearchField } from "~/components/search-field"
 
 export function Welcome({ message }: { message: string }) {
   return (
@@ -201,6 +202,26 @@ export function Welcome({ message }: { message: string }) {
                   <Tag>Cache_02</Tag>
                   <Tag>Cache_03</Tag>
                 </TagGroup>
+              </div>
+            </div>
+          </section>
+
+          {/* Search Section */}
+          <section className="space-y-6">
+            <h2 className="text-xl font-mono text-app-accent border-b border-primary-muted pb-2 uppercase">
+              07_Search //
+            </h2>
+            <div className="flex flex-col gap-8">
+              <div className="space-y-4">
+                <SearchField
+                  label="Query Database"
+                  placeholder="SEARCH_KEYWORD..."
+                />
+                <SearchField
+                  label="Disabled Search"
+                  isDisabled
+                  placeholder="OFFLINE"
+                />
               </div>
             </div>
           </section>

@@ -1,13 +1,14 @@
-import { Context, Effect, Layer } from "effect";
-import { D1 } from "./db";
-import { DatabaseError } from "../errors";
+import { Context, Effect, Layer } from "effect"
+import { D1 } from "./db"
+import { DatabaseError } from "../errors"
 import type {
   Bookmark,
   Folder,
   BookmarkSyncData,
   FolderSyncData,
   BookmarksResponse,
-} from "../bookmark-types";
+  BookmarksBarResponse,
+} from "../bookmark-types"
 
 /**
  * Bookmark service interface
@@ -16,43 +17,51 @@ export interface BookmarkService {
   /**
    * Get all bookmarks and folders
    */
-  readonly getAll: () => Effect.Effect<BookmarksResponse, DatabaseError>;
+  readonly getAll: () => Effect.Effect<BookmarksResponse, DatabaseError>
+
+  /**
+   * Get bookmarks bar categories and bookmarks
+   */
+  readonly getBookmarksBar: () => Effect.Effect<
+    BookmarksBarResponse,
+    DatabaseError
+  >
 
   /**
    * Create or update a bookmark
    */
   readonly upsertBookmark: (
     data: BookmarkSyncData
-  ) => Effect.Effect<void, DatabaseError>;
+  ) => Effect.Effect<void, DatabaseError>
 
   /**
    * Create or update a folder
    */
   readonly upsertFolder: (
     data: FolderSyncData
-  ) => Effect.Effect<void, DatabaseError>;
+  ) => Effect.Effect<void, DatabaseError>
 
   /**
    * Remove a bookmark by chrome_id
    */
   readonly removeBookmark: (
     chromeId: string
-  ) => Effect.Effect<void, DatabaseError>;
+  ) => Effect.Effect<void, DatabaseError>
 
   /**
    * Remove a folder by chrome_id (cascades to children)
    */
   readonly removeFolder: (
     chromeId: string
-  ) => Effect.Effect<void, DatabaseError>;
+  ) => Effect.Effect<void, DatabaseError>
 
   /**
    * Sync all bookmarks (replaces existing data)
    */
   readonly syncAll: (data: {
-    folders: FolderSyncData[];
-    bookmarks: BookmarkSyncData[];
-  }) => Effect.Effect<{ folders: number; bookmarks: number }, DatabaseError>;
+    folders: FolderSyncData[]
+    bookmarks: BookmarkSyncData[]
+  }) => Effect.Effect<{ folders: number; bookmarks: number }, DatabaseError>
 
   /**
    * Update bookmark position and parent after move
@@ -62,7 +71,7 @@ export interface BookmarkService {
     newParentId: string | null,
     newPath: string,
     newPosition: number
-  ) => Effect.Effect<void, DatabaseError>;
+  ) => Effect.Effect<void, DatabaseError>
 
   /**
    * Update folder position and parent after move
@@ -72,7 +81,7 @@ export interface BookmarkService {
     newParentId: string | null,
     newPath: string,
     newPosition: number
-  ) => Effect.Effect<void, DatabaseError>;
+  ) => Effect.Effect<void, DatabaseError>
 }
 
 /**
@@ -86,26 +95,74 @@ export class Bookmarks extends Context.Tag("Bookmarks")<
 /**
  * Generate a unique ID
  */
-const generateId = () => crypto.randomUUID();
+const generateId = () => crypto.randomUUID()
 
 /**
  * Create the Bookmark service implementation
  */
 const makeBookmarkService = Effect.gen(function* () {
-  const d1 = yield* D1;
+  const d1 = yield* D1
 
   const getAll = (): Effect.Effect<BookmarksResponse, DatabaseError> =>
     Effect.gen(function* () {
       const [foldersResult, bookmarksResult] = yield* Effect.all([
         d1.query<Folder>("SELECT * FROM folders ORDER BY path, position"),
         d1.query<Bookmark>("SELECT * FROM bookmarks ORDER BY path, position"),
-      ]);
+      ])
 
       return {
         folders: foldersResult.results,
         bookmarks: bookmarksResult.results,
-      };
-    });
+      }
+    })
+
+  const getBookmarksBar = (): Effect.Effect<
+    BookmarksBarResponse,
+    DatabaseError
+  > =>
+    Effect.gen(function* () {
+      console.log("[Bookmarks] getBookmarksBar called")
+
+      // Find the Bookmarks Bar folder
+      const bookmarksBarFolder = yield* d1.queryFirst<Folder>(
+        "SELECT id FROM folders WHERE title = 'Bookmarks Bar' AND parent_id IS NULL"
+      )
+
+      console.log("[Bookmarks] Bookmarks bar folder:", bookmarksBarFolder)
+
+      if (!bookmarksBarFolder) {
+        // Debug: check what folders exist
+        const allFolders = yield* d1.query<Folder>(
+          "SELECT id, title, parent_id FROM folders LIMIT 10"
+        )
+        console.log("[Bookmarks] Sample folders in DB:", allFolders.results)
+        return { categories: [], bookmarks: [] }
+      }
+
+      // Get direct child folders (categories) and all bookmarks under Bookmarks bar
+      const [categoriesResult, bookmarksResult] = yield* Effect.all([
+        d1.query<Folder>(
+          "SELECT * FROM folders WHERE parent_id = ? ORDER BY position",
+          bookmarksBarFolder.id
+        ),
+        d1.query<Bookmark>(
+          "SELECT * FROM bookmarks WHERE path LIKE '/Bookmarks Bar%' ORDER BY position"
+        ),
+      ])
+
+      console.log(
+        "[Bookmarks] Found",
+        categoriesResult.results.length,
+        "categories,",
+        bookmarksResult.results.length,
+        "bookmarks"
+      )
+
+      return {
+        categories: categoriesResult.results,
+        bookmarks: bookmarksResult.results,
+      }
+    })
 
   const upsertBookmark = (
     data: BookmarkSyncData
@@ -115,19 +172,19 @@ const makeBookmarkService = Effect.gen(function* () {
       const existing = yield* d1.queryFirst<Bookmark>(
         "SELECT id, folder_id FROM bookmarks WHERE chrome_id = ?",
         data.chrome_id
-      );
+      )
 
       // Get folder_id from parent chrome_id
-      let folderId: string | null = null;
+      let folderId: string | null = null
       if (data.parent_id) {
         const folder = yield* d1.queryFirst<Folder>(
           "SELECT id FROM folders WHERE chrome_id = ?",
           data.parent_id
-        );
-        folderId = folder?.id ?? null;
+        )
+        folderId = folder?.id ?? null
       }
 
-      const now = Date.now();
+      const now = Date.now()
 
       if (existing) {
         // Update existing bookmark
@@ -144,7 +201,7 @@ const makeBookmarkService = Effect.gen(function* () {
           data.position,
           now,
           data.chrome_id
-        );
+        )
       } else {
         // Insert new bookmark
         yield* d1.execute(
@@ -162,9 +219,9 @@ const makeBookmarkService = Effect.gen(function* () {
           data.position,
           now,
           now
-        );
+        )
       }
-    });
+    })
 
   const upsertFolder = (
     data: FolderSyncData
@@ -174,19 +231,19 @@ const makeBookmarkService = Effect.gen(function* () {
       const existing = yield* d1.queryFirst<Folder>(
         "SELECT id, parent_id FROM folders WHERE chrome_id = ?",
         data.chrome_id
-      );
+      )
 
       // Get parent_id from parent chrome_id
-      let parentId: string | null = null;
+      let parentId: string | null = null
       if (data.parent_id) {
         const parent = yield* d1.queryFirst<Folder>(
           "SELECT id FROM folders WHERE chrome_id = ?",
           data.parent_id
-        );
-        parentId = parent?.id ?? null;
+        )
+        parentId = parent?.id ?? null
       }
 
-      const now = Date.now();
+      const now = Date.now()
 
       if (existing) {
         // Update existing folder
@@ -202,10 +259,10 @@ const makeBookmarkService = Effect.gen(function* () {
           data.position,
           now,
           data.chrome_id
-        );
+        )
       } else {
         // Insert new folder
-        const id = generateId();
+        const id = generateId()
         yield* d1.execute(
           `INSERT INTO folders
             (id, chrome_id, parent_id, title, path, date_added, date_modified, position, created_at, updated_at)
@@ -220,16 +277,16 @@ const makeBookmarkService = Effect.gen(function* () {
           data.position,
           now,
           now
-        );
+        )
       }
-    });
+    })
 
   const removeBookmark = (
     chromeId: string
   ): Effect.Effect<void, DatabaseError> =>
     Effect.gen(function* () {
-      yield* d1.execute("DELETE FROM bookmarks WHERE chrome_id = ?", chromeId);
-    });
+      yield* d1.execute("DELETE FROM bookmarks WHERE chrome_id = ?", chromeId)
+    })
 
   const removeFolder = (chromeId: string): Effect.Effect<void, DatabaseError> =>
     Effect.gen(function* () {
@@ -237,46 +294,46 @@ const makeBookmarkService = Effect.gen(function* () {
       const folder = yield* d1.queryFirst<Folder>(
         "SELECT id FROM folders WHERE chrome_id = ?",
         chromeId
-      );
+      )
 
       if (folder) {
         // Delete bookmarks in this folder
         yield* d1.execute(
           "DELETE FROM bookmarks WHERE folder_id = ?",
           folder.id
-        );
+        )
         // Delete the folder (child folders cascade)
-        yield* d1.execute("DELETE FROM folders WHERE id = ?", folder.id);
+        yield* d1.execute("DELETE FROM folders WHERE id = ?", folder.id)
       }
-    });
+    })
 
   const syncAll = (data: {
-    folders: FolderSyncData[];
-    bookmarks: BookmarkSyncData[];
+    folders: FolderSyncData[]
+    bookmarks: BookmarkSyncData[]
   }): Effect.Effect<{ folders: number; bookmarks: number }, DatabaseError> =>
     Effect.gen(function* () {
       // Clear existing data
-      yield* d1.execute("DELETE FROM bookmarks");
-      yield* d1.execute("DELETE FROM folders");
+      yield* d1.execute("DELETE FROM bookmarks")
+      yield* d1.execute("DELETE FROM folders")
 
       // Create a map of chrome_id -> generated id for folders
-      const folderIdMap = new Map<string, string>();
-      const now = Date.now();
+      const folderIdMap = new Map<string, string>()
+      const now = Date.now()
 
       // Insert folders first (need to handle hierarchy)
       // Sort folders by path length to ensure parents are created first
       const sortedFolders = [...data.folders].sort(
         (a, b) => a.path.split("/").length - b.path.split("/").length
-      );
+      )
 
       for (const folder of sortedFolders) {
-        const id = generateId();
-        folderIdMap.set(folder.chrome_id, id);
+        const id = generateId()
+        folderIdMap.set(folder.chrome_id, id)
 
         // Get parent_id from our map
-        let parentId: string | null = null;
+        let parentId: string | null = null
         if (folder.parent_id && folderIdMap.has(folder.parent_id)) {
-          parentId = folderIdMap.get(folder.parent_id)!;
+          parentId = folderIdMap.get(folder.parent_id)!
         }
 
         yield* d1.execute(
@@ -293,14 +350,14 @@ const makeBookmarkService = Effect.gen(function* () {
           folder.position ?? 0,
           now,
           now
-        );
+        )
       }
 
       // Insert bookmarks
       for (const bookmark of data.bookmarks) {
         const folderId = bookmark.parent_id
           ? folderIdMap.get(bookmark.parent_id) ?? null
-          : null;
+          : null
 
         yield* d1.execute(
           `INSERT INTO bookmarks
@@ -317,14 +374,14 @@ const makeBookmarkService = Effect.gen(function* () {
           bookmark.position ?? 0,
           now,
           now
-        );
+        )
       }
 
       return {
         folders: data.folders.length,
         bookmarks: data.bookmarks.length,
-      };
-    });
+      }
+    })
 
   const moveBookmark = (
     chromeId: string,
@@ -334,13 +391,13 @@ const makeBookmarkService = Effect.gen(function* () {
   ): Effect.Effect<void, DatabaseError> =>
     Effect.gen(function* () {
       // Get folder_id from parent chrome_id
-      let folderId: string | null = null;
+      let folderId: string | null = null
       if (newParentId) {
         const folder = yield* d1.queryFirst<Folder>(
           "SELECT id FROM folders WHERE chrome_id = ?",
           newParentId
-        );
-        folderId = folder?.id ?? null;
+        )
+        folderId = folder?.id ?? null
       }
 
       yield* d1.execute(
@@ -350,8 +407,8 @@ const makeBookmarkService = Effect.gen(function* () {
         newPosition,
         Date.now(),
         chromeId
-      );
-    });
+      )
+    })
 
   const moveFolder = (
     chromeId: string,
@@ -361,13 +418,13 @@ const makeBookmarkService = Effect.gen(function* () {
   ): Effect.Effect<void, DatabaseError> =>
     Effect.gen(function* () {
       // Get parent_id from parent chrome_id
-      let parentId: string | null = null;
+      let parentId: string | null = null
       if (newParentId) {
         const parent = yield* d1.queryFirst<Folder>(
           "SELECT id FROM folders WHERE chrome_id = ?",
           newParentId
-        );
-        parentId = parent?.id ?? null;
+        )
+        parentId = parent?.id ?? null
       }
 
       yield* d1.execute(
@@ -377,11 +434,12 @@ const makeBookmarkService = Effect.gen(function* () {
         newPosition,
         Date.now(),
         chromeId
-      );
-    });
+      )
+    })
 
   return {
     getAll,
+    getBookmarksBar,
     upsertBookmark,
     upsertFolder,
     removeBookmark,
@@ -389,8 +447,8 @@ const makeBookmarkService = Effect.gen(function* () {
     syncAll,
     moveBookmark,
     moveFolder,
-  } satisfies BookmarkService;
-});
+  } satisfies BookmarkService
+})
 
 /**
  * Bookmark service layer (depends on D1)
@@ -398,4 +456,4 @@ const makeBookmarkService = Effect.gen(function* () {
 export const BookmarksLive: Layer.Layer<Bookmarks, never, D1> = Layer.effect(
   Bookmarks,
   makeBookmarkService
-);
+)

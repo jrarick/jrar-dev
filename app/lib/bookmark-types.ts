@@ -98,6 +98,11 @@ export interface BookmarksResponse {
   bookmarks: Bookmark[];
 }
 
+export interface BookmarksBarResponse {
+  categories: Folder[];
+  bookmarks: Bookmark[];
+}
+
 export interface SyncResponse {
   success: boolean;
   message: string;
