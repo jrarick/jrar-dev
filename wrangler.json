@@ -1,22 +1,30 @@
 {
-  "$schema": "./node_modules/wrangler/config-schema.json",
-  "name": "jrar-dev",
-  "main": "./workers/app.ts",
-  "compatibility_date": "2025-10-08",
-  "compatibility_flags": ["nodejs_compat"],
-  "observability": {
-    "enabled": true
-  },
-  "upload_source_maps": true,
-  "vars": {
-    "VALUE_FROM_CLOUDFLARE": "Hello from Cloudflare"
-  },
-  "d1_databases": [
-    {
-      "binding": "jrar_dev_db",
-      "database_name": "jrar-dev-db",
-      "database_id": "cd41f7a9-42ae-407d-8a0e-696037d4110e",
-      "remote": true
-    }
-  ]
+	"$schema": "./node_modules/wrangler/config-schema.json",
+	"name": "jrar-dev",
+	"main": "./workers/app.ts",
+	"compatibility_date": "2025-10-08",
+	"compatibility_flags": [
+		"nodejs_compat"
+	],
+	"observability": {
+		"enabled": true
+	},
+	"upload_source_maps": true,
+	"vars": {
+		"VALUE_FROM_CLOUDFLARE": "Hello from Cloudflare"
+	},
+	"d1_databases": [
+		{
+			"binding": "jrar_dev_db",
+			"database_name": "jrar-dev-db",
+			"database_id": "cd41f7a9-42ae-407d-8a0e-696037d4110e",
+			"remote": true
+		}
+	],
+	"kv_namespaces": [
+		{
+			"binding": "JRAR_DEV_KV",
+			"id": "83087d23796e49129a2d3112c7717c30"
+		}
+	]
 }

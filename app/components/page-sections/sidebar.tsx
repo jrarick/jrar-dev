@@ -1,7 +1,7 @@
-import { Link } from "./link"
+import { Link } from "~/components/link"
 import { href, useLocation } from "react-router"
 import { twMerge } from "tailwind-merge"
-import { Button } from "./button"
+import { Button } from "~/components/button"
 import { X } from "lucide-react"
 
 export const links = [

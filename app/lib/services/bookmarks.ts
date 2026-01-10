@@ -121,21 +121,12 @@ const makeBookmarkService = Effect.gen(function* () {
     DatabaseError
   > =>
     Effect.gen(function* () {
-      console.log("[Bookmarks] getBookmarksBar called")
-
       // Find the Bookmarks Bar folder
       const bookmarksBarFolder = yield* d1.queryFirst<Folder>(
         "SELECT id FROM folders WHERE title = 'Bookmarks Bar' AND parent_id IS NULL"
       )
 
-      console.log("[Bookmarks] Bookmarks bar folder:", bookmarksBarFolder)
-
       if (!bookmarksBarFolder) {
-        // Debug: check what folders exist
-        const allFolders = yield* d1.query<Folder>(
-          "SELECT id, title, parent_id FROM folders LIMIT 10"
-        )
-        console.log("[Bookmarks] Sample folders in DB:", allFolders.results)
         return { categories: [], bookmarks: [] }
       }
 
@@ -149,14 +140,6 @@ const makeBookmarkService = Effect.gen(function* () {
           "SELECT * FROM bookmarks WHERE path LIKE '/Bookmarks Bar%' ORDER BY position"
         ),
       ])
-
-      console.log(
-        "[Bookmarks] Found",
-        categoriesResult.results.length,
-        "categories,",
-        bookmarksResult.results.length,
-        "bookmarks"
-      )
 
       return {
         categories: categoriesResult.results,

@@ -3,10 +3,14 @@ import { Effect, Layer } from "effect"
 import type { Route } from "./+types/bookmarks"
 import { makeD1Layer } from "~/lib/services/db"
 import { Bookmarks, BookmarksLive } from "~/lib/services/bookmarks"
+import type { BookmarksBarResponse } from "~/lib/bookmark-types"
 import { TagGroup, Tag } from "~/components/tag-group"
 import { SearchField } from "~/components/search-field"
-import { BookmarkList } from "~/components/bookmark-list"
+import { BookmarkList } from "~/components/page-sections/bookmark-list"
 import type { Selection } from "react-aria-components"
+
+const CACHE_KEY = "bookmarks-bar"
+const CACHE_TTL = 1000 * 60 * 60 * 24 // 1 day in seconds
 
 export function meta() {
   return [
@@ -16,42 +20,45 @@ export function meta() {
 }
 
 export async function loader({ context }: Route.LoaderArgs) {
-  try {
-    const db = context.cloudflare.env.jrar_dev_db
+  const db = context.cloudflare.env.jrar_dev_db
+  const kv = context.cloudflare.env.JRAR_DEV_KV
 
-    if (!db) {
-      console.error("[Bookmarks] D1 database binding is undefined!")
-      return { categories: [], bookmarks: [] }
+  const D1Live = makeD1Layer(db)
+  const MainLayer = Layer.merge(
+    D1Live,
+    BookmarksLive.pipe(Layer.provide(D1Live))
+  )
+
+  const program = Effect.gen(function* () {
+    // Try cache first
+    const cached = yield* Effect.tryPromise(() =>
+      kv.get<BookmarksBarResponse>(CACHE_KEY, "json")
+    ).pipe(Effect.orElseSucceed(() => null))
+
+    if (cached) {
+      return cached
     }
 
-    const program = Effect.gen(function* () {
-      const bookmarks = yield* Bookmarks
-      return yield* bookmarks.getBookmarksBar()
-    })
+    // Cache miss - fetch from DB
+    const bookmarks = yield* Bookmarks
+    const data = yield* bookmarks.getBookmarksBar()
 
-    const D1Live = makeD1Layer(db)
-    const MainLayer = Layer.merge(
-      D1Live,
-      BookmarksLive.pipe(Layer.provide(D1Live))
-    )
+    // Cache result (fire and forget)
+    yield* Effect.promise(() =>
+      kv.put(CACHE_KEY, JSON.stringify(data), { expirationTtl: CACHE_TTL })
+    ).pipe(Effect.fork)
 
-    const result = await program.pipe(
-      Effect.provide(MainLayer),
-      Effect.tapError((error) =>
-        Effect.sync(() => console.error("[Bookmarks] Effect error:", error))
-      ),
-      Effect.match({
-        onFailure: () => ({ categories: [], bookmarks: [] }),
-        onSuccess: (data) => data,
-      }),
-      Effect.runPromise
-    )
+    return data
+  })
 
-    return result
-  } catch (error) {
-    console.error("[Bookmarks] Loader exception:", error)
-    return { categories: [], bookmarks: [] }
-  }
+  return program.pipe(
+    Effect.provide(MainLayer),
+    Effect.match({
+      onFailure: () => ({ categories: [], bookmarks: [] }),
+      onSuccess: (data) => data,
+    }),
+    Effect.runPromise
+  )
 }
 
 export default function BookmarksPage({ loaderData }: Route.ComponentProps) {

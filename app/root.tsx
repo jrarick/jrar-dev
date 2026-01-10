@@ -9,10 +9,10 @@ import {
   useNavigate,
   type NavigateOptions,
 } from "react-router"
-import { Sidebar, SidebarContent } from "./components/sidebar"
-import { Sheet } from "./components/sheet"
-import { RouteBreadcrumbs } from "./components/route-breadcrumbs"
-import { Button } from "./components/button"
+import { Sidebar, SidebarContent } from "~/components/page-sections/sidebar"
+import { Sheet } from "~/components/sheet"
+import { RouteBreadcrumbs } from "~/components/page-sections/route-breadcrumbs"
+import { Button } from "~/components/button"
 import { DialogTrigger, Dialog } from "react-aria-components"
 import { Menu } from "lucide-react"
 
@@ -26,6 +26,7 @@ declare global {
   namespace Cloudflare {
     interface Env {
       jrar_dev_db: D1Database
+      JRAR_DEV_KV: KVNamespace
     }
   }
 }

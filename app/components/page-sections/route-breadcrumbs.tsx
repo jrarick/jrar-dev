@@ -1,5 +1,5 @@
 import { useLocation } from "react-router"
-import { Breadcrumbs, Breadcrumb } from "./breadcrumbs"
+import { Breadcrumbs, Breadcrumb } from "~/components/breadcrumbs"
 
 const routeMap: Record<string, string> = {
   blog: "blog",
