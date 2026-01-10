@@ -1,0 +1,22 @@
+---
+title: "E-commerce Website Templates"
+description: "Robust e-commerce templates built with jQuery and Bootstrap"
+projectLink: "https://premium-template.ourers.com/"
+technologies: ["jQuery", "Bootstrap"]
+---
+
+While I was the Senior UI engineer at Event Rental Systems (ERS) I was responsible for creating the website templates that powered hundreds of our customers websites. Since SEO and page speed were huge metrics in digital strategy for bounce house rental companies, performance was tantamount. No dependencies outside of jQuery, Bootstrap, and Swiper.js, a carousel library, were allowed. This meant painstakingly creating every unique UI element and interaction from scratch.
+
+## There needed to be a high attention to detail
+
+When you use a component library a lot of complicated things are abstracted away for you and you likely won't have to worry about focus management, resize events, and stacking context among other concerns. I didn't have that luxury as I needed to create complex UI elements with all the bells and whistles that a prebuilt component might have.
+
+## Every interaction needed micromanagement
+
+Let's take the search bar for example. There were no dependencies, so when the user types in a search term the search suggestion panel needs to be a custom element that operates like a native select or custom component would. It needs to overlap the sticky header but also "follow" the search bar when the user scrolls down causing the header to shrink. If the user changes their screensize the panel needs to mirror the size of the search bar as well which is tricky since it's absolutely positioned. The native scrollbar on Windows looked bad so I needed to create a custom one for the dropdown that looked the same cross-device.
+
+Focus management was important too, so when the user focused away the search suggestions would hide but if the user refocused the search bar while there was a value in it, it would show the suggestions again. There needed to be keyboard navigation for the menu as well. The search suggestions were also engineered to be "smart" so we added a dictionary of synonyms and keywords to redirect the user to find what they were looking faster. And another important UX improvement was adding a little debounce to the search so it wasn't flashing new results every keystroke.
+
+## Extensibility was essential
+
+Since there were numerous clients using these templates (numbering in the hundreds), there needed to be enough customization to meaningfully differentiate one website from the next. I developed a rich theming system built on ERS's platform where support and customers could change theme colors, branding assets, graphics, and the font in addition to changing the different sections on their site.

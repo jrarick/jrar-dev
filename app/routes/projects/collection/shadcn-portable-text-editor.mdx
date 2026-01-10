@@ -1,0 +1,22 @@
+---
+title: "Shadcn Portable Text Editor"
+description: "A rich text editor published on the Shadcn registry"
+projectLink: "https://shadcn-portable-text-editor.vercel.app/"
+technologies: ["React", "TypeScript", "Tailwind"]
+---
+
+Working with headless rich text editors affords a lot of authoring flexibility however headless setups are quite a bit of work since "the head" aka the UI/design/behavior is all your responsibility. There's was a Shadcn implementation for TipTap and Lexical but not for Portable Text so I set out to create one. It needed to be a Shadcn registry compatible set of components that could expose some useful primitives for building an editor without compromising the composable nature of the headless architecture.
+
+## Figuring out the best approach
+
+I went through a number of iterations in order to create something that would allow the user to easily add a finished editor to the project but give them flexibility to edit it easily. The solution I landed on was creating thin wrappers over the editor primitives and existing shadcn components and then use those to build registry "blocks" which could be added into the user's project with one command.
+
+From a UI and design perspective I wanted the controls to have a cohesiveness and hierarchy. Grouping buttons together in a custom "ButtonGroup" component makes it easy to interpret the different behaviors of the editor. In an earlier iteration the expanded editor example had a dozen plus standalone buttons that looked very messy and interrupted any cohesive information hierarchy.
+
+## Challenges I faced
+
+It's sometimes difficult to know what's the ideal level of abstraction for UI components; for elements like the style select menu I went for a higher level of abstraction since the user likely wouldn't need to customize it very much. And at the end of the day with the shadcn model, the user owns the primitives completely so if they have a compelling reason to make wholesale changes to the style select menu they have the ability to do so.
+
+There was also the question of which defaults would be the most appropriate. I opted to make the button tooltips shown by default but the keyboard shortcuts within the tooltip are hidden by default. Since these are just defaults the user has the autonomy to change these view options but the defaults seemed sensible to me.
+
+[Github link](https://github.com/jrarick/shadcn-portable-text-editor)

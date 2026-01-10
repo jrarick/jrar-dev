@@ -96,8 +96,8 @@ export default function BookmarksPage({ loaderData }: Route.ComponentProps) {
     <main className="min-h-screen bg-app-background py-16">
       <div className="container mx-auto px-4 max-w-4xl">
         <header className="mb-8">
-          <h1 className="text-3xl font-mono font-bold text-primary-vivid uppercase tracking-widest">
-            Bookmarks_
+          <h1 className="text-3xl font-mono font-bold text-primary-vivid uppercase">
+            Bookmarks
           </h1>
           <p className="font-mono text-app-muted text-sm mt-2">
             {bookmarks.length} bookmarks

@@ -10,7 +10,10 @@ export default [
   route("bookmarks", "routes/bookmarks.tsx"),
   route("blog", "routes/blog/index.tsx"),
   route("blog/:slug", "routes/blog/post.tsx"),
-  route("projects", "routes/projects.tsx"),
+  ...prefix("projects", [
+    index("routes/projects/index.tsx"),
+    route(":slug", "routes/projects/project-slug.tsx"),
+  ]),
   route("tools", "routes/tools.tsx"),
   ...prefix("api", [
     ...prefix("bookmarks", [

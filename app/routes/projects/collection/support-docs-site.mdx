@@ -1,0 +1,22 @@
+---
+title: "Docs Site Implementation"
+description: "A Remix docs project powered by Sanity and Algolia"
+projectLink: "https://support.cablecast.tv/"
+technologies: ["Remix", "React", "Sanity"]
+---
+
+While with Tightrope, I was responsible with the implementation of a redesign of our support site. We wanted to consolidate support resources as we had a user manual, knowledge base articles (kb articles), and release notes all separate from each other. The way we delivered these resources was different as the user manual was authored as a series of markdown files, the kb articles were authored in Sanity, and the release notes were a collection of resolved tickets and feature requests. We created this project with Remix, Sanity for managing content, and Algolia for indexing content for search.
+
+## Simplifying navigation
+
+Since we had three main content types it was imperative for the user to be able to explore a given content type but also easily switch to another. That meant if the user was using the manual, we would use the left sidebar to show the directory and display the option to switch to the kb articles on the right sidebar, and vice versa. For the KB navigation we had subcategories within broader categories so we had dropdowns to allow the user to narrow their search. We also gathered the headings from each article and displayed them as a subnavigation on the right to allow the user to quickly explore the sections of articles.
+
+## Improving the authoring experience
+
+Using Sanity, we improved the previous authoring experience using the Portable Text rich text editor. The great thing about Sanity is it's very extensible, so in addition to the normal things you would expect in a rich text editor like headings, paragraphs, images, bullet lists, ect. you can also define your own custom blocks in the schema. I created custom block types like callouts and diagrams that had a specialized authoring experience within the Sanity studio since they were more complex than plain text.
+
+We also added author profiles to Sanity so we could associate articles with authors. This was important not only for the article metadata but also so that users could explore author profiles and read more from their favorite author.
+
+## Robust search
+
+Using Algolia, we imported our markdown files from the user manual and set up Sanity to automatically index kb articles. Algolia did a lot of the heavy lifting by using fuzzy search and highlighting the user input within the search results.

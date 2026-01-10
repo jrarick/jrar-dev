@@ -48,7 +48,7 @@ export function SidebarContent({ onLinkClick, onClose }: SidebarContentProps) {
                 className={twMerge(
                   "block px-4 py-2 decoration-transparent hover:decoration-transparent",
                   isActive
-                    ? "text-app-background border-l-2 bg-primary-accent pl-[14px] hover:text-app-background shadow-[0_0_10px_var(--primary-accent)]"
+                    ? "text-app-background bg-primary-accent hover:text-app-background shadow-[0_0_10px_var(--primary-accent)]"
                     : "text-app-muted hover:text-primary-vivid hover:bg-primary-background"
                 )}
               >

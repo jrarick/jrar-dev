@@ -13,7 +13,7 @@ export interface ButtonProps extends RACButtonProps {
 
 let button = tv({
   extend: focusRing,
-  base: "relative inline-flex items-center border-0 font-mono text-sm text-center transition rounded-none cursor-default p-1 flex items-center justify-center text-app-accent bg-transparent hover:bg-primary-background hover:text-app-background pressed:bg-primary-vivid disabled:bg-transparent [-webkit-tap-highlight-color:transparent]",
+  base: "relative inline-flex items-center border-0 font-mono text-sm text-center transition rounded-none cursor-default p-1 justify-center text-app-accent bg-transparent hover:bg-primary-background hover:text-app-background pressed:bg-primary-vivid disabled:bg-transparent [-webkit-tap-highlight-color:transparent]",
   variants: {
     isDisabled: {
       true: "text-app-muted cursor-not-allowed forced-colors:text-[GrayText]",

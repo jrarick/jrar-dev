@@ -64,7 +64,7 @@ function BookmarkItem({ bookmark, highlightText }: BookmarkItemProps) {
             highlight={highlightText}
           />
         </span>
-        <div className="flex items-center gap-2 text-xs text-app-muted justify-between">
+        <div className="flex items-center gap-2 text-xs text-app-muted group-hover:text-primary-muted justify-between">
           <span className="truncate">{bookmark.url}</span>
           <span className="shrink-0 tabular-nums">
             {new Date(bookmark.date_added).toISOString()}
