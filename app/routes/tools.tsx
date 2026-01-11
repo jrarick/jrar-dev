@@ -1,6 +1,10 @@
 import type { Route } from "./+types/tools"
 import { useState, useMemo } from "react"
 import { TagGroup, Tag } from "~/components/tag-group"
+import { PageLayout, PageHeader } from "~/components/page-layout"
+import { CyberCard } from "~/components/cyber-card"
+import { Badge } from "~/components/badge"
+import { EmptyState } from "~/components/empty-state"
 
 const kinds = ["All", "Framework", "Language", "Library", "Platform", "Other"]
 
@@ -192,90 +196,76 @@ export default function Tools() {
   }, [selectedKind])
 
   return (
-    <main className="min-h-screen bg-app-background py-16">
-      <div className="container mx-auto px-4 max-w-7xl">
-        <header className="mb-12">
-          <h1 className="text-3xl font-mono font-bold text-primary-vivid uppercase mb-4">
-            Tools
-          </h1>
-          <p className="font-mono text-app-vivid max-w-2xl">
-            Framework, Library, and tools that power my development workflow.
-          </p>
-        </header>
+    <PageLayout>
+      <PageHeader title="Tools">
+        <p className="font-mono text-app-vivid max-w-2xl">
+          Framework, Library, and tools that power my development workflow.
+        </p>
+      </PageHeader>
 
-        <div className="space-y-8">
-          <TagGroup
-            aria-label="Filter tools by category"
-            selectionMode="single"
-            selectedKeys={[selectedKind]}
-            onSelectionChange={(keys) => {
-              const key = Array.from(keys)[0]?.toString()
-              if (key) setSelectedKind(key)
-            }}
-          >
-            {kinds.map((kind) => (
-              <Tag key={kind} id={kind}>
-                {kind}
-              </Tag>
-            ))}
-          </TagGroup>
+      <div className="space-y-8">
+        <TagGroup
+          aria-label="Filter tools by category"
+          selectionMode="single"
+          selectedKeys={[selectedKind]}
+          onSelectionChange={(keys) => {
+            const key = Array.from(keys)[0]?.toString()
+            if (key) setSelectedKind(key)
+          }}
+        >
+          {kinds.map((kind) => (
+            <Tag key={kind} id={kind}>
+              {kind}
+            </Tag>
+          ))}
+        </TagGroup>
 
-          <div className="@container/tools">
-            <div className="grid grid-cols-1 @xl/tools:grid-cols-2 @4xl/tools:grid-cols-3 @6xl/tools:grid-cols-4 gap-6">
-              {filteredTools.map((tool) => (
-                <a
-                  key={tool.name}
-                  href={tool.website}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group relative block p-6 border border-primary-muted bg-app-background hover:border-primary-vivid hover:bg-primary-background/50 focus:outline-none focus:ring-1 focus:ring-primary-vivid"
-                >
-                  {/* Corner Accents */}
-                  <div className="absolute top-0 left-0 w-2 h-2 border-l-2 border-t-2 border-primary-muted group-hover:border-primary-vivid" />
-                  <div className="absolute top-0 right-0 w-2 h-2 border-r-2 border-t-2 border-primary-muted group-hover:border-primary-vivid" />
-                  <div className="absolute bottom-0 left-0 w-2 h-2 border-l-2 border-b-2 border-primary-muted group-hover:border-primary-vivid" />
-                  <div className="absolute bottom-0 right-0 w-2 h-2 border-r-2 border-b-2 border-primary-muted group-hover:border-primary-vivid" />
+        <div className="@container/tools">
+          <div className="grid grid-cols-1 @xl/tools:grid-cols-2 @4xl/tools:grid-cols-3 @6xl/tools:grid-cols-4 gap-6">
+            {filteredTools.map((tool) => (
+              <CyberCard
+                key={tool.name}
+                href={tool.website}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <div className="flex items-start gap-4 mb-4">
+                  {/* Logo */}
+                  <img
+                    src={`/tool-logos/${tool.image}`}
+                    alt={`${tool.name} logo`}
+                    className="size-8 object-contain shrink-0 opacity-80 group-hover:opacity-100"
+                  />
 
-                  <div className="flex items-start gap-4 mb-4">
-                    {/* Logo */}
-                    <img
-                      src={`/tool-logos/${tool.image}`}
-                      alt={`${tool.name} logo`}
-                      className="size-8 object-contain shrink-0 opacity-80 group-hover:opacity-100"
-                    />
-
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center">
-                        <h3 className="text-xl font-mono font-bold text-primary-vivid group-hover:text-primary-accent truncate">
-                          {tool.name}
-                        </h3>
-                      </div>
-
-                      <span className="inline-block mt-1 text-xs font-mono text-primary-muted uppercase tracking-wider border border-primary-muted/30 px-2 py-0.5">
-                        {tool.kind}
-                      </span>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center">
+                      <h3 className="text-xl font-mono font-bold text-primary-vivid group-hover:text-primary-accent truncate">
+                        {tool.name}
+                      </h3>
                     </div>
-                  </div>
 
-                  <div className="mt-4 pt-4 border-t border-primary-muted/20">
-                    <span className="text-xs font-mono text-app-muted group-hover:text-primary-muted">
-                      {new URL(tool.website).hostname.replace("www.", "")}
-                    </span>
+                    <Badge className="mt-1">
+                      {tool.kind}
+                    </Badge>
                   </div>
-                </a>
-              ))}
-            </div>
+                </div>
+
+                <div className="mt-4 pt-4 border-t border-primary-muted/20">
+                  <span className="text-xs font-mono text-app-muted group-hover:text-primary-muted">
+                    {new URL(tool.website).hostname.replace("www.", "")}
+                  </span>
+                </div>
+              </CyberCard>
+            ))}
           </div>
-
-          {filteredTools.length === 0 && (
-            <div className="py-12 text-center border border-dashed border-primary-muted">
-              <p className="font-mono text-primary-muted">
-                No tools found in this category.
-              </p>
-            </div>
-          )}
         </div>
+
+        {filteredTools.length === 0 && (
+          <EmptyState>
+            No tools found in this category.
+          </EmptyState>
+        )}
       </div>
-    </main>
+    </PageLayout>
   )
 }

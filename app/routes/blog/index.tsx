@@ -1,4 +1,5 @@
 import { Link, useLoaderData } from "react-router"
+import { PageLayout, PageHeader } from "~/components/page-layout"
 
 // Define interface for frontmatter
 interface Frontmatter {
@@ -35,50 +36,48 @@ export default function BlogIndex() {
   const { posts } = useLoaderData<typeof loader>()
 
   return (
-    <div className="min-h-screen bg-app-background p-8 font-mono">
-      <div className="max-w-4xl mx-auto">
-        <header className="mb-12 border-b border-primary-background pb-4">
-          <h1 className="text-3xl font-bold text-primary-vivid uppercase tracking-widest">
-            ~/blog // INDEX
-          </h1>
-          <p className="text-app-muted mt-2 text-sm">
-            {posts.length} entries found...
-          </p>
-        </header>
+    <PageLayout maxWidth="max-w-4xl" className="p-8">
+      <PageHeader
+        title="~/blog // INDEX"
+        className="border-b border-primary-background pb-4"
+      >
+        <p className="text-app-muted mt-2 text-sm">
+          {posts.length} entries found...
+        </p>
+      </PageHeader>
 
-        <ul className="flex flex-col gap-px bg-primary-background/20 border border-primary-background/20">
-          {posts.map((post) => (
-            <li
-              key={post.slug}
-              className="group relative bg-app-background hover:bg-primary-background/5 transition-colors"
-            >
-              <Link to={`/blog/${post.slug}`} className="block p-6">
-                <div className="flex flex-col md:flex-row md:items-baseline gap-2 md:gap-8">
-                  <span className="text-xs text-app-muted shrink-0 w-32 font-bold opacity-60">
-                    {post.frontmatter.date
-                      ? new Date(post.frontmatter.date)
-                          .toISOString()
-                          .split("T")[0]
-                      : "UNKNOWN_DATE"}
-                  </span>
-                  <div>
-                    <h2 className="text-xl font-bold text-primary-muted group-hover:text-primary-vivid transition-colors mb-2">
-                      {post.frontmatter.title || post.slug}
-                    </h2>
-                    {post.frontmatter.description && (
-                      <p className="text-sm text-app-muted/80 max-w-2xl leading-relaxed">
-                        {post.frontmatter.description}
-                      </p>
-                    )}
-                  </div>
+      <ul className="flex flex-col gap-px bg-primary-background/20 border border-primary-background/20">
+        {posts.map((post) => (
+          <li
+            key={post.slug}
+            className="group relative bg-app-background hover:bg-primary-background/5 transition-colors"
+          >
+            <Link to={`/blog/${post.slug}`} className="block p-6">
+              <div className="flex flex-col md:flex-row md:items-baseline gap-2 md:gap-8">
+                <span className="text-xs text-app-muted shrink-0 w-32 font-bold opacity-60">
+                  {post.frontmatter.date
+                    ? new Date(post.frontmatter.date)
+                        .toISOString()
+                        .split("T")[0]
+                    : "UNKNOWN_DATE"}
+                </span>
+                <div>
+                  <h2 className="text-xl font-bold text-primary-muted group-hover:text-primary-vivid transition-colors mb-2">
+                    {post.frontmatter.title || post.slug}
+                  </h2>
+                  {post.frontmatter.description && (
+                    <p className="text-sm text-app-muted/80 max-w-2xl leading-relaxed">
+                      {post.frontmatter.description}
+                    </p>
+                  )}
                 </div>
-                {/* Hover indicator */}
-                <div className="absolute left-0 top-0 bottom-0 w-1 bg-primary-vivid scale-y-0 group-hover:scale-y-100 transition-transform origin-top" />
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
+              </div>
+              {/* Hover indicator */}
+              <div className="absolute left-0 top-0 bottom-0 w-1 bg-primary-vivid scale-y-0 group-hover:scale-y-100 transition-transform origin-top" />
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </PageLayout>
   )
 }

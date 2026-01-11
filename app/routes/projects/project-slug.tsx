@@ -64,7 +64,7 @@ export default function ProjectPost({
       <div className="container mx-auto px-4 max-w-4xl">
         <Link
           to="/projects"
-          className="inline-flex items-center gap-2 text-primary-muted hover:text-primary-vivid font-mono mb-8 transition-colors"
+          className="inline-flex items-center gap-2 text-primary-muted hover:text-primary-vivid font-mono mb-8"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>Back to Projects</span>
@@ -73,11 +73,11 @@ export default function ProjectPost({
         <article>
           <header className="mb-12 border-b border-primary-muted/20 pb-12">
             <div className="aspect-video w-full overflow-hidden mb-8 bg-app-muted/20 border border-primary-muted/20 rounded-none relative group">
-              <div className="absolute inset-0 bg-primary-background/10 group-hover:bg-transparent transition-colors z-10" />
+              <div className="absolute inset-0 bg-primary-background/10 group-hover:bg-transparent z-10" />
               <img
                 src={`/projects-assets/${params.slug}.png`}
                 alt={frontmatter.title}
-                className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                className="w-full h-full object-cover grayscale group-hover:grayscale-0"
               />
 
               {/* Decorative corners */}
@@ -112,7 +112,7 @@ export default function ProjectPost({
                   href={frontmatter.projectLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-2 bg-primary-vivid text-app-background font-mono font-bold hover:bg-primary-accent transition-colors"
+                  className="inline-flex items-center gap-2 px-6 py-2 bg-primary-vivid text-app-background font-mono font-bold hover:bg-primary-accent"
                 >
                   <span>View Project</span>
                   <ExternalLink className="w-4 h-4" />
@@ -122,15 +122,17 @@ export default function ProjectPost({
           </header>
 
           <div
-            className="prose prose-invert prose-mono max-w-none 
-            prose-headings:text-primary-vivid prose-headings:font-normal prose-headings:uppercase
-            prose-p:text-app-muted prose-p:leading-relaxed
-            prose-a:text-primary-accent prose-a:no-underline hover:prose-a:underline
-            prose-strong:text-primary-accent
-            prose-code:text-primary-accent prose-code:bg-primary-muted/10 prose-code:px-1 prose-code:before:content-none prose-code:after:content-none
-            prose-pre:bg-app-muted/10 prose-pre:border prose-pre:border-primary-muted/20
-            prose-li:text-app-muted
-            "
+            className="
+          prose prose-invert max-w-none
+          prose-headings:text-primary-vivid prose-headings:font-bold prose-headings:uppercase prose-headings:tracking-wide
+          prose-h1:text-4xl prose-h1:border-b prose-h1:border-primary-background prose-h1:pb-4
+          prose-p:text-app-accent/90 prose-p:leading-relaxed
+          prose-a:text-primary-muted prose-a:no-underline hover:prose-a:text-primary-vivid hover:prose-a:underline
+          prose-strong:text-primary-vivid
+          prose-code:text-magenta prose-code:bg-app-muted/10 prose-code:px-1 prose-code:rounded-none prose-code:before:content-none prose-code:after:content-none
+          prose-pre:bg-neutral-900 prose-pre:border prose-pre:border-app-muted/20 prose-pre:rounded-none
+          prose-blockquote:border-l-2 prose-blockquote:border-primary-muted prose-blockquote:text-app-muted  
+        "
           >
             <Component />
           </div>

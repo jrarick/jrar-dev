@@ -8,6 +8,8 @@ import { TagGroup, Tag } from "~/components/tag-group"
 import { SearchField } from "~/components/search-field"
 import { BookmarkList } from "~/components/page-sections/bookmark-list"
 import type { Selection } from "react-aria-components"
+import { PageLayout, PageHeader } from "~/components/page-layout"
+import { EmptyState } from "~/components/empty-state"
 
 const CACHE_KEY = "bookmarks-bar"
 const CACHE_TTL = 1000 * 60 * 60 * 24 // 1 day in seconds
@@ -93,56 +95,49 @@ export default function BookmarksPage({ loaderData }: Route.ComponentProps) {
   }
 
   return (
-    <main className="min-h-screen bg-app-background py-16">
-      <div className="container mx-auto px-4 max-w-4xl">
-        <header className="mb-8">
-          <h1 className="text-3xl font-mono font-bold text-primary-vivid uppercase">
-            Bookmarks
-          </h1>
-          <p className="font-mono text-app-muted text-sm mt-2">
-            {bookmarks.length} bookmarks
-          </p>
-        </header>
+    <PageLayout maxWidth="max-w-4xl">
+      <PageHeader title="Bookmarks">
+        <p className="font-mono text-app-muted text-sm mt-2">
+          {bookmarks.length} bookmarks
+        </p>
+      </PageHeader>
 
-        <div className="space-y-6">
-          <SearchField
-            aria-label="Search bookmarks"
-            placeholder="SEARCH_BOOKMARKS"
-            value={searchQuery}
-            onChange={handleSearchChange}
+      <div className="space-y-6">
+        <SearchField
+          aria-label="Search bookmarks"
+          placeholder="SEARCH_BOOKMARKS"
+          value={searchQuery}
+          onChange={handleSearchChange}
+        />
+
+        {categories.length > 0 && (
+          <TagGroup
+            aria-label="Filter by category"
+            selectionMode="single"
+            selectedKeys={selectedCategory ? [selectedCategory] : []}
+            onSelectionChange={handleSelectionChange}
+          >
+            {categories.map((category) => (
+              <Tag key={category.id} id={category.id}>
+                {category.title}
+              </Tag>
+            ))}
+          </TagGroup>
+        )}
+
+        {filteredBookmarks.length > 0 ? (
+          <BookmarkList
+            bookmarks={filteredBookmarks}
+            highlightText={searchQuery}
           />
-
-          {categories.length > 0 && (
-            <TagGroup
-              aria-label="Filter by category"
-              selectionMode="single"
-              selectedKeys={selectedCategory ? [selectedCategory] : []}
-              onSelectionChange={handleSelectionChange}
-            >
-              {categories.map((category) => (
-                <Tag key={category.id} id={category.id}>
-                  {category.title}
-                </Tag>
-              ))}
-            </TagGroup>
-          )}
-
-          {filteredBookmarks.length > 0 ? (
-            <BookmarkList
-              bookmarks={filteredBookmarks}
-              highlightText={searchQuery}
-            />
-          ) : (
-            <section className="border border-primary-background p-8 text-center">
-              <p className="font-mono text-app-muted">
-                {bookmarks.length === 0
-                  ? "No bookmarks available. Something went wrong."
-                  : "No bookmarks match your search."}
-              </p>
-            </section>
-          )}
-        </div>
+        ) : (
+          <EmptyState>
+            {bookmarks.length === 0
+              ? "No bookmarks available. Something went wrong."
+              : "No bookmarks match your search."}
+          </EmptyState>
+        )}
       </div>
-    </main>
+    </PageLayout>
   )
 }
