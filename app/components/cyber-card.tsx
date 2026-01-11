@@ -21,13 +21,9 @@ type InternalLinkProps = CyberCardBaseProps &
 
 type CyberCardProps = ExternalLinkProps | InternalLinkProps
 
-export function CyberCard({
-  children,
-  className,
-  ...props
-}: CyberCardProps) {
+export function CyberCard({ children, className, ...props }: CyberCardProps) {
   const baseClassName = twMerge(
-    "group relative block p-6 border border-primary-muted bg-app-background hover:border-primary-vivid hover:bg-primary-background/50 focus:outline-none focus:ring-1 focus:ring-primary-vivid transition-all duration-300",
+    "group relative block p-6 border border-primary-muted bg-app-background hover:border-primary-vivid hover:bg-primary-background/50 focus:outline-none focus:ring-1 focus:ring-primary-vivid",
     className
   )
 
