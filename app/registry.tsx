@@ -33,7 +33,7 @@ export const registry: Record<string, ComponentDefinition> = {
       "A standard button component with standard, destructive, and quiet variants.",
     component: Button,
     defaultProps: {
-      children: "Button",
+      children: "Execute",
       variant: "primary",
       isDisabled: false,
       isPending: false,
@@ -54,10 +54,10 @@ export const registry: Record<string, ComponentDefinition> = {
       "A text input with label, description, and error message support.",
     component: TextField,
     defaultProps: {
-      label: "Username",
-      description: "Enter your unique username.",
-      placeholder: "johndoe",
-      errorMessage: "Required",
+      label: "System Identifier",
+      description: "Enter authorized user ID.",
+      placeholder: "sys_admin_01",
+      errorMessage: "Access Denied",
       isDisabled: false,
       isInvalid: false,
       isReadOnly: false,
@@ -77,7 +77,7 @@ export const registry: Record<string, ComponentDefinition> = {
     description: "A binary selection input.",
     component: Checkbox,
     defaultProps: {
-      children: "I agree to the terms",
+      children: "Enable Verbose Logging",
       isSelected: false,
       isDisabled: false,
       isIndeterminate: false,
@@ -97,17 +97,17 @@ export const registry: Record<string, ComponentDefinition> = {
       "A set of checkable buttons, known as radio buttons, where no more than one of the buttons can be checked at a time.",
     component: RadioGroup,
     defaultProps: {
-      label: "Favorite Pet",
-      description: "Choose your favorite pet.",
-      errorMessage: "Please select a pet.",
+      label: "Protocol Selection",
+      description: "Select transmission protocol.",
+      errorMessage: "Protocol verification failed.",
       isDisabled: false,
       isInvalid: false,
       isReadOnly: false,
       children: (
         <>
-          <Radio value="cat">Cat</Radio>
-          <Radio value="dog">Dog</Radio>
-          <Radio value="bird">Bird</Radio>
+          <Radio value="tcp">TCP</Radio>
+          <Radio value="udp">UDP</Radio>
+          <Radio value="icmp">ICMP</Radio>
         </>
       ),
     },
@@ -126,17 +126,17 @@ export const registry: Record<string, ComponentDefinition> = {
       "A select displays a collapsible list of options and allows a user to select one.",
     component: Select,
     defaultProps: {
-      label: "Favorite Color",
-      description: "Pick a color.",
-      errorMessage: "Selection required.",
-      placeholder: "Select...",
+      label: "Core Module",
+      description: "Select active kernel.",
+      errorMessage: "Module load failure.",
+      placeholder: "Select module...",
       isDisabled: false,
       isInvalid: false,
       children: (
         <>
-          <SelectItem id="red">Red</SelectItem>
-          <SelectItem id="green">Green</SelectItem>
-          <SelectItem id="blue">Blue</SelectItem>
+          <SelectItem id="net">NET_CORE</SelectItem>
+          <SelectItem id="ui">UI_RENDER</SelectItem>
+          <SelectItem id="db">DATA_STORE</SelectItem>
         </>
       ),
     },
@@ -154,7 +154,7 @@ export const registry: Record<string, ComponentDefinition> = {
     description: "A navigational link.",
     component: Link,
     defaultProps: {
-      children: "Click me",
+      children: "/sys/logs",
       variant: "primary",
       href: "#",
       isDisabled: false,
@@ -176,9 +176,9 @@ export const registry: Record<string, ComponentDefinition> = {
     defaultProps: {
       children: (
         <>
-          <Breadcrumb href="#">Home</Breadcrumb>
-          <Breadcrumb href="#">Components</Breadcrumb>
-          <Breadcrumb>Breadcrumbs</Breadcrumb>
+          <Breadcrumb href="#">root</Breadcrumb>
+          <Breadcrumb href="#">system</Breadcrumb>
+          <Breadcrumb>config</Breadcrumb>
         </>
       ),
     },
@@ -191,13 +191,13 @@ export const registry: Record<string, ComponentDefinition> = {
     description: "A tag group allows users to select from a list of options.",
     component: TagGroup,
     defaultProps: {
-      label: "Categories",
+      label: "Request Type",
       selectionMode: "single",
       items: [
-        { id: "1", name: "News" },
-        { id: "2", name: "Travel" },
-        { id: "3", name: "Gaming" },
-        { id: "4", name: "Shopping" },
+        { id: "1", name: "GET" },
+        { id: "2", name: "POST" },
+        { id: "3", name: "PUT" },
+        { id: "4", name: "DELETE" },
       ],
       children: (item: any) => <Tag>{item.name}</Tag>,
     },

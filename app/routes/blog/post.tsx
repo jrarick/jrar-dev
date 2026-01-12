@@ -33,19 +33,16 @@ export default function BlogPost({ loaderData }: Route.ComponentProps) {
 
   return (
     <div className="min-h-screen bg-app-background text-app-accent font-mono p-8">
-      <div className="max-w-4xl mx-auto">
+      <div className="mx-auto">
         <nav className="mb-12">
-          <Link
-            href="/blog"
-            className="text-app-muted hover:text-primary-vivid text-sm uppercase tracking-wider flex items-center gap-2 group"
-          >
+          <Link href="/blog" className="decoration-transparent">
             {"< cd .."}
           </Link>
         </nav>
 
         <article
           className="
-          prose prose-invert max-w-none
+          prose prose-sm prose-invert
           prose-headings:text-primary-vivid prose-headings:font-bold prose-headings:uppercase prose-headings:tracking-wide
           prose-h1:text-4xl prose-h1:border-b prose-h1:border-primary-background prose-h1:pb-4
           prose-p:text-app-accent/90 prose-p:leading-relaxed

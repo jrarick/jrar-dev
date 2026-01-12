@@ -31,14 +31,11 @@ export default function ComponentDetail({ params }: Route.ComponentProps) {
   return (
     <PageLayout>
       <div className="mb-6">
-        <Link
-          href="/components"
-          className="inline-flex items-center text-sm font-mono text-app-muted hover:text-primary-vivid mb-4"
-        >
+        <Link href="/components" className="decoration-transparent">
           {"< cd .."}
         </Link>
 
-        <PageHeader title={definition.name}>
+        <PageHeader title={definition.name} className="pt-12">
           <p className="font-mono text-app-vivid max-w-2xl">
             {definition.description}
           </p>

@@ -105,7 +105,7 @@ export default function BookmarksPage({ loaderData }: Route.ComponentProps) {
       <div className="space-y-6">
         <SearchField
           aria-label="Search bookmarks"
-          placeholder="SEARCH_BOOKMARKS"
+          placeholder="Search"
           value={searchQuery}
           onChange={handleSearchChange}
         />

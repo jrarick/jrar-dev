@@ -49,14 +49,11 @@ export default function ProjectPost({
   return (
     <main className="min-h-screen bg-app-background py-16">
       <div className="container mx-auto px-4 max-w-4xl">
-        <Link
-          href="/projects"
-          className="inline-flex items-center gap-2 text-primary-muted hover:text-primary-vivid font-mono mb-8"
-        >
-          <span>{"< cd .."}</span>
+        <Link href="/projects" className="decoration-transparent">
+          {"< cd .."}
         </Link>
 
-        <article>
+        <article className="pt-12">
           <header className="mb-12 border-b border-primary-muted/20 pb-12">
             <div className="aspect-video w-full overflow-hidden mb-8 bg-app-muted/20 border border-primary-muted/20 rounded-none relative group">
               <div className="absolute inset-0 bg-primary-background/10 group-hover:bg-transparent z-10" />

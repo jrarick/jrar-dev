@@ -8,7 +8,7 @@ export default function BlogIndex() {
   return (
     <PageLayout maxWidth="max-w-4xl" className="@2xl/main:p-8">
       <PageHeader
-        title="~/blog // INDEX"
+        title="Blog"
         className="border-b border-primary-background pb-4"
       >
         <p className="text-app-muted mt-2 text-sm">

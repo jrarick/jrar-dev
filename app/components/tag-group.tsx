@@ -29,14 +29,6 @@ const tagStyles = tv({
       true: "bg-app-muted/10 text-app-muted border-app-muted/20 forced-colors:text-[GrayText]",
     },
   },
-  compoundVariants: [
-    {
-      isSelected: true,
-      isDisabled: true,
-      className:
-        "bg-app-muted/20 border-app-muted/20 text-app-muted forced-colors:bg-[GrayText] forced-colors:text-[HighlightText]",
-    },
-  ],
 })
 
 export interface TagGroupProps<T>

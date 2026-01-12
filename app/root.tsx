@@ -117,7 +117,9 @@ export default function App() {
               </Dialog>
             </Sheet>
           </DialogTrigger>
-          <RouteBreadcrumbs />
+          <div className="hidden md:block">
+            <RouteBreadcrumbs />
+          </div>
         </header>
         <main className="flex-1 min-w-0 @container/main">
           <Outlet />
