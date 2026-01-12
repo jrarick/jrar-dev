@@ -1,46 +1,9 @@
-import { useLoaderData } from "react-router"
 import { Link } from "~/components/link"
 import { PageLayout, PageHeader } from "~/components/page-layout"
-
-// Define interface for frontmatter
-interface Frontmatter {
-  title: string
-  date?: string
-  [key: string]: any
-}
-
-// Define interface for MDX module
-interface MdxModule {
-  frontmatter: Frontmatter
-  default: React.ComponentType
-}
-
-export async function loader() {
-  // Use import.meta.glob to load all MDX files in the posts directory
-  const modules = import.meta.glob<MdxModule>("./posts/*.mdx", { eager: true })
-
-  // Map over the modules to extract slug and frontmatter
-  const posts = Object.entries(modules)
-    .map(([filepath, module]) => {
-      // Extract slug from filepath (e.g., "./posts/first-post.mdx" -> "first-post")
-      const slug = filepath.replace(/^\.\/posts\/(.*)\.mdx$/, "$1")
-      return {
-        slug,
-        frontmatter: module.frontmatter,
-      }
-    })
-    .sort((a, b) => {
-      // Sort posts by date descending
-      const dateA = new Date(a.frontmatter.date || 0).getTime()
-      const dateB = new Date(b.frontmatter.date || 0).getTime()
-      return dateB - dateA
-    })
-
-  return { posts }
-}
+import { useBlogPosts } from "~/hooks/use-content"
 
 export default function BlogIndex() {
-  const { posts } = useLoaderData<typeof loader>()
+  const posts = useBlogPosts()
 
   return (
     <PageLayout maxWidth="max-w-4xl" className="p-8">
@@ -62,11 +25,11 @@ export default function BlogIndex() {
           >
             <div className="flex-1 min-w-0 flex items-center justify-between gap-4">
               <span className="truncate text-app-accent group-hover:text-primary-vivid">
-                {post.frontmatter.title || post.slug}
+                {post.title || post.slug}
               </span>
               <span className="shrink-0 tabular-nums text-xs text-app-muted group-hover:text-primary-muted">
-                {post.frontmatter.date
-                  ? new Date(post.frontmatter.date).toISOString()
+                {post.date
+                  ? new Date(post.date).toISOString()
                   : "UNKNOWN_DATE"}
               </span>
             </div>

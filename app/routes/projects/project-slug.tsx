@@ -1,23 +1,10 @@
 import { Link } from "react-router"
 import { ArrowLeft, ExternalLink } from "lucide-react"
 import type { Route } from "./+types/project-slug"
-
-// Defines the structure of the frontmatter in your MDX files
-interface Frontmatter {
-  title: string
-  description: string
-  projectLink: string
-  technologies: string[]
-}
-
-// Defines the structure of the module imported via glob
-interface MDXModule {
-  frontmatter: Frontmatter
-  default: React.ComponentType
-}
+import type { ProjectMdxModule } from "~/lib/content-types"
 
 // Import MDX modules eagerly (build-time)
-const modules = import.meta.glob<MDXModule>("./collection/*.mdx", {
+const modules = import.meta.glob<ProjectMdxModule>("./collection/*.mdx", {
   eager: true,
 })
 

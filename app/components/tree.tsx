@@ -20,6 +20,9 @@ const itemStyles = tv({
         "hover:bg-primary-background/30 pressed:bg-primary-background/50 text-app-muted hover:text-primary-muted",
       true: "bg-primary-background text-primary-accent border-y-primary-muted z-20",
     },
+    isActive: {
+      true: "bg-primary-background text-primary-accent border-y-primary-muted z-20 hover:bg-primary-background hover:text-primary-accent",
+    },
     isDisabled: {
       true: "text-app-muted/50 forced-colors:text-[GrayText] z-10",
     },
@@ -64,11 +67,21 @@ const chevron = tv({
 
 export interface TreeItemProps extends Partial<AriaTreeItemProps> {
   title: string
+  isActive?: boolean
 }
 
-export function TreeItem({ title, children, ...props }: TreeItemProps) {
+export function TreeItem({
+  title,
+  children,
+  isActive,
+  ...props
+}: TreeItemProps) {
   return (
-    <AriaTreeItem className={itemStyles} textValue={title} {...props}>
+    <AriaTreeItem
+      className={(renderProps) => itemStyles({ ...renderProps, isActive })}
+      textValue={title}
+      {...props}
+    >
       <AriaTreeItemContent>
         {({
           selectionMode,
@@ -77,7 +90,7 @@ export function TreeItem({ title, children, ...props }: TreeItemProps) {
           isExpanded,
           isDisabled,
         }) => (
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 min-w-0">
             {selectionMode !== "none" && selectionBehavior === "toggle" && (
               <Checkbox slot="selection" />
             )}

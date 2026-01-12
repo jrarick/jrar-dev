@@ -2,50 +2,7 @@ import type { Route } from "./+types/index"
 import { PageLayout, PageHeader } from "~/components/page-layout"
 import { CyberCard } from "~/components/cyber-card"
 import { Badge } from "~/components/badge"
-
-const PROJECT_ORDER: Record<string, number> = {
-  "setpoint-data-suite": 1,
-  "longhorn-design-studio": 2,
-  "shadcn-portable-text-editor": 3,
-  "hydrogen-demo": 4,
-  "support-docs-site": 5,
-  "party-rental-ecommerce-template": 6,
-}
-
-// Defines the structure of the frontmatter in your MDX files
-interface Frontmatter {
-  title: string
-  description: string
-  projectLink: string
-  technologies: string[]
-}
-
-// Defines the structure of the module imported via glob
-interface MDXModule {
-  frontmatter: Frontmatter
-  default: React.ComponentType
-}
-
-// 1. Glob all MDX files from the collection directory eagerly
-const modules = import.meta.glob<MDXModule>("./collection/*.mdx", {
-  eager: true,
-})
-
-// 2. Map the modules to a usable data structure and sort by PROJECT_ORDER
-const projects = Object.entries(modules)
-  .map(([path, mod]) => {
-    // Extract slug from path: "./collection/hydrogen-demo.mdx" -> "hydrogen-demo"
-    const slug = path.replace("./collection/", "").replace(".mdx", "")
-    return {
-      slug,
-      ...mod.frontmatter,
-    }
-  })
-  .sort((a, b) => {
-    const orderA = PROJECT_ORDER[a.slug] ?? Infinity
-    const orderB = PROJECT_ORDER[b.slug] ?? Infinity
-    return orderA - orderB
-  })
+import { useProjects } from "~/hooks/use-content"
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -58,6 +15,8 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Projects() {
+  const projects = useProjects()
+
   return (
     <PageLayout>
       <PageHeader title="Projects">

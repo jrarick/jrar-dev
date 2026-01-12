@@ -1,17 +1,7 @@
 import { Suspense, useMemo, lazy } from "react"
 import { Link, useLoaderData } from "react-router"
 import type { Route } from "./+types/post"
-
-interface Frontmatter {
-  title: string
-  date?: string
-  [key: string]: any
-}
-
-interface MdxModule {
-  frontmatter: Frontmatter
-  default: React.ComponentType
-}
+import type { BlogFrontmatter, BlogMdxModule } from "~/lib/content-types"
 
 export async function loader({ params }: Route.LoaderArgs) {
   const modules = import.meta.glob("./posts/*.mdx")
@@ -21,7 +11,7 @@ export async function loader({ params }: Route.LoaderArgs) {
     throw new Response("Not Found", { status: 404 })
   }
 
-  const module = (await modules[filepath]()) as MdxModule
+  const module = (await modules[filepath]()) as BlogMdxModule
 
   return {
     slug: params.slug,
@@ -36,7 +26,7 @@ export default function BlogPost({ loaderData }: Route.ComponentProps) {
   const filepath = `./posts/${slug}.mdx`
 
   const Component = useMemo(() => {
-    const importFn = modules[filepath] as () => Promise<MdxModule>
+    const importFn = modules[filepath] as () => Promise<BlogMdxModule>
     return lazy(importFn)
   }, [filepath])
 
@@ -79,6 +69,7 @@ export default function BlogPost({ loaderData }: Route.ComponentProps) {
           </div>
 
           <Suspense
+            key={slug}
             fallback={
               <div className="flex items-center gap-2 text-primary-muted animate-pulse">
                 <span className="w-2 h-4 bg-primary-muted" />

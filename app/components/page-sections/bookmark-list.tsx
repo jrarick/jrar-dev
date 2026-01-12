@@ -42,7 +42,7 @@ function BookmarkItem({ bookmark, highlightText }: BookmarkItemProps) {
       href={bookmark.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="group flex items-center gap-3 py-2.5 px-4 text-sm hover:bg-primary-background/50 hover:text-primary-vivid border-b border-primary-background/50 last:border-b-0 focus-visible:outline-2 focus-visible:outline-primary-vivid focus-visible:outline-offset-2"
+      className="group flex items-center gap-3 py-2.5 px-4 text-sm hover:bg-primary-background/50 hover:text-primary-vivid border-b border-primary-background/50 last:border-b-0   focus-visible:outline-2 focus-visible:outline-primary-vivid focus-visible:outline-offset-2"
     >
       {faviconUrl ? (
         <img

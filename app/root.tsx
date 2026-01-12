@@ -21,6 +21,14 @@ import "./app.css"
 import { RouterProvider } from "react-aria-components"
 import Noise from "./components/noise"
 import { usePrefersReducedMotion } from "./hooks/use-prefers-reduced-motion"
+import { loadBlogPosts, loadProjects } from "~/lib/content.server"
+
+export function loader() {
+  return {
+    blogPosts: loadBlogPosts(),
+    projects: loadProjects(),
+  }
+}
 
 declare global {
   namespace Cloudflare {
@@ -56,7 +64,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
   const prefersReducedMotion = usePrefersReducedMotion({ ssr: true })
 
   return (
-    <html lang="en" className="pointer-events-none">
+    <html lang="en">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -66,7 +74,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <body className="font-mono bg-app-background text-app-accent">
         {!prefersReducedMotion && (
           <div
-            className="w-dvw h-dvh fixed overflow-hidden z-20 inset-0"
+            className="w-dvw h-dvh fixed overflow-hidden z-20 inset-0 pointer-events-none"
             aria-hidden="true"
           >
             <Noise
