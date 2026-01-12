@@ -1,7 +1,7 @@
 import type { Route } from "./+types/component-slug"
 import { PageLayout, PageHeader } from "~/components/page-layout"
 import { registry } from "~/registry"
-import { ComponentShowcase } from "~/components/component-showcase"
+import { ComponentShowcase } from "~/components/page-sections/component-showcase"
 import { Link } from "~/components/link"
 import { ArrowLeft } from "lucide-react"
 

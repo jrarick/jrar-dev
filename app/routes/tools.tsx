@@ -6,7 +6,15 @@ import { CyberCard } from "~/components/cyber-card"
 import { Badge } from "~/components/badge"
 import { EmptyState } from "~/components/empty-state"
 
-const kinds = ["All", "Framework", "Language", "Library", "Platform", "Other"]
+const kinds = [
+  "All",
+  "Framework",
+  "Language",
+  "Library",
+  "Platform",
+  "AI",
+  "Other",
+]
 
 interface Tool {
   name: string
@@ -81,6 +89,18 @@ const tools: Tool[] = [
     image: "react-router-icon.svg",
     website: "https://reactrouter.com",
     kind: "Library",
+  },
+  {
+    name: "Claude Code",
+    image: "claude.svg",
+    website: "https://claude.com/product/claude-code",
+    kind: "AI",
+  },
+  {
+    name: "Antigravity",
+    image: "antigravity.svg",
+    website: "https://antigravity.google/",
+    kind: "AI",
   },
   {
     name: "Sanity",

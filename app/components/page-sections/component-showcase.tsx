@@ -1,7 +1,7 @@
 import { useState } from "react"
-import { TextField } from "./text-field"
-import { Select, SelectItem } from "./select"
-import { Checkbox } from "./checkbox"
+import { TextField } from "~/components/text-field"
+import { Select, SelectItem } from "~/components/select"
+import { Checkbox } from "~/components/checkbox"
 import type { ComponentDefinition, ControlDef } from "~/registry"
 import { tv } from "tailwind-variants"
 

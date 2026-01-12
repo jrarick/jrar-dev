@@ -25,7 +25,7 @@ export default function ComponentsIndex() {
         </p>
       </PageHeader>
 
-      <div className="grid grid-cols-1 @3xl/main:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 @4xl/main:grid-cols-2 gap-6">
         {components.map((component) => (
           <CyberCard
             key={component.slug}
@@ -37,7 +37,7 @@ export default function ComponentsIndex() {
                 {`<${component.name} />`}
               </h3>
 
-              <div className="h-40 flex items-center justify-center bg-app-muted/5 relative overflow-hidden">
+              <div className="h-64 flex items-center justify-center bg-app-muted/5 relative overflow-hidden">
                 <div className="pointer-events-none transform scale-90">
                   <component.component {...component.defaultProps} />
                 </div>

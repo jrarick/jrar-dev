@@ -29,6 +29,14 @@ const tagStyles = tv({
       true: "bg-app-muted/10 text-app-muted border-app-muted/20 forced-colors:text-[GrayText]",
     },
   },
+  compoundVariants: [
+    {
+      isSelected: true,
+      isDisabled: true,
+      className:
+        "bg-app-muted/20 border-app-muted/20 text-app-muted forced-colors:bg-[GrayText] forced-colors:text-[HighlightText]",
+    },
+  ],
 })
 
 export interface TagGroupProps<T>
@@ -89,16 +97,23 @@ export function Tag({ children, ...props }: AriaTagProps) {
         tagStyles({ ...renderProps, className })
       )}
     >
-      {composeRenderProps(children, (children, { allowsRemoving }) => (
-        <>
-          {children}
-          {allowsRemoving && (
-            <Button slot="remove" className={removeButtonStyles}>
-              <XIcon aria-hidden className="w-3 h-3" />
-            </Button>
-          )}
-        </>
-      ))}
+      {composeRenderProps(
+        children,
+        (children, { allowsRemoving, isDisabled }) => (
+          <>
+            {children}
+            {allowsRemoving && (
+              <Button
+                slot="remove"
+                isDisabled={isDisabled}
+                className={removeButtonStyles}
+              >
+                <XIcon aria-hidden className="w-3 h-3" />
+              </Button>
+            )}
+          </>
+        )
+      )}
     </AriaTag>
   )
 }
