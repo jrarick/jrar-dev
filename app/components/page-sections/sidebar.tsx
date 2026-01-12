@@ -4,6 +4,7 @@ import { Tree, TreeItem } from "~/components/tree"
 import { X } from "lucide-react"
 import { useBlogPosts, useProjects } from "~/hooks/use-content"
 import { Link } from "../link"
+import { registry } from "~/registry"
 
 interface SidebarContentProps {
   onLinkClick?: () => void
@@ -24,6 +25,9 @@ export function SidebarContent({ onLinkClick, onClose }: SidebarContentProps) {
   if (pathname.startsWith("/projects")) {
     expandedKeys.push("projects")
   }
+  if (pathname.startsWith("/components")) {
+    expandedKeys.push("components")
+  }
 
   // Determine the selected key based on current path
   const getSelectedKey = (): string => {
@@ -32,6 +36,13 @@ export function SidebarContent({ onLinkClick, onClose }: SidebarContentProps) {
     if (pathname === "/bookmarks") return "bookmarks"
     if (pathname === "/projects") return "projects"
     if (pathname === "/tools") return "tools"
+    if (pathname === "/components") return "components"
+
+    // Check for component match
+    const componentMatch = pathname.match(/^\/components\/(.+)$/)
+    if (componentMatch) {
+      return `component-${componentMatch[1]}`
+    }
 
     // Check for blog post match
     const blogMatch = pathname.match(/^\/blog\/(.+)$/)
@@ -123,6 +134,22 @@ export function SidebarContent({ onLinkClick, onClose }: SidebarContentProps) {
           href={href("/tools")}
           isActive={selectedKey === "tools"}
         />
+        <TreeItem
+          id="components"
+          title="/components"
+          href={href("/components")}
+          isActive={selectedKey === "components"}
+        >
+          {Object.keys(registry).map((slug) => (
+            <TreeItem
+              key={slug}
+              id={`component-${slug}`}
+              title={`/${slug}`}
+              href={href("/components/:slug", { slug })}
+              isActive={selectedKey === `component-${slug}`}
+            />
+          ))}
+        </TreeItem>
       </Tree>
     </div>
   )

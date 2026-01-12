@@ -21,6 +21,8 @@ export default [
       index("routes/api/bookmarks/index.ts"),
     ]),
   ]),
+  route("components", "routes/components.tsx"),
+  route("components/:slug", "routes/component-slug.tsx"),
   // Prevent Chrome DevTools from showing an error in dev server logs
   route(".well-known/*", "routes/well-known.ts"),
 ] satisfies RouteConfig

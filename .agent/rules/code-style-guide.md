@@ -1,3 +1,7 @@
+---
+trigger: always_on
+---
+
 # Project Context & Agent Guide
 
 This file contains essential context for AI agents (Jules, Claude, etc.) working on the `jrar-dev` project.
