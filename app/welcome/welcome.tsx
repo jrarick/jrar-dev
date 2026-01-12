@@ -7,6 +7,7 @@ import { RadioGroup, Radio } from "~/components/radio-group"
 import { Breadcrumb, Breadcrumbs } from "~/components/breadcrumbs"
 import { TagGroup, Tag } from "~/components/tag-group"
 import { SearchField } from "~/components/search-field"
+import { Tree, TreeItem } from "~/components/tree"
 
 export function Welcome({ message }: { message: string }) {
   return (
@@ -223,6 +224,25 @@ export function Welcome({ message }: { message: string }) {
                   placeholder="OFFLINE"
                 />
               </div>
+            </div>
+          </section>
+
+          {/* Tree Section */}
+          <section className="space-y-6">
+            <h2 className="text-xl font-mono text-app-accent border-b border-primary-muted pb-2 uppercase">
+              08_Tree //
+            </h2>
+            <div className="flex flex-col gap-8">
+              <Tree aria-label="Project Files" selectionMode="multiple">
+                <TreeItem id="src" title="src">
+                  <TreeItem id="components" title="components">
+                    <TreeItem id="button" title="Button.tsx" />
+                    <TreeItem id="input" title="Input.tsx" />
+                  </TreeItem>
+                  <TreeItem id="utils" title="utils.ts" />
+                </TreeItem>
+                <TreeItem id="package" title="package.json" />
+              </Tree>
             </div>
           </section>
         </div>
