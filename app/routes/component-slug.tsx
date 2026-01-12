@@ -3,7 +3,6 @@ import { PageLayout, PageHeader } from "~/components/page-layout"
 import { registry } from "~/registry"
 import { ComponentShowcase } from "~/components/page-sections/component-showcase"
 import { Link } from "~/components/link"
-import { ArrowLeft } from "lucide-react"
 
 export function loader({ params }: Route.LoaderArgs) {
   if (!registry[params.slug]) {
@@ -36,8 +35,7 @@ export default function ComponentDetail({ params }: Route.ComponentProps) {
           href="/components"
           className="inline-flex items-center text-sm font-mono text-app-muted hover:text-primary-vivid mb-4"
         >
-          <ArrowLeft className="w-4 h-4 mr-2" />
-          Back to components
+          {"< cd .."}
         </Link>
 
         <PageHeader title={definition.name}>
