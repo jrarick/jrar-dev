@@ -1,5 +1,5 @@
-import { Link } from "react-router"
-import { ArrowLeft, ExternalLink } from "lucide-react"
+import { ExternalLink } from "lucide-react"
+import { Link } from "~/components/link"
 import type { Route } from "./+types/project-slug"
 import type { ProjectMdxModule } from "~/lib/content-types"
 
@@ -50,11 +50,10 @@ export default function ProjectPost({
     <main className="min-h-screen bg-app-background py-16">
       <div className="container mx-auto px-4 max-w-4xl">
         <Link
-          to="/projects"
+          href="/projects"
           className="inline-flex items-center gap-2 text-primary-muted hover:text-primary-vivid font-mono mb-8"
         >
-          <ArrowLeft className="w-4 h-4" />
-          <span>Back to Projects</span>
+          <span>{"< cd .."}</span>
         </Link>
 
         <article>

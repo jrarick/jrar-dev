@@ -1,7 +1,8 @@
 import { Suspense, useMemo, lazy } from "react"
-import { Link, useLoaderData } from "react-router"
+import { useLoaderData } from "react-router"
 import type { Route } from "./+types/post"
 import type { BlogFrontmatter, BlogMdxModule } from "~/lib/content-types"
+import { Link } from "~/components/link"
 
 export async function loader({ params }: Route.LoaderArgs) {
   const modules = import.meta.glob("./posts/*.mdx")
@@ -35,7 +36,7 @@ export default function BlogPost({ loaderData }: Route.ComponentProps) {
       <div className="max-w-4xl mx-auto">
         <nav className="mb-12">
           <Link
-            to="/blog"
+            href="/blog"
             className="text-app-muted hover:text-primary-vivid text-sm uppercase tracking-wider flex items-center gap-2 group"
           >
             {"< cd .."}
