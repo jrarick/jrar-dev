@@ -22,7 +22,7 @@ export function Welcome({ message }: { message: string }) {
           </p>
         </header>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 w-full max-w-6xl">
+        <div className="grid grid-cols-1 @3xl/main:grid-cols-2 @5xl/main:grid-cols-3 gap-12 w-full max-w-6xl">
           {/* Buttons Section */}
           <section className="space-y-6">
             <h2 className="text-xl font-mono text-app-accent border-b border-primary-muted pb-2 uppercase">

@@ -25,7 +25,7 @@ export default function Projects() {
         </p>
       </PageHeader>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 @3xl/main:grid-cols-2 @5xl/main:grid-cols-3 gap-6">
         {projects.map((project) => (
           <CyberCard key={project.slug} to={`/projects/${project.slug}`}>
             <div className="aspect-video w-full overflow-hidden mb-6 bg-app-muted/20 border border-primary-muted/20">

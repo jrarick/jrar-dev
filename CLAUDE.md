@@ -74,3 +74,10 @@ We use OKLCH semantic variables. Do not use raw hex codes or standard Tailwind c
 - **Terminal Components**: When creating new UI components, ensure they look like terminal interfaces (borders, monospaced text, high contrast active states).
 - **Links**: ALWAYS use the `Link` component from `~/components/link` for internal links. Do NOT use `Link` or `NavLink` from `react-router` directly in UI components. The `Router` provider is already configured to handle client-side routing for `react-aria-components`. Active states should be determined using `useLocation`. Use `href` from `react-router` for route typesafety.
 - **Component Organization**: Component primitives should go in `app/components` and compound components that are used as page sections should go in `app/components/page-sections`.
+- **Responsive Layouts**: For components inside the main content area, use container queries (`@<size>/main:`) instead of viewport media queries (`sm:`, `md:`, `lg:`). The main content has `@container/main` applied. Use this mapping:
+  - `sm:` (640px) → `@2xl/main:` (672px)
+  - `md:` (768px) → `@3xl/main:` (768px)
+  - `lg:` (1024px) → `@5xl/main:` (1024px)
+  - `xl:` (1280px) → `@7xl/main:` (1280px)
+
+  Keep viewport media queries for app shell elements (sidebar, header) that should respond to window size.
