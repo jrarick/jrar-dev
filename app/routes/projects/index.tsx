@@ -82,20 +82,16 @@ export default function Projects() {
                 {project.title}
               </h3>
 
-              <p className="text-sm font-mono text-app-muted line-clamp-2 h-10">
+              <p className="text-sm font-mono text-app-muted line-clamp-2 h-10 group-hover:text-primary-muted">
                 {project.description}
               </p>
 
               <div className="flex flex-wrap gap-2">
                 {project.technologies.slice(0, 3).map((tech) => (
-                  <Badge key={tech}>
-                    {tech}
-                  </Badge>
+                  <Badge key={tech}>{tech}</Badge>
                 ))}
                 {project.technologies.length > 3 && (
-                  <Badge>
-                    +{project.technologies.length - 3}
-                  </Badge>
+                  <Badge>+{project.technologies.length - 3}</Badge>
                 )}
               </div>
             </div>
