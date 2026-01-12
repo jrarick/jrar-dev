@@ -12,7 +12,11 @@ export default [
   route("blog/:slug", "routes/blog/post.tsx"),
   ...prefix("projects", [
     index("routes/projects/index.tsx"),
-    route(":slug", "routes/projects/project-slug.tsx"),
+    route(":slug", "routes/projects/slug.tsx"),
+  ]),
+  ...prefix("components", [
+    index("routes/components/index.tsx"),
+    route(":slug", "routes/components/slug.tsx"),
   ]),
   route("tools", "routes/tools.tsx"),
   ...prefix("api", [
@@ -21,8 +25,7 @@ export default [
       index("routes/api/bookmarks/index.ts"),
     ]),
   ]),
-  route("components", "routes/components.tsx"),
-  route("components/:slug", "routes/component-slug.tsx"),
+
   // Prevent Chrome DevTools from showing an error in dev server logs
   route(".well-known/*", "routes/well-known.ts"),
 ] satisfies RouteConfig

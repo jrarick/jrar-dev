@@ -1,7 +1,7 @@
 import { ExternalLink } from "lucide-react"
 import { Link } from "~/components/link"
-import type { Route } from "./+types/project-slug"
 import type { ProjectMdxModule } from "~/lib/content-types"
+import type { Route } from "./+types/slug"
 
 // Import MDX modules eagerly (build-time)
 const modules = import.meta.glob<ProjectMdxModule>("./collection/*.mdx", {

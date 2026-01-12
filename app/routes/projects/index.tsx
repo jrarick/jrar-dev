@@ -21,7 +21,7 @@ export default function Projects() {
     <PageLayout>
       <PageHeader title="Projects">
         <p className="font-mono text-app-vivid max-w-2xl">
-          A collection of my work, experiments, and open source contributions.
+          my work, experiments, and open source contributions
         </p>
       </PageHeader>
 

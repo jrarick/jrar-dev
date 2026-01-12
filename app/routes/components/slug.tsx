@@ -1,8 +1,8 @@
-import type { Route } from "./+types/component-slug"
 import { PageLayout, PageHeader } from "~/components/page-layout"
 import { registry } from "~/registry"
 import { ComponentShowcase } from "~/components/page-sections/component-showcase"
 import { Link } from "~/components/link"
+import type { Route } from "./+types/slug"
 
 export function loader({ params }: Route.LoaderArgs) {
   if (!registry[params.slug]) {

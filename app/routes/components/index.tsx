@@ -1,7 +1,7 @@
-import type { Route } from "./+types/components"
 import { PageLayout, PageHeader } from "~/components/page-layout"
 import { CyberCard } from "~/components/cyber-card"
 import { registry } from "~/registry"
+import type { Route } from "./+types"
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -20,8 +20,7 @@ export default function ComponentsIndex() {
     <PageLayout>
       <PageHeader title="Components">
         <p className="font-mono text-app-vivid max-w-2xl">
-          I don't have a practical use for these yet, but they're too cool not
-          to share
+          no practical use for these yet but I wanted to share
         </p>
       </PageHeader>
 

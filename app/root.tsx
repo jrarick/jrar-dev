@@ -16,12 +16,12 @@ import { Button } from "~/components/button"
 import { DialogTrigger, Dialog } from "react-aria-components"
 import { Menu } from "lucide-react"
 
-import type { Route } from "./+types/root"
 import "./app.css"
 import { RouterProvider } from "react-aria-components"
 import Noise from "./components/noise"
 import { usePrefersReducedMotion } from "./hooks/use-prefers-reduced-motion"
 import { loadBlogPosts, loadProjects } from "~/lib/content.server"
+import type { Route } from "./+types/root"
 
 export function loader() {
   return {
