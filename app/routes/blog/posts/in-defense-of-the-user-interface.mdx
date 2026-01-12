@@ -1,0 +1,50 @@
+---
+title: "In defense of the user interface"
+date: "2025-12-31"
+---
+
+Some months ago, Eric Schmidt, the former CEO of Google predicted that ["user interfaces are largely going to go away"](https://www.tiktok.com/@todayin_ai/video/7529487338037120277). More recently, AngelList cofounder Naval Ravikant tweeted: ["UI is pre-AI"](https://x.com/naval/status/1994906324468207765). This line of thinking underpinning these sort of proclamations is that AI agents infer intent from natural language so flawlessly that most things people do on the internet will soon be able to be accomplished simply by typing instructions into an AI chatbot window.
+
+This unserious idea is demonstrably false. Ever since AI tools like ChatGPT, Claude, Gemini, and others were released for public use around three years ago, there's been an explosion of new user interfaces. The notion that user interfaces are going away comes from three (willful?) misunderstandings about the way AI tools and user interfaces work together and overlap.
+
+## User interfaces help users to know what they want
+
+An empty chatbot textbox can be really powerful in the right hands. A well engineered agent being used by someone who knows exactly what they're trying to accomplish means exponential productivity gains. The issue is that a blank canvas is overwhelming for most users. People don't always know what they want or how to articulate it in a way that's useful to AI.
+
+User interfaces help guide users towards accomplishing their goals by providing visual cues and constraints that help them understand what actions are possible and how to perform them. This is especially true for dense UIs with lots of features. If the interface is well designed, it can educate users on what options are available to them and help them discover new features they might not have known about otherwise. An empty textbox is great for power users but not necessarily for every user.
+
+## Dynamically generated UIs aren't consistent, fast, or cheap
+
+Some applications have experimented with dynamically generating user interfaces on the fly using AI. The idea is that instead of building a static UI ahead of time, the AI generates a custom UI based on what a user is trying to accomplish at a given time. This sounds like a great idea in theory but in practice pretty reliably delivers a poor experience.
+
+### Not consistent
+
+First of all, users famously **hate** when user interfaces change. Go on Facebook and look at a recent post from their official page after they roll out a UI change. Regardless of how small it is or whether it's a good change or not, there are hundreds of comments complaining about how much they hate the new UI and want the old one back. Users build mental models of how software works based on their experience using it and when the UI changes, it alters the way they need to interact with it and decreases their confidence in using it.
+
+Now imagine if you never had two UIs that were the same because it's being AI generated on the fly on every new request. I don't even think I need to elaborate how disastrous of a decision this would be for user experience.
+
+### Not fast
+
+Front end tooling has gotten really good in the last decade. There's been a lot of hand-wringing about how complex front end development has gotten (skill issue btw) but it's allowed developers to ship insanely performant, near instant experiences. Front ends can be lightning fast thanks to strategies like code splitting, server-side rendering, prefetching and prerendering, and edge computing. Now not every front end is performant (again, skill issue) but software that that's well made will always beat an UI generated at runtime by AI.
+
+Even when using fast models, the time it takes to dynamically generate a UI is going to be slower than traditional UIs. Users get frustrated with slow software and lose confidence that an operation is even running if it takes 10+ seconds to load. If users lose confidence, they'll probably search for an alternative.
+
+### Not cheap
+
+AI inference costs a lot of money. There are cheap models that can be used to generate UIs but the results are quite poor. And not just in code quality. In fact, the code quality is totally inconsequential in this scenario since the code is just discarded after use anyways. But the actual UI the user sees is of poor quality with inconsistent layouts, clipping, misaligned elements, and other style and behavior deviations. We can sort of hedge against this by having the agent adhere to a strict design system or component system but at that point we'd have to ask what we're even gaining with this approach. It would require less effort and beget better results to just build a traditional UI instead of trying to invent a framework for an agent just to generate something inferior.
+
+More intelligent frontier models can be used for better results but the cost of inference goes up significantly. Even for software that doesn't have a lot of users, this can get extremely expensive very quickly. Meta can afford to burn money hand over fist on AI experiments that don't generate any value but most other companies don't have that luxury.
+
+## Model Context Protocol UI (MCP UI) is an add on, not a replacement
+
+ChatGPT and other AI tools have an MCP standard for implementing 3rd party UI elements into their chatbots. So if a user asks a chatbot to book a flight, the chatbot can respond with a UI widget from Expedia (or some other travel software) with some options and a flow for completing the booking. This is a really clever, forward-thinking way to reduce user friction when completing tasks but it requires a new UI with a special protocol to be created by each company that wants to implement MCP UI.
+
+So what are we even really talking about here? Fundamentally, we are still building user interfaces but we're just altering the contexts in which they appear.
+
+Another consideration is that your software may not even be a chosen default for a given market or niche within different chatbots. Going back to the flight booking example, let's say Expedia is the default MCP integration in ChatGPT for booking flights. If you're a competitor to Expedia, you'll have to do extra work to make sure users as the chatbot to use your integration instead of Expedia. Depending on how MCP protocol evolves and the financial incentives surrounding exclusivity deals, your integration may not even be included as an MCP UI option in a given chatbot. In this scenario, users that want to use your service will only be able to your website or app to complete their bookings.
+
+And since MCP UI integrations exist inside external chatbots does that mean you're just going to shut down your website and tell them to use AI instead? Of course not. Some older demographics and less tech-savvy users in particular are unlikely to adopt chatbots after using traditional interfaces for years or decades. This really doesn't have anything to do with the simplicity or difficulty of natural language input either. Many are just used to using websites and don't want to change even if there's value in doing so. For these users, your website or app is the only way they will ever interact with your software. So really, the number of user interfaces could double since you'll need an MCP UI integration in addition to your regular website or mobile app.
+
+---
+
+_This article was authored without the use of generative AI_

@@ -12,7 +12,7 @@ interface LinkProps extends AriaLinkProps {
 
 const styles = tv({
   extend: focusRing,
-  base: "underline disabled:no-underline disabled:cursor-default forced-colors:disabled:text-[GrayText] transition [-webkit-tap-highlight-color:transparent]",
+  base: "underline disabled:no-underline disabled:cursor-default forced-colors:disabled:text-[GrayText] [-webkit-tap-highlight-color:transparent]",
   variants: {
     variant: {
       primary:

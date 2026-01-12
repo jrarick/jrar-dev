@@ -1,0 +1,74 @@
+---
+title: "GitHub isn't using toasts anymore and neither should you"
+date: "2025-11-26"
+---
+
+A toast is a small, mostly unobtrusive message box that pops up in a corner of the screen, much like a piece of toast in a toaster. They typically appear in response to some user input or action but can also be triggered by system events or background processes. Originally, toasts were used primarily in mobile apps but have been adopted by web apps and native desktop apps as well.
+
+GitHub recently made news in accessibility and UX circles, [announcing the deprecation of toasts in their design system](https://primer.style/accessibility/toasts/) in light of their accessibility issues. This is a good thing for accessibility but also for user experience.
+
+## Superfluous UI for it's own sake
+
+Many UI libraries include toasts as a standard component because they're expected to in order to have a comprehensive library. As a consequence, developers and designers will often include them in UI flows without consideration of what problem they're allegedly solving. And who could really blame them? If basically everyone else in the industry is doing it, pushing for a different approach won't win you many supporters among your peers.
+
+## Toasts on the web are poor UX
+
+Toasts are typically unnecessary and at worst can panic the user. When using toasts, either they need to disappear automatically after a timeout or require the user to dismiss them manually. They also have usability issues related to their placement on the screen and how they relate to the user's actions.
+
+### Automatic dismissal issues
+
+If the toast dismisses itself automatically, the user may not have had enough time to read and process the information, especially if they have a reading disability or are not fluent in a given language. They also may just be distracted or multitasking and miss the message entirely. Because there's no way to recall the message after it disappears, the user is left wondering what happened and if the message they missed was important.
+
+### Manual dismissal issues
+
+If the toast hangs indefinitely and requires manual dismissal, it adds visual clutter to the UI. The user has already completed their action and may even be currently viewing the record they just created or edited.
+
+Why would a user need to have a message held for them about an action that they can clearly see the result of right in front of them? It just adds noise to the interface and requires an extra click to dismiss it. If there are multiple toasts that have accumulated, the user will need to take several actions to remove them all.
+
+### Violation of the Gestalt principle of proximity
+
+Some toasts appear as a result of a user action that doesn't trigger a redirect. When the user completes and action like submitting a form or saving changes, they remain on the same page and see a toast appear in a corner of the screen.
+
+Most toast libraries appear by default in the bottom right or left corner of the screen. What happens in the bottom corners of the screen? Not much in most cases. This means the user needs to move their eyes away from the main content area where the action took place in order to read the toast message. If they are using a super-wide monitor or have multiple monitors, there's an uphill battle just to get the user to notice the toast at all.
+
+This violates the Gestalt principle of proximity, which states that related items should be placed close together to create a visual connection. The feedback for an action should be placed closed to where the action took place so the user can easily associate the two.
+
+### Unnecessary feedback after redirects
+
+If the users action results in a redirect to a new page, there's no need for a toast at all. Creating or updating a record and then redirecting to that record is usually sufficient feedback that the action was successful. In the event that it's not, a banner message at the top of the content is a better alternative since it's in close proximity to what has changed. A toast in the corner of the screen is unnecessary.
+
+### Overlapping UI
+
+Toasts also have the issue of overlapping other pertinent UI elements. If a toast appears over a button or link that the user is trying to click or content they want to see, it's going to be a frustrating experience.
+
+## Two convincing use cases for toasts and better alternatives
+
+### Bulk deletions
+
+If a user deletes one record, there's no need for feedback beyond the record disappearing in the UI. There could even be an exit animation for the deleted record to give visual feedback to the user. If there needs to be an undo option, a button can appear in place of the deleted record or at the top of the list.
+
+But what if the user deletes multiple records all at once? In this case, using a toast might be justifiable since the user may not be able to keep track of all the records that were just deleted.
+
+But a better alternative would be to show a banner at the top of the list indicating how many records were deleted and providing an undo option. This keeps the feedback in close proximity to the content that changed and avoids the aforementioned issues above with automatic or manual dismissal.
+
+### Long running background processes
+
+Another case where a toast might seem justifiable would be after a background process completes that the user may be actively waiting for. If the user is working on an unrelated task and a background process finishes, a toast seems like an easy way to notify the user without interrupting their workflow. But is it the best way?
+
+#### External notifications
+
+If a long running process finishes that pertinent to the user, a toast is going to be insufficient feedback since the user may not even be looking at the screen or at their computer when it appears. Using push notifications or sending an email would be more appropriate since the user can be notified even when they're not actively using the app. This also ensures the user doesn't miss the notification entirely if the toast automatically dismisses before they see it.
+
+#### Notification center
+
+In applications where users may have multiple long running background processes happening at once, a notification center in the navigation or sidebar is a much better alternative than using toasts. This allows users to see all their notifications in one place and review them when ready. It also avoids the issue of overlapping UI elements since the notification center only appears when the user actually wants to see it to take up screen real estate.
+
+## What should you do?
+
+For accessibility reasons alone, if you're starting a new project or redesigning an existing one, avoid using toasts entirely and reach for better and more accessible alternatives. This is a benefit to all users, not just ones with disabilities.
+
+If you have an existing app that uses toasts, consider phasing them out in favor of better alternatives like inline messages, banners, push notifications, or a notification center. However, don't just remove toasts without replacing them with something else. If toasts are the only feedback mechanism for certain actions, it's better to retain them for the time being rather than to have no feedback at all.
+
+---
+
+_This article was authored without the use of generative AI_

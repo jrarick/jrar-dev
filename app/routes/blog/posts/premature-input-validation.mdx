@@ -1,0 +1,78 @@
+---
+title: "Premature input validation and its consequences"
+date: "2025-08-15"
+---
+
+![Dog with super-imposed glasses, buck teeth, and finger pointing up](/blog-assets/nerd-dog.webp)
+
+Forms are simultaneously one of the simplest things on the web and one of the most difficult things to get right. The simplest version of a form will handle all validation server side and, in the event of an invalid submission, send back errors to display in the UI. It's a beautiful thing.
+
+But man, in his hubris, decided that wasn't good enough and cooked up a thing called "client side validation" to "improve the user experience".
+
+The world we now live in is a truly harrowing experience where you're constantly being yelled at by form inputs basically for no reason. Ever had a sibling that announces "I'm telling" any time you do anything at all right or wrong? That's basically what it's like.
+
+## When to validate early
+
+I'm only partially kidding of course. There are certainly times where executing some client side validation before a form is submitted is useful and, in fact, the experience would be worse without it.
+
+User account creation is the primary example that comes to mind.
+
+### Usernames
+
+Many modern applications have forgone using usernames altogether in favor of email addresses or social login, but not all have.
+
+If you need a username or alias to use a forum or similar app, it makes sense to check if that username is already taken before the user submits a registration form. This is especially true if your site has millions of users where username collisions are likely.
+
+Imagine how annoying it would be for our user, John Smith, to fill out and submit the registration form only to find out `johnsmith` is already taken.
+
+- Then he tries `johnsmith1`. _Submit form._ Nope, that's taken too.
+- What about `johnsmith2`? _Submit form._ No luck.
+- He might need to get to `johnsmith37` before he finds a free username.
+
+This is a scenario where client side validation makes a lot of sense.
+
+Instead of waiting for John to submit the form, we can check the availability of his desired username on every keystroke. John gets instant feedback on whether his chosen username is available or not, allowing him to adjust immediately instead of trying to submit a form 37 times.
+
+### Passwords
+
+There is a lot that could be said about password security, but it's generally accepted your password should be no less than 8 characters (ideally longer) to prevent brute force attacks. The effectiveness of requiring mixed-case and special characters is debated, but many sites implement them anyway.
+
+Validating a password is another scenario where some early client side validation is useful.
+
+You could show an error message if the password doesn't meet the safety requirements as the user types. However, this may be a situation where providing a success indicator under the field once the requirements are met would be less annoying. You would likely want to save an error message until the user tries to submit the form with a deficient password.
+
+## Errors shown in the UI are for when something goes wrong
+
+Many websites and applications do some validation on blur (when the user un-focuses the field) for every field. This assumes the user is going to fill out the form in the exact order it's laid out, without jumping around. This is actually pretty unlikely unless the form is just a few fields.
+
+They may focus a text area that requires a longer response and then decide to fill out an easier field, like a phone number, first. Have they done anything wrong by doing that? Anything worthy of showing an error over? No, but the text area shows an error anyway.
+
+Studies on forms have shown these inappropriate errors stress users out and increase cognitive load. This is the opposite effect that early client side validation was supposed to have.
+
+Now of course, if the user has already submitted the form with incorrect input, it seems reasonable to validate client side and not remove the error indicator until the user has corrected the input.
+
+## Invalid submissions are your fault (maybe)
+
+There will certainly be scenarios where a user makes mistakes and needs to correct them. But if many users are submitting invalid forms frequently, it's probably a sign your form design stinks. FIX IT!! NOW!!
+
+### Make use of the proper fields
+
+If you have a field that only accepts a small subset of values, why would you use a normal input field instead of a select field?
+
+I see this on the internet more often than you would expect. Restrict the types of input up front and you reduce the amount of invalid submissions.
+
+### Provide clear form labels and descriptions
+
+Generally, you shouldn't use a placeholder as a label since it disappears when the user starts typing. This often leads to confusion about what the field is for, especially if the user has to correct an error and the placeholder is no longer visible.
+
+Use the proper label element that is always visible and clearly describes the purpose of the field. If a field isn't self-explanatory or requires additional context to complete, use a description under the field to clarify what's expected. Poor descriptions cause aimless inputs which cause invalid submissions.
+
+### It could be wizard time
+
+Forms that require multiple steps are a great opportunity to use a wizard to guide users through the process. This breaks down the forms into manageable chunks and reduces the chance of missing fields or overwhelming the user with too much information.
+
+It is almost guaranteed that if you have dozens of fields on the same page, you'll get invalid submissions (probably multiple per user).
+
+---
+
+_This article was authored without the use of generative AI_

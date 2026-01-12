@@ -1,0 +1,76 @@
+---
+title: "Building resilient layouts"
+date: "2025-03-22"
+---
+
+![A collapsed Jenga tower](/blog-assets/jenga.jpg)
+
+One of my favorite games to play as a kid was Jenga. The goal was to take turns removing blocks from a tower without toppling it. Whoever made the tower fall over lost and deservedly became the object of scorn of the other player(s). Fun stuff.
+
+When you first start, the tower is rock solid and it's pretty hard to make it fall over from removing just one piece. As the game continues, the tower gets further and further from the original state to the point where any tiny movement can totally compromise its structural integrity.
+
+## Jenga tower layouts
+
+If you've worked in the web space for any amount of time, you've probably encountered or even created Jenga tower layouts in your UIs. Once a layout is "finished", it works great but the moment something needs to be changed or repurposed, the whole thing falls apart. Overflowing and cut-off text, mismatched and inconsistent spacing, stacking context issues, and smushed or stretched elements are common issues often seen in poorly composed layouts.
+
+Creating a resilient layout right from the beginning can be challenging but will significantly reduce the maintenance burden later on. Here's four tips to give your layouts the flexibility they need to perform well in various conditions.
+
+### Stop using flexbox for everything
+
+Developers default to flexbox for almost everything because:
+
+- It has a pretty simple API and mental model that primarily deals with one axis
+- It creates very flexible layouts that are self-determining
+
+Unfortunately, this approach has limitations because:
+
+- Many layouts deal with two axes for which flexbox is usually ill-equipped
+- Flexibility begets unpredictability so you'll often get surprising, unintended behavior
+
+You _need_ to learn how to use [grid](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout) if you are a professional front end engineer. There are certainly cases where you'll want to reach for flexbox, particularly if you need an element's content to determine how large it will be, but most layout problems are best served by leveraging grid.
+
+When you create a grid-like layout with a flexbox salary you end up with layout issues that are "fixed" with dumb workarounds like:
+
+- Arbitrary widths or heights for every element
+- Empty "spacing" elements
+- Sizing elements with percentage values updated by eight different breakpoint media queries
+- Flex containers within flex containers within flex containers within flex containers...
+
+As a side note, you absolutely should use tables for layouts or components that are tabular. In the early days of the web, almost all layouts (and emails) were created with tables which caused a lot of headaches because they cause some really annoying problems when they're used for other things other than tables. There was a bit of an overreaction in parts of the webdev commmunity where the thought was using any tables for anything ever was very bad. But this is wrong and table elements and positioning should in fact be used for tables (and nothing else).
+
+### Use container queries
+
+It seems like almost every web application in 2025 uses a sidebar on desktop screens that collapses into a slideout menu on mobile. This is a great UX pattern but this causes some annoying layout problems that viewport media queries aren't great for fixing.
+
+If your sidebar shows only on screens larger than 1024px, your main content will actually be wider at 1023px than it is at 1025px. The caveman way of reflowing your content using media queries usually looks like this:
+
+- flex col or a single grid col under 768px
+- flex row or multiple grid cols between 768px and 1024px
+- flex col or a single grid col between 1024px and 1280px
+- flex row or multiple grid cols above 1280px
+
+Gross. But the good news is container queries have been supported in all major browsers for over a year and a half from the time of writing and they simplify this problem immensely. Just put a container query on the top level of your main content container and use one single query of that container's width to determine how your content should reflow.
+
+### Find creative uses for CSS variables
+
+A popular programming principle is to avoid using "magic numbers". This means using semantically named constants instead of dumping arbitrary numeric values with unclear purpose into functions. This practice has carried over into CSS with design systems using CSS variables as tokens to enforce design constraints. It's far easier to create consistent and on-brand UIs when you use a design system with CSS variables.
+
+But you can also use CSS variables for more than just design systems. They are also a great way to group related values for a particular element. Adam Wathan recently released [a fantastic short video series](https://tailwindcss.com/build-uis-that-dont-suck) where he repeatedly uses this technique. A single variable is attached to the top level element of a component becomes the single source of truth for a value that is repeated multiple times in its children. Instead of updating a value three or four times, the one variable can just be updated, saving time and reducing layout bugs.
+
+### Put constraints on content you don't manage
+
+For marketing websites, content is typically managed by a third party through a content management system. You should assume that if the person responsible for managing the content can break the site, at some point they will.
+
+Ideally, you should test what happens to different website sections when there's a cartoonishly large amount of content put into them but the best place to stop the layout from breaking is at its source. Unless it's a blog post or some other sort of longform writing you need to enforce a sensible character limit in the content management system for different text content sections. Even if it doesn't break the layout, per se, you should preemptively prevent scenarios where the website would look stupid or convert poorly because of a wall of text where it shouldn't be.
+
+Also, it's important to test really long strings within text and see how they perform in different layouts and components. Your content managers might not be using "supercalifragilisticexpialidocious" very often in their writing but pasting a website url with a very long query string at the end might break your layout in some scenarios since there's no sensible place for the browser to break the word. Wrapping extra long words in a span with a "word-break: break-all;" or "word-break: break-word;" style can often alleviate this concern.
+
+There may be scenarios where you can't enforce content constraints from within a CMS and you'll need to get creative to ensure content displays correctly. Clipping or truncating text can be appropriate if superfluous text compromises the integrity of the layout.
+
+## Putting it together
+
+Creating resilient layouts is ultimately about anticipating change and designing with the future in mind. Unlike a Jenga tower, a thoughtfully constructed layout should be able to accommodate changes without collapsing. Your future self (and anyone else who touches your code) is going to thank you for taking the time to build stuff the right way.
+
+---
+
+_This article was authored without the use of generative AI_

@@ -21,13 +21,16 @@ export async function loader({ params }: Route.LoaderArgs) {
     throw new Response("Not Found", { status: 404 })
   }
 
+  const module = (await modules[filepath]()) as MdxModule
+
   return {
     slug: params.slug,
+    frontmatter: module.frontmatter,
   }
 }
 
 export default function BlogPost({ loaderData }: Route.ComponentProps) {
-  const { slug } = loaderData
+  const { slug, frontmatter } = loaderData
 
   const modules = import.meta.glob("./posts/*.mdx")
   const filepath = `./posts/${slug}.mdx`
@@ -43,12 +46,9 @@ export default function BlogPost({ loaderData }: Route.ComponentProps) {
         <nav className="mb-12">
           <Link
             to="/blog"
-            className="text-app-muted hover:text-primary-vivid transition-colors text-sm uppercase tracking-wider flex items-center gap-2 group"
+            className="text-app-muted hover:text-primary-vivid text-sm uppercase tracking-wider flex items-center gap-2 group"
           >
-            <span className="group-hover:-translate-x-1 transition-transform">
-              {"<"}
-            </span>
-            cd ..
+            {"< cd .."}
           </Link>
         </nav>
 
@@ -65,6 +65,19 @@ export default function BlogPost({ loaderData }: Route.ComponentProps) {
           prose-blockquote:border-l-2 prose-blockquote:border-primary-muted prose-blockquote:text-app-muted  
         "
         >
+          <div className="mb-8 border-b border-primary-background pb-8">
+            <h1 className="text-4xl font-bold uppercase tracking-wide text-primary-vivid mb-2 border-0! pb-0!">
+              {frontmatter.title}
+            </h1>
+            {frontmatter.date && (
+              <div className="text-app-muted text-sm font-mono">
+                <span className="tabular-nums">
+                  {new Date(frontmatter.date).toISOString()}
+                </span>
+              </div>
+            )}
+          </div>
+
           <Suspense
             fallback={
               <div className="flex items-center gap-2 text-primary-muted animate-pulse">

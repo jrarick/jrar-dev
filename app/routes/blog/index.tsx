@@ -1,11 +1,11 @@
-import { Link, useLoaderData } from "react-router"
+import { useLoaderData } from "react-router"
+import { Link } from "~/components/link"
 import { PageLayout, PageHeader } from "~/components/page-layout"
 
 // Define interface for frontmatter
 interface Frontmatter {
   title: string
   date?: string
-  description?: string
   [key: string]: any
 }
 
@@ -20,14 +20,21 @@ export async function loader() {
   const modules = import.meta.glob<MdxModule>("./posts/*.mdx", { eager: true })
 
   // Map over the modules to extract slug and frontmatter
-  const posts = Object.entries(modules).map(([filepath, module]) => {
-    // Extract slug from filepath (e.g., "./posts/first-post.mdx" -> "first-post")
-    const slug = filepath.replace(/^\.\/posts\/(.*)\.mdx$/, "$1")
-    return {
-      slug,
-      frontmatter: module.frontmatter,
-    }
-  })
+  const posts = Object.entries(modules)
+    .map(([filepath, module]) => {
+      // Extract slug from filepath (e.g., "./posts/first-post.mdx" -> "first-post")
+      const slug = filepath.replace(/^\.\/posts\/(.*)\.mdx$/, "$1")
+      return {
+        slug,
+        frontmatter: module.frontmatter,
+      }
+    })
+    .sort((a, b) => {
+      // Sort posts by date descending
+      const dateA = new Date(a.frontmatter.date || 0).getTime()
+      const dateB = new Date(b.frontmatter.date || 0).getTime()
+      return dateB - dateA
+    })
 
   return { posts }
 }
@@ -46,38 +53,26 @@ export default function BlogIndex() {
         </p>
       </PageHeader>
 
-      <ul className="flex flex-col gap-px bg-primary-background/20 border border-primary-background/20">
+      <div className="font-mono bg-app-background border border-primary-background mt-8">
         {posts.map((post) => (
-          <li
+          <Link
             key={post.slug}
-            className="group relative bg-app-background hover:bg-primary-background/5 transition-colors"
+            href={`/blog/${post.slug}`}
+            className="group flex items-center gap-3 py-2.5 px-4 text-sm hover:bg-primary-background/50 hover:text-primary-vivid border-b border-primary-background/50 last:border-b-0 no-underline hover:decoration-0 text-app-accent"
           >
-            <Link to={`/blog/${post.slug}`} className="block p-6">
-              <div className="flex flex-col md:flex-row md:items-baseline gap-2 md:gap-8">
-                <span className="text-xs text-app-muted shrink-0 w-32 font-bold opacity-60">
-                  {post.frontmatter.date
-                    ? new Date(post.frontmatter.date)
-                        .toISOString()
-                        .split("T")[0]
-                    : "UNKNOWN_DATE"}
-                </span>
-                <div>
-                  <h2 className="text-xl font-bold text-primary-muted group-hover:text-primary-vivid transition-colors mb-2">
-                    {post.frontmatter.title || post.slug}
-                  </h2>
-                  {post.frontmatter.description && (
-                    <p className="text-sm text-app-muted/80 max-w-2xl leading-relaxed">
-                      {post.frontmatter.description}
-                    </p>
-                  )}
-                </div>
-              </div>
-              {/* Hover indicator */}
-              <div className="absolute left-0 top-0 bottom-0 w-1 bg-primary-vivid scale-y-0 group-hover:scale-y-100 transition-transform origin-top" />
-            </Link>
-          </li>
+            <div className="flex-1 min-w-0 flex items-center justify-between gap-4">
+              <span className="truncate text-app-accent group-hover:text-primary-vivid">
+                {post.frontmatter.title || post.slug}
+              </span>
+              <span className="shrink-0 tabular-nums text-xs text-app-muted group-hover:text-primary-muted">
+                {post.frontmatter.date
+                  ? new Date(post.frontmatter.date).toISOString()
+                  : "UNKNOWN_DATE"}
+              </span>
+            </div>
+          </Link>
         ))}
-      </ul>
+      </div>
     </PageLayout>
   )
 }

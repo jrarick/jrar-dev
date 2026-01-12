@@ -1,0 +1,60 @@
+---
+title: "Mobile optimization fundamentals"
+date: "2025-03-02"
+---
+
+![Torso of a man holding a phone](/blog-assets/man-holding-phone.jpg)
+
+When many people think of **mobile optimization**, it basically boils down to making everything fit on the screen without horizontal scrolling or overlapping elements.
+
+While it's not less than that, if screen responsiveness is where your mobile optimization starts and ends, your users will have a woefully underwhelming and frustrating experience.
+
+Here's how you can ensure your users have the best experience possible on a mobile device:
+
+## 1. Use big touch targets
+
+WCAG accessibility guidelines require a [44px by 44px minimum size](https://www.w3.org/WAI/WCAG21/Understanding/target-size.html) for interactive elements on touch screens (with a few exceptions). Apart from accessibility concerns, it really is a big usability boon to make it as easy as possible to press interactive elements.
+
+Almost everyone has had a mobile app or website experience where an ad pops up and you need to press the tiniest **X** icon imaginable in order to close it. You end up accidentally pressing the advertisement link at least three times before you can find the smallest surface area of your pinky to center directly on the **X** and finally close it. Don't do that to your users.
+
+## 2. Serve the appropriate assets
+
+You don't need to send a **2,000px-wide hero image** to a 400px-wide screen. It won't look any better and will just make the site load slower. If you're using **Next.js**, you can use the [Image component](https://nextjs.org/docs/pages/api-reference/components/image), which abstracts away optimization work to serve different image sizes at different screen sizes.
+
+If not, you can still use:
+
+- `<img>` with the `srcset` and `sizes` attributes, or
+- `<picture>` and `<source>` tags for the same effect.
+
+## 3. Make sure your content makes visual sense
+
+A section of your website might look awesome on desktop, but when scaled down it can become stretched out and extend far beyond a normal device's height.
+
+Technically, it's "mobile responsive" in the sense that nothing is broken but it will require extra effort from users to interpret what you're trying to communicate. Get creative, and don't be afraid to **hide superfluous UI elements on mobile** that just clutter things up.
+
+## 4. Ditch the carousels
+
+This should probably go for desktop too—but it's especially true for mobile. Even well-engineered carousel libraries often end up having strange and unpredictable touch interactions (not to mention accessibility pitfalls).
+
+There's also data showing that their click-through rate is an abysmal **1%**.
+
+Instead:
+
+- Use a **horizontally scrolling container** with scroll snapping if necessary.
+- If your collection is small, just let it scroll vertically so the normal document flow is preserved.
+
+## 5. Bump up the font size on inputs
+
+You'll need to use at least **16px font size on input elements**, or else the device will automatically zoom in when one is focused.
+
+This accessibility feature helps sight-impaired users, but the issue is that after the input is blurred, the zoomed-in view still remains. That kind of behavior makes it seem like the website or app lacks polish so avoid it entirely by using **16px or greater** on inputs.
+
+## 6. Test on real devices
+
+Last but certainly not least: **don't rely solely on dev tools mobile emulation.** At some point, you _will_ ship a broken mobile view if you aren't testing on real devices. There are a number of browser quirks that won't appear in emulation but can break your app.
+
+Ideally, test on a variety of screen sizes on both **Android and iPhone**. Of course, not everyone has 30+ different cell phones lying around so a tool like [Browserstack](https://www.browserstack.com/) can come in handy.
+
+---
+
+_This article was authored without the use of generative AI_

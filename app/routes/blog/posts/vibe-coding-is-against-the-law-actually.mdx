@@ -1,0 +1,42 @@
+---
+title: "Vibe coding is against the law, actually"
+date: "2025-09-09"
+---
+
+![A policeman pointing a gun directly at the lens](/blog-assets/cop-pointing-gun.png)
+
+You really thought you could just vibe code an app and get away with it, huh? Nope, not on my watch buster. If you can't do the time, don't do the crime.
+
+Ok so it's not illegal to type some instructions into an AI textbox to create an app but there are laws put in place through the American with Disabilities Act (ADA) that have strict requirements for websites and software apps to meet accessibility standards. If you have a public facing website or app, you're liable to be fined or sued if you violate these standards.
+
+## Personal software
+
+A number of people have started creating "personal software" for themselves with AI tools. These apps are typically small in scope and concerned with one or two main functionalities.
+
+They can have incredible utility since pre-AI, it was basically impossible for non-technical folks and a questionable time investment for developers to build personal utility apps. Since these apps aren't meant to ever be used by anyone else accessibility isn't really a concern. This is totally fine and expected.
+
+## Prototyping
+
+Another use case for AI generated software is prototyping. You want to quickly throw something together to test out an idea or concept. Again, since this isn't meant to be a production ready app for users to work with, accessibility isn't a concern. Instead of investing tons of time creating a high fidelity prototype that will eventually get thrown away, you can vibe it up. This is also a legitimate way to use AI app builders.
+
+## AI builders primarily aren't concerned about accessibility
+
+The main issue is that none of these vibe coding platforms market themselves as being for personal software or prototypes; instead, they present themselves as tools to create production ready apps to be used by the public. This couldn't be further from the truth. Aside from any other issues with AI generated software (which there are many), LLMs cannot generate software that meets accessibility standards.
+
+Speed is really the only thing that matters. Trying to build things the "right way" is not even a concern. The goal is to get something that "works" as fast as possible at the expense of anything else.
+
+Go check out the documentation for any of the major AI app builders and see how much they talk about accessibility. At most, I've found a one paragraph snippet that covers the "hello world" of accessibility concerns like alt text on images or heading structures. That stuff is obviously important but if you've spent more than 15 minutes in the front end world you should know those concepts already.
+
+Accessibility goes quite deep and is a commitment to a specific way of building focused on the details. Vibe coding is antithetical to accessibility since it prioritizes speed and allows for sloppiness. Trying to tack on accessibility post hoc usually will get poor results.
+
+## Accessible components are not enough
+
+Most of the time, vibe coding platforms use accessible component primitives like Radix or React Aria. These libraries are specifically engineered to address accessibility concerns for common UI patterns like modals, dropdowns, tabs, and other interactive elements. This is a great start and using these components can prevent some common accessibility pitfalls however most accessibility issues are created when stitching components together into a user interface.
+
+The majority of accessibility issues are completely invisible to LLMs. Things like focus management, keyboard navigation, and screen reader support are all things that need to be manually tested and iterated on when building a UI.
+
+Ultimately, we need humans in the loop to create accessible software and websites. AI can be a tool to help accelerate the development lifecycle but cannot ever be a replacement for skilled developers who are knowledgeable about accessibility.
+
+---
+
+_This article was authored without the use of generative AI_
