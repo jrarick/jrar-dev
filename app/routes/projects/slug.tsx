@@ -2,6 +2,7 @@ import { ExternalLink } from "lucide-react"
 import { Link } from "~/components/link"
 import type { ProjectMdxModule } from "~/lib/content-types"
 import type { Route } from "./+types/slug"
+import { twMerge } from "tailwind-merge"
 
 // Import MDX modules eagerly (build-time)
 const modules = import.meta.glob<ProjectMdxModule>("./collection/*.mdx", {
@@ -31,6 +32,9 @@ export function meta({ loaderData }: Route.MetaArgs) {
   ]
 }
 
+const proseClassNames =
+  "prose prose-sm prose-invert max-w-none prose-headings:text-primary-vivid prose-headings:font-bold prose-headings:uppercase prose-headings:tracking-wide prose-h1:text-4xl prose-h1:border-b prose-h1:border-primary-background prose-h1:pb-4 prose-p:text-app-accent/90 prose-p:leading-relaxed prose-a:text-primary-muted prose-a:no-underline hover:prose-a:text-primary-vivid hover:prose-a:underline prose-strong:text-primary-vivid prose-code:text-magenta prose-code:bg-app-muted/10 prose-code:px-1 prose-code:rounded-none prose-code:before:content-none prose-code:after:content-none prose-pre:bg-neutral-900 prose-pre:border prose-pre:border-app-muted/20 prose-pre:rounded-none prose-blockquote:border-l-2 prose-blockquote:border-primary-muted prose-blockquote:text-app-muted"
+
 export default function ProjectPost({
   loaderData,
   params,
@@ -47,14 +51,14 @@ export default function ProjectPost({
   const { frontmatter } = loaderData
 
   return (
-    <main className="min-h-screen bg-app-background py-16">
-      <div className="container mx-auto px-4 max-w-4xl">
+    <main className="min-h-screen bg-app-background mx-auto py-16 max-w-prose">
+      <div className={twMerge("container mx-auto px-4", proseClassNames)}>
         <Link href="/projects" className="decoration-transparent">
           {"< cd .."}
         </Link>
 
         <article className="pt-12">
-          <header className="mb-12 border-b border-primary-muted/20 pb-12">
+          <header className="mb-12 border-b border-primary-muted/20 pb-12 not-prose">
             <div className="aspect-video w-full overflow-hidden mb-8 bg-app-muted/20 border border-primary-muted/20 rounded-none relative group">
               <div className="absolute inset-0 bg-primary-background/10 group-hover:bg-transparent z-10" />
               <img
@@ -104,21 +108,7 @@ export default function ProjectPost({
             </div>
           </header>
 
-          <div
-            className="
-          prose prose-invert max-w-none
-          prose-headings:text-primary-vivid prose-headings:font-bold prose-headings:uppercase prose-headings:tracking-wide
-          prose-h1:text-4xl prose-h1:border-b prose-h1:border-primary-background prose-h1:pb-4
-          prose-p:text-app-accent/90 prose-p:leading-relaxed
-          prose-a:text-primary-muted prose-a:no-underline hover:prose-a:text-primary-vivid hover:prose-a:underline
-          prose-strong:text-primary-vivid
-          prose-code:text-magenta prose-code:bg-app-muted/10 prose-code:px-1 prose-code:rounded-none prose-code:before:content-none prose-code:after:content-none
-          prose-pre:bg-neutral-900 prose-pre:border prose-pre:border-app-muted/20 prose-pre:rounded-none
-          prose-blockquote:border-l-2 prose-blockquote:border-primary-muted prose-blockquote:text-app-muted  
-        "
-          >
-            <Component />
-          </div>
+          <Component />
         </article>
       </div>
     </main>

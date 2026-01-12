@@ -15,7 +15,7 @@ export interface GridLoaderProps {
 }
 
 const gridStyles = tv({
-  base: "grid grid-cols-5 gap-px",
+  base: "grid grid-cols-3 gap-px",
   variants: {
     size: {
       sm: "w-4 h-4",
@@ -39,51 +39,58 @@ const cellStyles = tv({
   },
 })
 
-// Calculate Chebyshev distance from center (cell 12) for wave pattern
+// Calculate Chebyshev distance from center (cell 4) for wave pattern
 function getWaveDelay(index: number): number {
-  const row = Math.floor(index / 5)
-  const col = index % 5
-  const centerRow = 2
-  const centerCol = 2
+  const row = Math.floor(index / 3)
+  const col = index % 3
+  const centerRow = 1
+  const centerCol = 1
   const distance = Math.max(
     Math.abs(row - centerRow),
     Math.abs(col - centerCol)
   )
-  return distance * 150 // 150ms per ring
+  return distance * 200 // 200ms per ring
 }
 
 // Snake path traversal order
 const SNAKE_PATH = [
-  0, 1, 2, 3, 4, 9, 8, 7, 6, 5, 10, 11, 12, 13, 14, 19, 18, 17, 16, 15, 20, 21,
-  22, 23, 24,
+  0,
+  1,
+  2, // Right
+  5,
+  4,
+  3, // Left
+  6,
+  7,
+  8, // Right
 ]
 
 function getSnakeDelay(index: number): number {
   const position = SNAKE_PATH.indexOf(index)
-  return position * 40 // 40ms per cell = 1s total cycle
+  return position * 100 // 100ms per cell = 900ms total
 }
 
 // Rain: each column cascades down
 function getRainDelay(index: number): number {
-  const row = Math.floor(index / 5)
-  const col = index % 5
-  return col * 100 + row * 100 // Column offset + row cascade
+  const row = Math.floor(index / 3)
+  const col = index % 3
+  return col * 150 + row * 150 // Column offset + row cascade
 }
 
 // Blink: seeded "random" delays based on index
 function getBlinkDelay(index: number): number {
   // Use a simple hash for consistent "random" delays
-  const hash = ((index * 17 + 7) % 25) / 25
+  const hash = ((index * 17 + 7) % 9) / 9
   return hash * 800
 }
 
 // Parallax: columns move in opposite directions
 function getParallaxDelay(index: number): number {
-  const row = Math.floor(index / 5)
-  const col = index % 5
+  const row = Math.floor(index / 3)
+  const col = index % 3
   const isEvenCol = col % 2 === 0
-  // Even columns go down (0-4), odd columns go up (4-0)
-  const effectiveRow = isEvenCol ? row : 4 - row
+  // Even columns go down (0-2), odd columns go up (2-0)
+  const effectiveRow = isEvenCol ? row : 2 - row
   return col * 80 + effectiveRow * 100
 }
 
@@ -98,7 +105,7 @@ const PATTERN_CONFIG: Record<
   },
   snake: {
     animation: "grid-snake",
-    duration: "1000ms",
+    duration: "900ms",
     getDelay: getSnakeDelay,
   },
   rain: {
@@ -138,7 +145,7 @@ export function GridLoader({
 
   return (
     <div className={gridStyles({ className })} aria-hidden="true">
-      {Array.from({ length: 25 }).map((_, i) => (
+      {Array.from({ length: 9 }).map((_, i) => (
         <div
           key={i}
           className={cellStyles({ inverted })}
