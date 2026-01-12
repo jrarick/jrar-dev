@@ -199,7 +199,7 @@ export default function Tools() {
     <PageLayout>
       <PageHeader title="Tools">
         <p className="font-mono text-app-vivid max-w-2xl">
-          Framework, Library, and tools that power my development workflow.
+          libraries, frameworks, and tools that power my development workflow
         </p>
       </PageHeader>
 
@@ -220,8 +220,8 @@ export default function Tools() {
           ))}
         </TagGroup>
 
-        <div className="@container/tools">
-          <div className="grid grid-cols-1 @xl/tools:grid-cols-2 @4xl/tools:grid-cols-3 @6xl/tools:grid-cols-4 gap-6">
+        <div>
+          <div className="grid grid-cols-1 @xl/main:grid-cols-2 @4xl/main:grid-cols-3 @6xl/main:grid-cols-4 gap-6">
             {filteredTools.map((tool) => (
               <CyberCard
                 key={tool.name}
@@ -244,9 +244,7 @@ export default function Tools() {
                       </h3>
                     </div>
 
-                    <Badge className="mt-1">
-                      {tool.kind}
-                    </Badge>
+                    <Badge className="mt-1">{tool.kind}</Badge>
                   </div>
                 </div>
 
@@ -261,9 +259,7 @@ export default function Tools() {
         </div>
 
         {filteredTools.length === 0 && (
-          <EmptyState>
-            No tools found in this category.
-          </EmptyState>
+          <EmptyState>No tools found in this category.</EmptyState>
         )}
       </div>
     </PageLayout>

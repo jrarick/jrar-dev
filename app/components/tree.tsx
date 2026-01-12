@@ -54,7 +54,7 @@ const expandButton = tv({
 })
 
 const chevron = tv({
-  base: "w-4 h-4 text-primary-accent transition-transform duration-200 ease-in-out",
+  base: "w-4 h-4 text-primary-accent",
   variants: {
     isExpanded: {
       true: "transform rotate-90",

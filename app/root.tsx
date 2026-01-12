@@ -119,7 +119,7 @@ export default function App() {
           </DialogTrigger>
           <RouteBreadcrumbs />
         </header>
-        <main className="flex-1 min-w-0">
+        <main className="flex-1 min-w-0 @container:main">
           <Outlet />
         </main>
       </div>
