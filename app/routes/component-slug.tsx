@@ -35,7 +35,7 @@ export default function ComponentDetail({ params }: Route.ComponentProps) {
           {"< cd .."}
         </Link>
 
-        <PageHeader title={definition.name} className="pt-12">
+        <PageHeader title={`<${definition.name} />`} className="pt-12">
           <p className="font-mono text-app-vivid max-w-2xl">
             {definition.description}
           </p>

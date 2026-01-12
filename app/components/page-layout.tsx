@@ -7,9 +7,18 @@ interface PageLayoutProps {
   className?: string
 }
 
-export function PageLayout({ children, maxWidth = "max-w-7xl", className }: PageLayoutProps) {
+export function PageLayout({
+  children,
+  maxWidth = "max-w-7xl",
+  className,
+}: PageLayoutProps) {
   return (
-    <main className={twMerge("min-h-screen bg-app-background py-16 font-mono", className)}>
+    <main
+      className={twMerge(
+        "min-h-screen bg-app-background py-16 font-mono",
+        className
+      )}
+    >
       <div className={twMerge("container mx-auto px-4", maxWidth)}>
         {children}
       </div>
@@ -26,7 +35,7 @@ interface PageHeaderProps {
 export function PageHeader({ title, children, className }: PageHeaderProps) {
   return (
     <header className={twMerge("mb-12", className)}>
-      <h1 className="text-3xl font-mono font-bold text-primary-vivid uppercase mb-4">
+      <h1 className="text-3xl font-mono font-bold text-primary-vivid mb-4">
         {title}
       </h1>
       {children}

@@ -30,7 +30,7 @@ export const registry: Record<string, ComponentDefinition> = {
   button: {
     name: "Button",
     description:
-      "A standard button component with standard, destructive, and quiet variants.",
+      "Initiates a discrete execution sequence. Triggers an event handler upon strictly defined interaction parameters.",
     component: Button,
     defaultProps: {
       children: "Execute",
@@ -50,8 +50,7 @@ export const registry: Record<string, ComponentDefinition> = {
   },
   "text-field": {
     name: "TextField",
-    description:
-      "A text input with label, description, and error message support.",
+    description: "Accepts alphanumeric string input for variable assignment.",
     component: TextField,
     defaultProps: {
       label: "System Identifier",
@@ -74,7 +73,8 @@ export const registry: Record<string, ComponentDefinition> = {
   },
   checkbox: {
     name: "Checkbox",
-    description: "A binary selection input.",
+    description:
+      "Binary state toggle. [ 0 | 1 ]. Represents a boolean value within the system configuration.",
     component: Checkbox,
     defaultProps: {
       children: "Enable Verbose Logging",
@@ -94,7 +94,7 @@ export const registry: Record<string, ComponentDefinition> = {
   "radio-group": {
     name: "RadioGroup",
     description:
-      "A set of checkable buttons, known as radio buttons, where no more than one of the buttons can be checked at a time.",
+      "Mutually exclusive option selector. Enforces single-choice constraint across a related set of variables.",
     component: RadioGroup,
     defaultProps: {
       label: "Protocol Selection",
@@ -123,7 +123,7 @@ export const registry: Record<string, ComponentDefinition> = {
   select: {
     name: "Select",
     description:
-      "A select displays a collapsible list of options and allows a user to select one.",
+      "Dropdown enumeration interface. Expands to reveal a list of pre-defined constants for assignment.",
     component: Select,
     defaultProps: {
       label: "Core Module",
@@ -151,7 +151,8 @@ export const registry: Record<string, ComponentDefinition> = {
   },
   link: {
     name: "Link",
-    description: "A navigational link.",
+    description:
+      "Hypertext reference pointer. Redirects the user agent to a specified URI resource.",
     component: Link,
     defaultProps: {
       children: "/sys/logs",
@@ -171,7 +172,7 @@ export const registry: Record<string, ComponentDefinition> = {
   breadcrumbs: {
     name: "Breadcrumbs",
     description:
-      "Breadcrumbs display a hierarchy of links to the current page.",
+      "Hierarchical navigation trail. Visualizes the current location within the directory structure or state machine.",
     component: Breadcrumbs,
     defaultProps: {
       children: (
@@ -188,7 +189,8 @@ export const registry: Record<string, ComponentDefinition> = {
   },
   "tag-group": {
     name: "TagGroup",
-    description: "A tag group allows users to select from a list of options.",
+    description:
+      "Collection of categorical identifiers. Used for filtering, sorting, or labeling data entities.",
     component: TagGroup,
     defaultProps: {
       label: "Request Type",
@@ -213,7 +215,8 @@ export const registry: Record<string, ComponentDefinition> = {
   },
   tree: {
     name: "Tree",
-    description: "A tree displays a hierarchy of items.",
+    description:
+      "Recursive data structure visualization. Displays nested nodes and leaves in a collapsible hierarchy.",
     component: Tree,
     defaultProps: {
       aria_label: "Files",
