@@ -125,14 +125,6 @@ export function ComponentShowcase({ definition }: ComponentShowcaseProps) {
 
   return (
     <div className="space-y-8">
-      {/* Header */}
-      <div className="border-b border-primary-muted pb-4">
-        <h3 className="text-lg font-mono text-primary-vivid">Variants</h3>
-        <p className="text-sm text-app-vivid mt-1">
-          State variations with default content
-        </p>
-      </div>
-
       {/* Variant grid */}
       <div className="grid grid-cols-1 @2xl/main:grid-cols-2 @5xl/main:grid-cols-3 gap-6">
         {variants.map((variant, idx) => {
