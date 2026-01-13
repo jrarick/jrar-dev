@@ -11,6 +11,7 @@ export function meta({ loaderData }: Route.MetaArgs) {
   return generateOGImageMeta({
     title: `${loaderData.frontmatter.title} - jrar.dev`,
     description: loaderData.frontmatter.description || "Blog post",
+    url: `/blog/${loaderData.slug}`,
     ogImagePath: `/og/blog/${loaderData.slug}.png`,
     type: "article",
     publishedTime: loaderData.frontmatter.date,

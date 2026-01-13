@@ -40,7 +40,8 @@ const TwitterLogo = (props: SVGProps<SVGSVGElement>) => (
 export function meta({}: Route.MetaArgs) {
   return generateOGImageMeta({
     title: "jrar.dev",
-    description: "Developer portfolio and blog",
+    description: "Josh Rarick portfolio and blog",
+    url: "/",
     ogImagePath: "/og/home.png",
     type: "website",
   })

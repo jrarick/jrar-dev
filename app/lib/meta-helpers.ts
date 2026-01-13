@@ -1,9 +1,12 @@
+const BASE_URL = "https://jrar.dev"
+
 /**
  * Options for generating Open Graph image meta tags
  */
 export interface OGImageMetaOptions {
   title: string
   description: string
+  url: string
   ogImagePath: string
   type?: "website" | "article"
   publishedTime?: string
@@ -20,19 +23,23 @@ export interface OGImageMetaOptions {
  * @returns Array of meta tag objects compatible with React Router meta function
  */
 export function generateOGImageMeta(options: OGImageMetaOptions) {
-  const { title, description, ogImagePath, type = "website", publishedTime } = options
+  const { title, description, url, ogImagePath, type = "website", publishedTime } = options
+
+  const absoluteUrl = `${BASE_URL}${url}`
+  const absoluteImageUrl = `${BASE_URL}${ogImagePath}`
 
   const meta = [
     { title },
     { name: "description", content: description },
+    { property: "og:url", content: absoluteUrl },
     { property: "og:title", content: title },
     { property: "og:description", content: description },
-    { property: "og:image", content: ogImagePath },
+    { property: "og:image", content: absoluteImageUrl },
     { property: "og:type", content: type },
     { name: "twitter:card", content: "summary_large_image" },
     { name: "twitter:title", content: title },
     { name: "twitter:description", content: description },
-    { name: "twitter:image", content: ogImagePath },
+    { name: "twitter:image", content: absoluteImageUrl },
   ]
 
   if (type === "article" && publishedTime) {
