@@ -58,7 +58,7 @@ export function ComponentShowcase({ definition }: ComponentShowcaseProps) {
 
       {/* Controls Panel */}
       <div className="@4xl/main:col-span-1 space-y-6 border border-primary-muted p-6 bg-app-background h-full">
-        <h3 className="text-lg font-mono font-bold text-primary-vivid border-b border-primary-muted pb-2 mb-4">
+        <h3 className="text-lg font-mono font-medium text-primary-vivid border-b border-primary-muted pb-2 mb-4">
           Levers
         </h3>
 

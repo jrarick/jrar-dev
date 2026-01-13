@@ -65,7 +65,7 @@ export function SidebarContent({ onLinkClick, onClose }: SidebarContentProps) {
     <div className="flex flex-col h-full">
       <div className="flex items-center justify-between mb-8">
         <Link
-          className="text-xl font-bold text-primary-vivid pl-4 decoration-transparent"
+          className="text-xl font-medium text-primary-vivid pl-4 decoration-transparent"
           href={href("/")}
         >
           jrar.dev

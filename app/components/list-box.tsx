@@ -100,7 +100,7 @@ export function DropdownItem(props: ListBoxItemProps) {
     >
       {composeRenderProps(props.children, (children, { isSelected }) => (
         <>
-          <span className="flex items-center flex-1 gap-2 font-normal truncate group-selected:font-semibold">
+          <span className="flex items-center flex-1 gap-2 font-normal truncate group-selected:font-medium">
             {children}
           </span>
           <span className="flex items-center w-5">
@@ -122,7 +122,7 @@ export function DropdownSection<T extends object>(
 ) {
   return (
     <ListBoxSection className="first:-mt-[5px] after:content-[''] after:block after:h-[5px] last:after:hidden">
-      <Header className="text-sm font-semibold text-app-muted px-4 py-1 truncate sticky -top-[5px] -mt-px -mx-1 z-10 bg-app-muted/90 backdrop-blur-md supports-[-moz-appearance:none]:bg-app-muted border-y border-y-primary-background [&+*]:mt-1">
+      <Header className="text-sm font-medium text-app-muted px-4 py-1 truncate sticky -top-[5px] -mt-px -mx-1 z-10 bg-app-muted/90 backdrop-blur-md supports-[-moz-appearance:none]:bg-app-muted border-y border-y-primary-background [&+*]:mt-1">
         {props.title}
       </Header>
       <Collection items={props.items}>{props.children}</Collection>

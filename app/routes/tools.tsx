@@ -259,7 +259,7 @@ export default function Tools() {
 
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center">
-                      <h3 className="text-xl font-mono font-bold text-primary-vivid group-hover:text-primary-accent truncate">
+                      <h3 className="text-xl font-mono font-medium text-primary-vivid group-hover:text-primary-accent truncate">
                         {tool.name}
                       </h3>
                     </div>

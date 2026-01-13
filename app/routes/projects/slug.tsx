@@ -33,7 +33,7 @@ export function meta({ loaderData }: Route.MetaArgs) {
 }
 
 const proseClassNames =
-  "prose prose-sm prose-invert max-w-none prose-headings:text-primary-vivid prose-headings:font-bold prose-headings:uppercase prose-headings:tracking-wide prose-h1:text-4xl prose-h1:border-b prose-h1:border-primary-background prose-h1:pb-4 prose-p:text-app-accent/90 prose-p:leading-relaxed prose-a:text-primary-muted prose-a:no-underline hover:prose-a:text-primary-vivid hover:prose-a:underline prose-strong:text-primary-vivid prose-code:text-magenta prose-code:bg-app-muted/10 prose-code:px-1 prose-code:rounded-none prose-code:before:content-none prose-code:after:content-none prose-pre:bg-neutral-900 prose-pre:border prose-pre:border-app-muted/20 prose-pre:rounded-none prose-blockquote:border-l-2 prose-blockquote:border-primary-muted prose-blockquote:text-app-muted"
+  "prose prose-sm prose-invert max-w-none prose-headings:text-primary-vivid prose-headings:font-medium prose-headings:uppercase prose-headings:tracking-wide prose-h1:text-4xl prose-h1:border-b prose-h1:border-primary-background prose-h1:pb-4 prose-p:text-app-accent/90 prose-p:leading-relaxed prose-a:text-primary-muted prose-a:no-underline hover:prose-a:text-primary-vivid hover:prose-a:underline prose-strong:text-primary-vivid prose-code:text-magenta prose-code:bg-app-muted/10 prose-code:px-1 prose-code:rounded-none prose-code:before:content-none prose-code:after:content-none prose-pre:bg-neutral-900 prose-pre:border prose-pre:border-app-muted/20 prose-pre:rounded-none prose-blockquote:border-l-2 prose-blockquote:border-primary-muted prose-blockquote:text-app-muted"
 
 export default function ProjectPost({
   loaderData,
@@ -74,7 +74,7 @@ export default function ProjectPost({
               <div className="absolute bottom-0 right-0 w-4 h-4 border-r-2 border-b-2 border-primary-vivid z-20" />
             </div>
 
-            <h1 className="text-4xl @3xl/main:text-5xl font-mono font-bold text-primary-vivid uppercase mb-6">
+            <h1 className="text-4xl @3xl/main:text-5xl font-mono font-medium text-primary-vivid uppercase mb-6">
               {frontmatter.title}
             </h1>
 
@@ -99,7 +99,7 @@ export default function ProjectPost({
                   href={frontmatter.projectLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-2 bg-primary-vivid text-app-background font-mono font-bold hover:bg-primary-accent"
+                  className="inline-flex items-center gap-2 px-6 py-2 bg-primary-vivid text-app-background font-mono font-medium hover:bg-primary-accent"
                 >
                   <span>View Project</span>
                   <ExternalLink className="w-4 h-4" />

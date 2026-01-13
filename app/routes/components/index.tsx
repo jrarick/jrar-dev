@@ -32,7 +32,7 @@ export default function ComponentsIndex() {
             className="p-0"
           >
             <div className="flex flex-col">
-              <h3 className="text-xl font-mono p-4 font-bold text-primary-vivid group-hover:text-primary-accent truncate border-b border-primary-muted/20">
+              <h3 className="text-xl font-mono p-4 font-medium text-primary-vivid group-hover:text-primary-accent truncate border-b border-primary-muted/20">
                 {`<${component.name} />`}
               </h3>
 

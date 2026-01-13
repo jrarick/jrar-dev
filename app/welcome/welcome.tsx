@@ -14,7 +14,7 @@ export function Welcome({ message }: { message: string }) {
     <main className="flex items-center justify-center min-h-screen bg-app-background py-16">
       <div className="flex-1 flex flex-col items-center gap-16 min-h-0 container mx-auto px-4">
         <header className="flex flex-col items-center gap-4">
-          <h1 className="text-4xl font-mono font-bold text-primary-vivid uppercase tracking-widest animate-pulse">
+          <h1 className="text-4xl font-mono font-medium text-primary-vivid uppercase tracking-widest animate-pulse">
             Terminal_UI
           </h1>
           <p className="font-mono text-app-muted text-sm">

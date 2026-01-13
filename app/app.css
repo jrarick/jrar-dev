@@ -6,12 +6,61 @@
 /* Highlight.js theme */
 @import "highlight.js/styles/base16/green-screen.css";
 
+/* Monaspace Neon Frozen Font */
+@font-face {
+  font-family: "Monaspace Neon";
+  src: url("/monaspace-neon/MonaspaceNeonFrozen-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Monaspace Neon";
+  src: url("/monaspace-neon/MonaspaceNeonFrozen-Italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Monaspace Neon";
+  src: url("/monaspace-neon/MonaspaceNeonFrozen-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Monaspace Neon";
+  src: url("/monaspace-neon/MonaspaceNeonFrozen-MediumItalic.ttf") format("truetype");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Monaspace Neon";
+  src: url("/monaspace-neon/MonaspaceNeonFrozen-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Monaspace Neon";
+  src: url("/monaspace-neon/MonaspaceNeonFrozen-BoldItalic.ttf") format("truetype");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
 @layer base;
 @layer components;
 @layer utilities;
 
 @theme {
-  --font-mono: "Fragment Mono", ui-monospace, system-ui, monospace;
+  --font-mono: "Monaspace Neon", ui-monospace, system-ui, monospace;
 
   /* App Colors */
   --color-app-background: oklch(0 0 0);

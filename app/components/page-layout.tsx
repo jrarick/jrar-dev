@@ -35,7 +35,7 @@ interface PageHeaderProps {
 export function PageHeader({ title, children, className }: PageHeaderProps) {
   return (
     <header className={twMerge("mb-12", className)}>
-      <h1 className="text-3xl font-mono font-bold text-primary-vivid mb-4">
+      <h1 className="text-3xl font-mono font-medium text-primary-vivid mb-4">
         {title}
       </h1>
       {children}

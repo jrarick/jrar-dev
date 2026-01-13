@@ -37,7 +37,7 @@ export default function Projects() {
             </div>
 
             <div className="space-y-4">
-              <h3 className="text-xl font-mono font-bold text-primary-vivid group-hover:text-primary-accent truncate">
+              <h3 className="text-xl font-mono font-medium text-primary-vivid group-hover:text-primary-accent truncate">
                 {project.title}
               </h3>
 
