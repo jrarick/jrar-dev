@@ -8,7 +8,10 @@ export function meta({ data }: Route.MetaArgs) {
   if (!data) return [{ title: "not found - jrar.dev" }]
   return [
     { title: `${data.frontmatter.title} - jrar.dev` },
-    { name: "description", content: data.frontmatter.description || "Blog post" },
+    {
+      name: "description",
+      content: data.frontmatter.description || "Blog post",
+    },
   ]
 }
 
@@ -40,7 +43,7 @@ export default function BlogPost({ loaderData }: Route.ComponentProps) {
   }, [filepath])
 
   const proseClassNames =
-    "prose prose-sm prose-invert prose-headings:text-primary-vivid prose-headings:font-medium prose-headings:uppercase prose-headings:tracking-wide prose-h1:text-4xl prose-h1:border-b prose-h1:border-primary-background prose-h1:pb-4 prose-p:text-app-accent/90 prose-p:leading-relaxed prose-a:text-primary-muted prose-a:no-underline hover:prose-a:text-primary-vivid hover:prose-a:underline prose-strong:text-primary-vivid prose-code:text-magenta prose-code:bg-app-muted/10 prose-code:px-1 prose-code:rounded-none prose-code:before:content-none prose-code:after:content-none prose-pre:bg-neutral-900 prose-pre:border prose-pre:border-app-muted/20 prose-pre:rounded-none prose-blockquote:border-l-2 prose-blockquote:border-primary-muted prose-blockquote:text-app-muted"
+    "prose prose-sm prose-invert prose-headings:text-primary-vivid prose-headings:font-medium prose-headings:tracking-wide prose-h1:text-4xl prose-h1:border-b prose-h1:border-primary-background prose-h1:pb-4 prose-p:text-app-accent/90 prose-p:leading-relaxed prose-a:text-primary-muted prose-a:no-underline hover:prose-a:text-primary-vivid hover:prose-a:underline prose-strong:text-primary-vivid prose-code:text-magenta prose-code:bg-app-muted/10 prose-code:px-1 prose-code:rounded-none prose-code:before:content-none prose-code:after:content-none prose-pre:bg-neutral-900 prose-pre:border prose-pre:border-app-muted/20 prose-pre:rounded-none prose-blockquote:border-l-2 prose-blockquote:border-primary-muted prose-blockquote:text-app-muted"
 
   return (
     <div className="min-h-screen bg-app-background text-app-accent font-mono p-8">
@@ -53,11 +56,11 @@ export default function BlogPost({ loaderData }: Route.ComponentProps) {
 
         <article className={proseClassNames}>
           <div className="mb-8 border-b border-primary-background pb-8">
-            <h1 className="text-4xl font-medium uppercase tracking-wide text-primary-vivid mb-2 border-0! pb-0!">
+            <h1 className="text-4xl font-medium tracking-wide text-primary-vivid mb-2 border-0! pb-0!">
               {frontmatter.title}
             </h1>
             {frontmatter.date && (
-              <div className="text-app-muted text-sm font-mono">
+              <div className="text-app-vivid text-sm font-mono">
                 <span className="tabular-nums">
                   {new Date(frontmatter.date).toISOString()}
                 </span>

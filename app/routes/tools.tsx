@@ -183,7 +183,7 @@ const tools: Tool[] = [
   {
     name: "React Aria",
     image: "react-aria-icon.svg",
-    website: "https://react-spectrum.adobe.com/react-aria/index.html",
+    website: "https://react-aria.adobe.com/",
     kind: "Library",
   },
   {
