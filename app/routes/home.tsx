@@ -38,13 +38,28 @@ const TwitterLogo = (props: SVGProps<SVGSVGElement>) => (
 )
 
 export function meta({}: Route.MetaArgs) {
-  return generateOGImageMeta({
-    title: "jrar.dev",
-    description: "Josh Rarick portfolio and blog",
+  const ogMeta = generateOGImageMeta({
+    title: "home - jrar.dev",
+    description: "Josh Rarick portfolio and blog - Product focused engineer specializing in user interfaces and interaction",
     url: "/",
     ogImagePath: "/og/home.png",
     type: "website",
   })
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "Josh Rarick",
+    url: "https://jrar.dev",
+    jobTitle: "Software Engineer",
+    sameAs: [
+      "https://github.com/jrarick",
+      "https://x.com/josh_rarick",
+      "https://www.linkedin.com/in/rarick-joshua/",
+    ],
+  }
+
+  return [...ogMeta, { "script:ld+json": jsonLd }]
 }
 
 export default function Home() {
@@ -60,7 +75,7 @@ export default function Home() {
         </h1>
         <p className="text-lg/9 font-mono text-app-vivid mb-6 max-w-2xl">
           This is my website. I'm a product focused engineer, specializing in
-          user interfaces and interaction. I am a TypeScript enjoyer and AI tool
+          user interfaces and interaction. I'm a TypeScript enjoyer and AI tool
           enthusiast.
         </p>
         <div className="flex gap-6">

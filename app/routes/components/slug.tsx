@@ -3,6 +3,7 @@ import { registry } from "~/registry"
 import { ComponentShowcase } from "~/components/page-sections/component-showcase"
 import { Link } from "~/components/link"
 import type { Route } from "./+types/slug"
+import { generateOGImageMeta } from "~/lib/meta-helpers"
 
 export function loader({ params }: Route.LoaderArgs) {
   if (!registry[params.slug]) {
@@ -15,10 +16,13 @@ export function meta({ params }: Route.MetaArgs) {
   const component = registry[params.slug]
   if (!component) return [{ title: "not found - jrar.dev" }]
 
-  return [
-    { title: `${component.name} - jrar.dev` },
-    { name: "description", content: component.description },
-  ]
+  return generateOGImageMeta({
+    title: `${component.name} - jrar.dev`,
+    description: component.description,
+    url: `/components/${params.slug}`,
+    ogImagePath: "/og/home.png",
+    type: "website",
+  })
 }
 
 export default function ComponentDetail({ params }: Route.ComponentProps) {

@@ -10,15 +10,19 @@ import { BookmarkList } from "~/components/page-sections/bookmark-list"
 import type { Selection } from "react-aria-components"
 import { PageLayout, PageHeader } from "~/components/page-layout"
 import { EmptyState } from "~/components/empty-state"
+import { generateOGImageMeta } from "~/lib/meta-helpers"
 
 const CACHE_KEY = "bookmarks-bar"
 const CACHE_TTL = 1000 * 60 * 60 * 24 // 1 day in seconds
 
 export function meta() {
-  return [
-    { title: "bookmarks - jrar.dev" },
-    { name: "description", content: "Bookmarks I find interesting" },
-  ]
+  return generateOGImageMeta({
+    title: "bookmarks - jrar.dev",
+    description: "Bookmarks I find interesting",
+    url: "/bookmarks",
+    ogImagePath: "/og/home.png",
+    type: "website",
+  })
 }
 
 export async function loader({ context }: Route.LoaderArgs) {

@@ -1,12 +1,16 @@
 import { Link } from "~/components/link"
 import { PageLayout, PageHeader } from "~/components/page-layout"
 import { useBlogPosts } from "~/hooks/use-content"
+import { generateOGImageMeta } from "~/lib/meta-helpers"
 
 export function meta() {
-  return [
-    { title: "blog - jrar.dev" },
-    { name: "description", content: "Blog posts and writings" },
-  ]
+  return generateOGImageMeta({
+    title: "blog - jrar.dev",
+    description: "Blog posts and writings about web development, UI/UX, and accessibility",
+    url: "/blog",
+    ogImagePath: "/og/home.png",
+    type: "website",
+  })
 }
 
 export default function BlogIndex() {

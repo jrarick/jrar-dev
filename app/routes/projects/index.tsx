@@ -3,15 +3,16 @@ import { PageLayout, PageHeader } from "~/components/page-layout"
 import { CyberCard } from "~/components/cyber-card"
 import { Badge } from "~/components/badge"
 import { useProjects } from "~/hooks/use-content"
+import { generateOGImageMeta } from "~/lib/meta-helpers"
 
 export function meta({}: Route.MetaArgs) {
-  return [
-    { title: "projects - jrar.dev" },
-    {
-      name: "description",
-      content: "A collection of my work and experiments.",
-    },
-  ]
+  return generateOGImageMeta({
+    title: "projects - jrar.dev",
+    description: "A collection of my work and experiments",
+    url: "/projects",
+    ogImagePath: "/og/home.png",
+    type: "website",
+  })
 }
 
 export default function Projects() {

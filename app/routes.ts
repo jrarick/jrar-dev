@@ -7,6 +7,8 @@ import {
 
 export default [
   index("routes/home.tsx"),
+  route("robots.txt", "routes/robots[.]txt.ts"),
+  route("sitemap.xml", "routes/sitemap[.]xml.ts"),
   route("bookmarks", "routes/bookmarks.tsx"),
   route("blog", "routes/blog/index.tsx"),
   route("blog/:slug", "routes/blog/post.tsx"),

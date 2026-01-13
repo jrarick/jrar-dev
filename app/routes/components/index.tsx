@@ -2,12 +2,16 @@ import { PageLayout, PageHeader } from "~/components/page-layout"
 import { CyberCard } from "~/components/cyber-card"
 import { registry } from "~/registry"
 import type { Route } from "./+types"
+import { generateOGImageMeta } from "~/lib/meta-helpers"
 
 export function meta({}: Route.MetaArgs) {
-  return [
-    { title: "components - jrar.dev" },
-    { name: "description", content: "UI Component Library and Design System" },
-  ]
+  return generateOGImageMeta({
+    title: "components - jrar.dev",
+    description: "UI Component Library and Design System",
+    url: "/components",
+    ogImagePath: "/og/home.png",
+    type: "website",
+  })
 }
 
 export default function ComponentsIndex() {

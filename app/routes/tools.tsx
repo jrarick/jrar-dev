@@ -5,6 +5,7 @@ import { PageLayout, PageHeader } from "~/components/page-layout"
 import { CyberCard } from "~/components/cyber-card"
 import { Badge } from "~/components/badge"
 import { EmptyState } from "~/components/empty-state"
+import { generateOGImageMeta } from "~/lib/meta-helpers"
 
 const kinds = [
   "All",
@@ -201,10 +202,13 @@ const tools: Tool[] = [
 ]
 
 export function meta({}: Route.MetaArgs) {
-  return [
-    { title: "tools - jrar.dev" },
-    { name: "description", content: "Tools and Utilities" },
-  ]
+  return generateOGImageMeta({
+    title: "tools - jrar.dev",
+    description: "Libraries, frameworks, and tools that power my development workflow",
+    url: "/tools",
+    ogImagePath: "/og/home.png",
+    type: "website",
+  })
 }
 
 export default function Tools() {

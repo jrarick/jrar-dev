@@ -3,6 +3,7 @@ import { Link } from "~/components/link"
 import type { ProjectMdxModule } from "~/lib/content-types"
 import type { Route } from "./+types/slug"
 import { twMerge } from "tailwind-merge"
+import { generateOGImageMeta } from "~/lib/meta-helpers"
 
 // Import MDX modules eagerly (build-time)
 const modules = import.meta.glob<ProjectMdxModule>("./collection/*.mdx", {
@@ -26,10 +27,13 @@ export async function loader({ params }: Route.LoaderArgs) {
 
 export function meta({ loaderData }: Route.MetaArgs) {
   if (!loaderData) return [{ title: "not found - jrar.dev" }]
-  return [
-    { title: `${loaderData.frontmatter.title} - jrar.dev` },
-    { name: "description", content: loaderData.frontmatter.description },
-  ]
+  return generateOGImageMeta({
+    title: `${loaderData.frontmatter.title} - jrar.dev`,
+    description: loaderData.frontmatter.description,
+    url: `/projects/${loaderData.slug}`,
+    ogImagePath: "/og/home.png",
+    type: "website",
+  })
 }
 
 const proseClassNames =

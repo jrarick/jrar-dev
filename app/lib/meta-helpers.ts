@@ -1,4 +1,4 @@
-const BASE_URL = "https://jrar.dev"
+export const BASE_URL = "https://jrar.dev"
 
 /**
  * Options for generating Open Graph image meta tags
@@ -23,7 +23,14 @@ export interface OGImageMetaOptions {
  * @returns Array of meta tag objects compatible with React Router meta function
  */
 export function generateOGImageMeta(options: OGImageMetaOptions) {
-  const { title, description, url, ogImagePath, type = "website", publishedTime } = options
+  const {
+    title,
+    description,
+    url,
+    ogImagePath,
+    type = "website",
+    publishedTime,
+  } = options
 
   const absoluteUrl = `${BASE_URL}${url}`
   const absoluteImageUrl = `${BASE_URL}${ogImagePath}`
@@ -31,6 +38,7 @@ export function generateOGImageMeta(options: OGImageMetaOptions) {
   const meta = [
     { title },
     { name: "description", content: description },
+    { tagName: "link", rel: "canonical", href: absoluteUrl },
     { property: "og:url", content: absoluteUrl },
     { property: "og:title", content: title },
     { property: "og:description", content: description },
