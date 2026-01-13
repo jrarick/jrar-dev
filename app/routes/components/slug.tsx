@@ -13,10 +13,10 @@ export function loader({ params }: Route.LoaderArgs) {
 
 export function meta({ params }: Route.MetaArgs) {
   const component = registry[params.slug]
-  if (!component) return [{ title: "Component Not Found" }]
+  if (!component) return [{ title: "not found - jrar.dev" }]
 
   return [
-    { title: `${component.name} - Components` },
+    { title: `${component.name} - jrar.dev` },
     { name: "description", content: component.description },
   ]
 }
@@ -32,7 +32,7 @@ export default function ComponentDetail({ params }: Route.ComponentProps) {
     <PageLayout>
       <div className="mb-6">
         <Link href="/components" className="decoration-transparent">
-          {"< cd .."}
+          {"<- cd .."}
         </Link>
 
         <PageHeader title={`<${definition.name} />`} className="pt-12">

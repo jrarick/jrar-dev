@@ -202,7 +202,7 @@ const tools: Tool[] = [
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "Tools" },
+    { title: "tools - jrar.dev" },
     { name: "description", content: "Tools and Utilities" },
   ]
 }

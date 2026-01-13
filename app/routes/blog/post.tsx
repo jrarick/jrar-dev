@@ -4,6 +4,14 @@ import type { Route } from "./+types/post"
 import type { BlogFrontmatter, BlogMdxModule } from "~/lib/content-types"
 import { Link } from "~/components/link"
 
+export function meta({ data }: Route.MetaArgs) {
+  if (!data) return [{ title: "not found - jrar.dev" }]
+  return [
+    { title: `${data.frontmatter.title} - jrar.dev` },
+    { name: "description", content: data.frontmatter.description || "Blog post" },
+  ]
+}
+
 export async function loader({ params }: Route.LoaderArgs) {
   const modules = import.meta.glob("./posts/*.mdx")
   const filepath = `./posts/${params.slug}.mdx`
@@ -39,7 +47,7 @@ export default function BlogPost({ loaderData }: Route.ComponentProps) {
       <div className="mx-auto max-w-prose">
         <nav className="mb-12">
           <Link href="/blog" className="decoration-transparent">
-            {"< cd .."}
+            {"<- cd .."}
           </Link>
         </nav>
 

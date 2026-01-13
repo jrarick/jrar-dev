@@ -2,6 +2,13 @@ import { Link } from "~/components/link"
 import { PageLayout, PageHeader } from "~/components/page-layout"
 import { useBlogPosts } from "~/hooks/use-content"
 
+export function meta() {
+  return [
+    { title: "blog - jrar.dev" },
+    { name: "description", content: "Blog posts and writings" },
+  ]
+}
+
 export default function BlogIndex() {
   const posts = useBlogPosts()
 

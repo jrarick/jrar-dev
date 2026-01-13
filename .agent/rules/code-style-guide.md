@@ -39,7 +39,7 @@ This file contains essential context for AI agents (Jules, Claude, etc.) working
 
 **Strict Adherence Required**:
 
-- **Typography**: `Fragment Mono` ONLY. Do not use sans-serif fonts. Use `font-mono`.
+- **Typography**: `Monaspace Neon` ONLY. Do not use sans-serif fonts. Use `font-mono`.
 - **Shapes**: **NO ROUNDED CORNERS**. Sharp edges only.
 - **Theme**: Dark Mode ONLY. No light mode styles.
 

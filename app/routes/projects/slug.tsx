@@ -25,9 +25,9 @@ export async function loader({ params }: Route.LoaderArgs) {
 }
 
 export function meta({ loaderData }: Route.MetaArgs) {
-  if (!loaderData) return [{ title: "Project Not Found" }]
+  if (!loaderData) return [{ title: "not found - jrar.dev" }]
   return [
-    { title: loaderData.frontmatter.title },
+    { title: `${loaderData.frontmatter.title} - jrar.dev` },
     { name: "description", content: loaderData.frontmatter.description },
   ]
 }
@@ -54,7 +54,7 @@ export default function ProjectPost({
     <main className="min-h-screen bg-app-background mx-auto py-16 max-w-prose">
       <div className={twMerge("container mx-auto px-4", proseClassNames)}>
         <Link href="/projects" className="decoration-transparent">
-          {"< cd .."}
+          {"<- cd .."}
         </Link>
 
         <article className="pt-12">

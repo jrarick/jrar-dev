@@ -46,19 +46,6 @@ declare module "react-aria-components" {
   }
 }
 
-export const links: Route.LinksFunction = () => [
-  { rel: "preconnect", href: "https://fonts.googleapis.com" },
-  {
-    rel: "preconnect",
-    href: "https://fonts.gstatic.com",
-    crossOrigin: "anonymous",
-  },
-  {
-    rel: "stylesheet",
-    href: "https://fonts.googleapis.com/css2?family=Fragment+Mono:ital@0;1&display=swap",
-  },
-]
-
 export function Layout({ children }: { children: React.ReactNode }) {
   const navigate = useNavigate()
   const prefersReducedMotion = usePrefersReducedMotion({ ssr: true })
@@ -103,7 +90,7 @@ export default function App() {
     <div className="flex min-h-screen">
       <Sidebar />
       <div className="flex-1 flex flex-col min-w-0">
-        <header className="flex items-center gap-4 p-4 border-b border-primary-background bg-app-background/80 backdrop-blur sticky top-0 z-10">
+        <header className="flex items-center gap-4 p-4 border-b border-primary-background bg-app-background/80 backdrop-blur sticky top-0 z-30">
           <DialogTrigger>
             <Button variant="quiet" className="md:hidden">
               <Menu />

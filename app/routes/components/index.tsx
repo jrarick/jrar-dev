@@ -5,7 +5,7 @@ import type { Route } from "./+types"
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "Components" },
+    { title: "components - jrar.dev" },
     { name: "description", content: "UI Component Library and Design System" },
   ]
 }

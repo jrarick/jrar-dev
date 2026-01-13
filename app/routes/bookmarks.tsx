@@ -16,7 +16,7 @@ const CACHE_TTL = 1000 * 60 * 60 * 24 // 1 day in seconds
 
 export function meta() {
   return [
-    { title: "Bookmarks // JRAR" },
+    { title: "bookmarks - jrar.dev" },
     { name: "description", content: "Bookmarks I find interesting" },
   ]
 }

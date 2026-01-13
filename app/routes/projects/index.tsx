@@ -6,7 +6,7 @@ import { useProjects } from "~/hooks/use-content"
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "Projects" },
+    { title: "projects - jrar.dev" },
     {
       name: "description",
       content: "A collection of my work and experiments.",
