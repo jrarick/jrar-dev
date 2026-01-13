@@ -4,6 +4,7 @@ import { CyberCard } from "~/components/cyber-card"
 import { Badge } from "~/components/badge"
 import { Link } from "~/components/link"
 import { useProjects, useBlogPosts } from "~/hooks/use-content"
+import { generateOGImageMeta } from "~/lib/meta-helpers"
 import type { SVGProps } from "react"
 
 const LinkedinLogo = (props: SVGProps<SVGSVGElement>) => (
@@ -37,13 +38,12 @@ const TwitterLogo = (props: SVGProps<SVGSVGElement>) => (
 )
 
 export function meta({}: Route.MetaArgs) {
-  return [
-    { title: "jrar.dev" },
-    {
-      name: "description",
-      content: "Developer portfolio and blog",
-    },
-  ]
+  return generateOGImageMeta({
+    title: "jrar.dev",
+    description: "Developer portfolio and blog",
+    ogImagePath: "/og/home.png",
+    type: "website",
+  })
 }
 
 export default function Home() {
