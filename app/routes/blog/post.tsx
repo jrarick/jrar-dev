@@ -3,16 +3,18 @@ import { useLoaderData } from "react-router"
 import type { Route } from "./+types/post"
 import type { BlogFrontmatter, BlogMdxModule } from "~/lib/content-types"
 import { Link } from "~/components/link"
+import { generateOGImageMeta } from "~/lib/meta-helpers"
 
-export function meta({ data }: Route.MetaArgs) {
-  if (!data) return [{ title: "not found - jrar.dev" }]
-  return [
-    { title: `${data.frontmatter.title} - jrar.dev` },
-    {
-      name: "description",
-      content: data.frontmatter.description || "Blog post",
-    },
-  ]
+export function meta({ loaderData }: Route.MetaArgs) {
+  if (!loaderData) return [{ title: "not found - jrar.dev" }]
+
+  return generateOGImageMeta({
+    title: `${loaderData.frontmatter.title} - jrar.dev`,
+    description: loaderData.frontmatter.description || "Blog post",
+    ogImagePath: `/og/blog/${loaderData.slug}.png`,
+    type: "article",
+    publishedTime: loaderData.frontmatter.date,
+  })
 }
 
 export async function loader({ params }: Route.LoaderArgs) {
