@@ -13,6 +13,7 @@ import type {
   SyncResponse,
   BookmarkSyncData,
 } from "~/lib/bookmark-types";
+import { isValidBookmarkUrl } from "~/lib/security-utils";
 
 /**
  * POST /api/bookmarks/sync
@@ -64,6 +65,14 @@ export async function action({ request, context }: Route.ActionArgs) {
             position: payload.bookmark.position,
           });
         } else {
+          if (!isValidBookmarkUrl(payload.bookmark.url)) {
+            return yield* Effect.fail(
+              new ValidationError({
+                message: "Invalid bookmark URL protocol",
+                field: "bookmark.url",
+              })
+            );
+          }
           yield* bookmarks.upsertBookmark(payload.bookmark);
         }
 
@@ -102,6 +111,14 @@ export async function action({ request, context }: Route.ActionArgs) {
             position: payload.bookmark.position,
           });
         } else {
+          if (!isValidBookmarkUrl(payload.bookmark.url)) {
+            return yield* Effect.fail(
+              new ValidationError({
+                message: "Invalid bookmark URL protocol",
+                field: "bookmark.url",
+              })
+            );
+          }
           yield* bookmarks.upsertBookmark(payload.bookmark);
         }
 
@@ -146,7 +163,7 @@ export async function action({ request, context }: Route.ActionArgs) {
 
         // Filter out items that are folders or have no URL
         const bookmarkItems = payload.bookmarks.filter(
-          (b): b is BookmarkSyncData => !b.is_folder && !!b.url
+          (b): b is BookmarkSyncData => !b.is_folder && isValidBookmarkUrl(b.url)
         );
 
         const stats = yield* bookmarks.syncAll({
