@@ -117,7 +117,9 @@ const syncAllBookmarks = async () => {
   }
 
   const apiBase = await getApiBase();
-  const tree = await chrome.bookmarks.getTree();
+  // Only sync "Bookmarks Bar" (ID 1) to prevent syncing private bookmarks
+  // from "Other Bookmarks" or "Mobile Bookmarks"
+  const tree = await chrome.bookmarks.getSubTree("1");
   const folders = [];
   const bookmarks = [];
 

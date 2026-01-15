@@ -47,6 +47,10 @@ export async function action({ request, context }: Route.ActionArgs) {
 
     // Handle different sync actions
     switch (payload.action) {
+      case "ping": {
+        return { success: true, message: "Pong" } satisfies SyncResponse;
+      }
+
       case "create": {
         if (!payload.bookmark) {
           return yield* Effect.fail(
