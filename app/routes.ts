@@ -24,7 +24,6 @@ export default [
   ...prefix("api", [
     ...prefix("bookmarks", [
       route("sync", "routes/api/bookmarks/sync.ts"),
-      index("routes/api/bookmarks/index.ts"),
     ]),
   ]),
 
