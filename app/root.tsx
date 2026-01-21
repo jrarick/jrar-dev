@@ -73,6 +73,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
             />
           </div>
         )}
+        <div
+          className="fixed inset-0 z-50 pointer-events-none"
+          style={{
+            boxShadow: "inset 0 0 100px 20px var(--color-primary-muted)",
+            opacity: 0.15,
+          }}
+          aria-hidden="true"
+        />
         <div className="pointer-events-auto">
           <RouterProvider navigate={navigate} useHref={useHref}>
             {children}
