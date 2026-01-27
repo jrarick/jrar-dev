@@ -28,32 +28,48 @@ export function SidebarContent({ onLinkClick, onClose }: SidebarContentProps) {
   if (pathname.startsWith("/components")) {
     expandedKeys.push("components")
   }
+  if (pathname.startsWith("/utilities")) {
+    expandedKeys.push("utilities")
+  }
 
   // Determine the selected key based on current path
   const getSelectedKey = (): string => {
-    if (pathname === "/") return "index"
-    if (pathname === "/blog") return "blog"
-    if (pathname === "/bookmarks") return "bookmarks"
-    if (pathname === "/projects") return "projects"
-    if (pathname === "/tools") return "tools"
-    if (pathname === "/components") return "components"
-
-    // Check for component match
-    const componentMatch = pathname.match(/^\/components\/(.+)$/)
-    if (componentMatch) {
-      return `component-${componentMatch[1]}`
+    switch (pathname) {
+      case "/":
+        return "index"
+      case "/blog":
+        return "blog"
+      case "/bookmarks":
+        return "bookmarks"
+      case "/projects":
+        return "projects"
+      case "/tools":
+        return "tools"
+      case "/utilities":
+        return "utilities"
+      case "/components":
+        return "components"
     }
 
-    // Check for blog post match
-    const blogMatch = pathname.match(/^\/blog\/(.+)$/)
-    if (blogMatch) {
-      return `blog-${blogMatch[1]}`
+    // Check for nested routes using prefix matching
+    if (pathname.startsWith("/components/")) {
+      const slug = pathname.slice("/components/".length)
+      return `component-${slug}`
     }
 
-    // Check for project match
-    const projectMatch = pathname.match(/^\/projects\/(.+)$/)
-    if (projectMatch) {
-      return `project-${projectMatch[1]}`
+    if (pathname.startsWith("/blog/")) {
+      const slug = pathname.slice("/blog/".length)
+      return `blog-${slug}`
+    }
+
+    if (pathname.startsWith("/projects/")) {
+      const slug = pathname.slice("/projects/".length)
+      return `project-${slug}`
+    }
+
+    if (pathname.startsWith("/utilities/")) {
+      const slug = pathname.slice("/utilities/".length)
+      return `utilities-${slug}`
     }
 
     return ""
@@ -86,13 +102,13 @@ export function SidebarContent({ onLinkClick, onClose }: SidebarContentProps) {
       >
         <TreeItem
           id="index"
-          title="/"
+          title="index"
           href={href("/")}
           isActive={selectedKey === "index"}
         />
         <TreeItem
           id="projects"
-          title="/projects"
+          title="projects"
           href={href("/projects")}
           isActive={selectedKey === "projects"}
         >
@@ -100,7 +116,7 @@ export function SidebarContent({ onLinkClick, onClose }: SidebarContentProps) {
             <TreeItem
               key={project.id}
               id={project.id}
-              title={`/${project.slug}`}
+              title={project.slug}
               href={href("/projects/:slug", { slug: project.slug })}
               isActive={selectedKey === project.id}
             />
@@ -108,7 +124,7 @@ export function SidebarContent({ onLinkClick, onClose }: SidebarContentProps) {
         </TreeItem>
         <TreeItem
           id="blog"
-          title="/blog"
+          title="blog"
           href={href("/blog")}
           isActive={selectedKey === "blog"}
         >
@@ -116,7 +132,7 @@ export function SidebarContent({ onLinkClick, onClose }: SidebarContentProps) {
             <TreeItem
               key={post.id}
               id={post.id}
-              title={`/${post.slug}`}
+              title={post.slug}
               href={href("/blog/:slug", { slug: post.slug })}
               isActive={selectedKey === post.id}
             />
@@ -124,19 +140,19 @@ export function SidebarContent({ onLinkClick, onClose }: SidebarContentProps) {
         </TreeItem>
         <TreeItem
           id="bookmarks"
-          title="/bookmarks"
+          title="bookmarks"
           href={href("/bookmarks")}
           isActive={selectedKey === "bookmarks"}
         />
         <TreeItem
           id="tools"
-          title="/tools"
+          title="tools"
           href={href("/tools")}
           isActive={selectedKey === "tools"}
         />
         <TreeItem
           id="components"
-          title="/components"
+          title="components"
           href={href("/components")}
           isActive={selectedKey === "components"}
         >
@@ -144,11 +160,24 @@ export function SidebarContent({ onLinkClick, onClose }: SidebarContentProps) {
             <TreeItem
               key={slug}
               id={`component-${slug}`}
-              title={`/${slug}`}
+              title={slug}
               href={href("/components/:slug", { slug })}
               isActive={selectedKey === `component-${slug}`}
             />
           ))}
+        </TreeItem>
+        <TreeItem
+          id="utilities"
+          title="utilities"
+          href={href("/utilities")}
+          isActive={selectedKey === "utilities"}
+        >
+          <TreeItem
+            id="utilities-qr-code-generator"
+            title="qr-code-generator"
+            href={href("/utilities/qr-code-generator")}
+            isActive={selectedKey === "utilities-qr-code-generator"}
+          />
         </TreeItem>
       </Tree>
     </div>

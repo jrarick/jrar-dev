@@ -21,10 +21,12 @@ export default [
     route(":slug", "routes/components/slug.tsx"),
   ]),
   route("tools", "routes/tools.tsx"),
+  ...prefix("utilities", [
+    index("routes/utilities/index.tsx"),
+    route("qr-code-generator", "routes/utilities/qr-code-generator.tsx"),
+  ]),
   ...prefix("api", [
-    ...prefix("bookmarks", [
-      route("sync", "routes/api/bookmarks/sync.ts"),
-    ]),
+    ...prefix("bookmarks", [route("sync", "routes/api/bookmarks/sync.ts")]),
   ]),
 
   // Prevent Chrome DevTools from showing an error in dev server logs

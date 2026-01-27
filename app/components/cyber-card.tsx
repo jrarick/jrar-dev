@@ -24,16 +24,16 @@ type CyberCardProps = ExternalLinkProps | InternalLinkProps
 export function CyberCard({ children, className, ...props }: CyberCardProps) {
   const baseClassName = twMerge(
     "group relative block p-6 border border-primary-muted bg-app-background hover:border-primary-vivid hover:bg-primary-background/50 focus:outline-none focus:ring-1 focus:ring-primary-vivid",
-    className
+    className,
   )
 
   const content = (
     <>
       {/* Corner Accents */}
-      <div className="absolute top-0 left-0 w-2 h-2 border-l-2 border-t-2 border-primary-muted group-hover:border-primary-vivid" />
-      <div className="absolute top-0 right-0 w-2 h-2 border-r-2 border-t-2 border-primary-muted group-hover:border-primary-vivid" />
-      <div className="absolute bottom-0 left-0 w-2 h-2 border-l-2 border-b-2 border-primary-muted group-hover:border-primary-vivid" />
-      <div className="absolute bottom-0 right-0 w-2 h-2 border-r-2 border-b-2 border-primary-muted group-hover:border-primary-vivid" />
+      <div className="absolute group-hover:-top-1 group-hover:-left-1 top-0 left-0 w-2 h-2 border-l-2 border-t-2 border-primary-muted group-hover:border-primary-vivid" />
+      <div className="absolute group-hover:-top-1 group-hover:-right-1 top-0 right-0 w-2 h-2 border-r-2 border-t-2 border-primary-muted group-hover:border-primary-vivid" />
+      <div className="absolute group-hover:-bottom-1 group-hover:-left-1 bottom-0 left-0 w-2 h-2 border-l-2 border-b-2 border-primary-muted group-hover:border-primary-vivid" />
+      <div className="absolute group-hover:-bottom-1 group-hover:-right-1 bottom-0 right-0 w-2 h-2 border-r-2 border-b-2 border-primary-muted group-hover:border-primary-vivid" />
       {children}
     </>
   )

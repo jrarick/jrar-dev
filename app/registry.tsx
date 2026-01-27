@@ -7,6 +7,7 @@ import { Link } from "~/components/link"
 import { Breadcrumbs, Breadcrumb } from "~/components/breadcrumbs"
 import { TagGroup, Tag } from "~/components/tag-group"
 import { Tree, TreeItem } from "~/components/tree"
+import { ColorPicker } from "~/components/color-picker"
 import type { ComponentType, ReactNode } from "react"
 
 export type ControlType = "select" | "boolean" | "text"
@@ -245,6 +246,20 @@ export const registry: Record<string, ComponentDefinition> = {
         type: "select",
         options: ["none", "single", "multiple"],
       },
+    },
+  },
+  "color-picker": {
+    name: "ColorPicker",
+    description:
+      "A widget that allows a user to select a color, typically used in graphic editing or theme customization.",
+    component: ColorPicker,
+    defaultProps: {
+      label: "Theme Color",
+      defaultValue: "#00ff00",
+      children: null,
+    },
+    controls: {
+      label: { type: "text" },
     },
   },
 }
